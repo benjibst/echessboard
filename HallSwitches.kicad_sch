@@ -4978,6 +4978,16 @@
 		(uuid "fdd271f7-1f19-4faf-9187-d11b0bbf3919")
 	)
 	(label "IO4_INT"
+		(at 21.59 33.02 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "00cc7175-9ff6-4b9f-8573-e82d27564051")
+	)
+	(label "IO4_INT"
 		(at 160.02 118.11 180)
 		(effects
 			(font
@@ -5068,6 +5078,16 @@
 		(uuid "5a5a6f39-3da8-42eb-91b9-a85218de97ff")
 	)
 	(label "SDA"
+		(at 21.59 20.32 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "5d702cea-3c43-4d2b-9133-5ed11a1f99db")
+	)
+	(label "SDA"
 		(at 160.02 113.03 180)
 		(effects
 			(font
@@ -5137,6 +5157,16 @@
 		)
 		(uuid "78d18fdc-d41f-42ce-b1ae-50cfdfb93b5c")
 	)
+	(label "IO3_INT"
+		(at 21.59 30.48 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8fad5706-fcf4-44d6-a65b-3dc2290b8a01")
+	)
 	(label "SDA"
 		(at 161.29 41.91 180)
 		(effects
@@ -5146,6 +5176,16 @@
 			(justify right bottom)
 		)
 		(uuid "96457048-2f60-442a-aab2-e680cfb37133")
+	)
+	(label "SCL"
+		(at 21.59 22.86 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ac39464b-74ee-4a20-9725-680d2a2701f7")
 	)
 	(label "3V3"
 		(at 35.56 46.99 270)
@@ -5198,6 +5238,16 @@
 		(uuid "be379294-deb0-458d-bde7-4ed29c070e3a")
 	)
 	(label "IO2_INT"
+		(at 21.59 27.94 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ce4b9539-921e-4bee-afbe-3cbef096cc2c")
+	)
+	(label "IO2_INT"
 		(at 161.29 46.99 180)
 		(effects
 			(font
@@ -5206,6 +5256,26 @@
 			(justify right bottom)
 		)
 		(uuid "cebc6c5b-2146-4460-a750-9cdea7211e57")
+	)
+	(label "3V3"
+		(at 21.59 17.78 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "ced2468a-c25d-4bc1-8591-e160f6888e5d")
+	)
+	(label "IO1_INT"
+		(at 21.59 25.4 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "cf57ec31-1de2-4082-b4c5-2782e08f849d")
 	)
 	(label "3V3"
 		(at 38.1 154.94 180)
@@ -5286,6 +5356,83 @@
 			(justify right bottom)
 		)
 		(uuid "fe509a58-df39-4bda-b118-98b036480f84")
+	)
+	(hierarchical_label "SDA"
+		(shape input)
+		(at 21.59 20.32 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "121acd52-76b8-42d7-a7c1-221a4b50f88b")
+	)
+	(hierarchical_label "IO4_INT"
+		(shape input)
+		(at 21.59 33.02 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "1cc298ad-cf9d-4319-9493-50c6a981e46d")
+	)
+	(hierarchical_label "3V3"
+		(shape input)
+		(at 21.59 17.78 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "209ed749-de04-44e7-9e0c-72866975fdd1")
+	)
+	(hierarchical_label "SCL"
+		(shape input)
+		(at 21.59 22.86 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "51b360ec-7d6b-4a8e-b689-5d958329dd1d")
+	)
+	(hierarchical_label "IO1_INT"
+		(shape input)
+		(at 21.59 25.4 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "71e3c1b4-94bd-405f-92ec-fe13229ca901")
+	)
+	(hierarchical_label "IO2_INT"
+		(shape input)
+		(at 21.59 27.94 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "96de1530-06d6-4993-b0fa-f30609b4db0a")
+	)
+	(hierarchical_label "IO3_INT"
+		(shape input)
+		(at 21.59 30.48 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "bf32c103-9627-49b8-abc0-08ed787d0bd1")
 	)
 	(symbol
 		(lib_id "Sensor_Magnetic:SM351LT")
