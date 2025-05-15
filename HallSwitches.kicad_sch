@@ -5260,6 +5260,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 124.46 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "c7965eba-bf11-493a-ab7f-0f2d1d3e33cf")
 		)
@@ -5295,7 +5304,7 @@
 				)
 			)
 		)
-		(property "Value" "100n"
+		(property "Value" "100nF"
 			(at 105.41 21.59 90)
 			(effects
 				(font
@@ -5323,6 +5332,15 @@
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
 			(at 110.49 22.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C30926"
+			(at 110.49 22.86 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5362,7 +5380,7 @@
 				)
 			)
 		)
-		(property "Value" "100n"
+		(property "Value" "100nF"
 			(at 52.07 24.13 90)
 			(effects
 				(font
@@ -5390,6 +5408,15 @@
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
 			(at 57.15 25.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C30926"
+			(at 57.15 25.4 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5467,6 +5494,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 123.19 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "9b514b60-cc69-4ba7-8618-7b63cffe8bc2")
 		)
@@ -5502,7 +5538,7 @@
 				)
 			)
 		)
-		(property "Value" "100n"
+		(property "Value" "100nF"
 			(at 105.41 25.4 90)
 			(effects
 				(font
@@ -5530,6 +5566,15 @@
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
 			(at 110.49 26.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C30926"
+			(at 110.49 26.67 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5599,6 +5644,15 @@
 			)
 		)
 		(property "Description" "Hall Effect Switch, SOT-23"
+			(at 99.06 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C22466024"
 			(at 99.06 139.7 0)
 			(effects
 				(font
@@ -5747,6 +5801,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 246.38 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "3ab3ad85-f5a5-4e8c-bbe1-e9e49d1b7cb7")
 		)
@@ -5812,6 +5875,15 @@
 			)
 		)
 		(property "Description" "Hall Effect Switch, SOT-23"
+			(at 124.46 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C22466024"
 			(at 124.46 40.64 0)
 			(effects
 				(font
@@ -5893,6 +5965,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 123.19 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "af250554-8e75-442a-b895-7c957afd4d80")
 		)
@@ -5966,6 +6047,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 246.38 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "b285d32d-48e5-4831-a5cc-d8f1d9184be0")
 		)
@@ -6031,6 +6121,15 @@
 			)
 		)
 		(property "Description" "Hall Effect Switch, SOT-23"
+			(at 243.84 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C22466024"
 			(at 243.84 68.58 0)
 			(effects
 				(font
@@ -6178,6 +6277,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 123.19 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "2cf6e2f4-5d76-4ff0-9e25-52f401355dde")
 		)
@@ -6251,6 +6359,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 243.84 40.64 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "138959b8-970e-41c4-860b-d75ed9b02185")
 		)
@@ -6316,6 +6433,15 @@
 			)
 		)
 		(property "Description" "Hall Effect Switch, SOT-23"
+			(at 99.06 127 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C22466024"
 			(at 99.06 127 0)
 			(effects
 				(font
@@ -6425,7 +6551,7 @@
 				)
 			)
 		)
-		(property "Value" "100n"
+		(property "Value" "100nF"
 			(at 129.54 20.32 90)
 			(effects
 				(font
@@ -6453,6 +6579,15 @@
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
 			(at 134.62 21.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C30926"
+			(at 134.62 21.59 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6522,6 +6657,15 @@
 			)
 		)
 		(property "Description" "Hall Effect Switch, SOT-23"
+			(at 246.38 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C22466024"
 			(at 246.38 137.16 0)
 			(effects
 				(font
@@ -6603,6 +6747,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 243.84 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "587be9c3-0f90-4557-be7a-a2142d7f41cd")
 		)
@@ -6676,6 +6829,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 222.25 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "ff9d1125-41d4-4846-a198-38978f737833")
 		)
@@ -6711,7 +6873,7 @@
 				)
 			)
 		)
-		(property "Value" "100n"
+		(property "Value" "100nF"
 			(at 128.27 93.98 90)
 			(effects
 				(font
@@ -6739,6 +6901,15 @@
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
 			(at 133.35 95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C30926"
+			(at 133.35 95.25 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6778,7 +6949,7 @@
 				)
 			)
 		)
-		(property "Value" "100n"
+		(property "Value" "100nF"
 			(at 227.33 95.25 90)
 			(effects
 				(font
@@ -6806,6 +6977,15 @@
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
 			(at 232.41 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C30926"
+			(at 232.41 96.52 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6875,6 +7055,15 @@
 			)
 		)
 		(property "Description" "Hall Effect Switch, SOT-23"
+			(at 219.71 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C22466024"
 			(at 219.71 53.34 0)
 			(effects
 				(font
@@ -6956,6 +7145,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 243.84 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "17419ad6-2b94-4ea0-8d0d-698f8aeea35c")
 		)
@@ -7029,6 +7227,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 100.33 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "4694c22c-3aef-4367-adcd-8641a2aff2e8")
 		)
@@ -7094,6 +7301,15 @@
 			)
 		)
 		(property "Description" "Hall Effect Switch, SOT-23"
+			(at 124.46 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C22466024"
 			(at 124.46 55.88 0)
 			(effects
 				(font
@@ -7241,6 +7457,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 219.71 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "6487044f-6b36-478c-9530-9161435fd6be")
 		)
@@ -7276,7 +7501,7 @@
 				)
 			)
 		)
-		(property "Value" "100n"
+		(property "Value" "100nF"
 			(at 104.14 102.87 90)
 			(effects
 				(font
@@ -7304,6 +7529,15 @@
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
 			(at 109.22 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C30926"
+			(at 109.22 104.14 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7381,6 +7615,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 219.71 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "5a94ac50-6134-476f-b04c-76c624775413")
 		)
@@ -7416,7 +7659,7 @@
 				)
 			)
 		)
-		(property "Value" "100n"
+		(property "Value" "100nF"
 			(at 224.79 25.4 90)
 			(effects
 				(font
@@ -7444,6 +7687,15 @@
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
 			(at 229.87 26.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C30926"
+			(at 229.87 26.67 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7483,7 +7735,7 @@
 				)
 			)
 		)
-		(property "Value" "100n"
+		(property "Value" "100nF"
 			(at 129.54 27.94 90)
 			(effects
 				(font
@@ -7511,6 +7763,15 @@
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
 			(at 134.62 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C30926"
+			(at 134.62 29.21 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7550,7 +7811,7 @@
 				)
 			)
 		)
-		(property "Value" "100n"
+		(property "Value" "100nF"
 			(at 251.46 105.41 90)
 			(effects
 				(font
@@ -7578,6 +7839,15 @@
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
 			(at 256.54 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C30926"
+			(at 256.54 106.68 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7683,7 +7953,7 @@
 				)
 			)
 		)
-		(property "Value" "100n"
+		(property "Value" "100nF"
 			(at 227.33 102.87 90)
 			(effects
 				(font
@@ -7711,6 +7981,15 @@
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
 			(at 232.41 104.14 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C30926"
+			(at 232.41 104.14 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7788,6 +8067,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 100.33 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "8a4c9a17-ca9a-4aa6-b2be-e8d6fb90aa17")
 		)
@@ -7823,7 +8111,7 @@
 				)
 			)
 		)
-		(property "Value" "100n"
+		(property "Value" "100nF"
 			(at 248.92 27.94 90)
 			(effects
 				(font
@@ -7851,6 +8139,15 @@
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
 			(at 254 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C30926"
+			(at 254 29.21 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7920,6 +8217,15 @@
 			)
 		)
 		(property "Description" "Hall Effect Switch, SOT-23"
+			(at 219.71 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C22466024"
 			(at 219.71 38.1 0)
 			(effects
 				(font
@@ -8001,6 +8307,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 243.84 50.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "cd3a999d-f40f-493e-9be7-2bb5d47fe9c8")
 		)
@@ -8036,7 +8351,7 @@
 				)
 			)
 		)
-		(property "Value" "100n"
+		(property "Value" "100nF"
 			(at 104.14 99.06 90)
 			(effects
 				(font
@@ -8064,6 +8379,15 @@
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
 			(at 109.22 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C30926"
+			(at 109.22 100.33 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8103,7 +8427,7 @@
 				)
 			)
 		)
-		(property "Value" "100n"
+		(property "Value" "100nF"
 			(at 251.46 101.6 90)
 			(effects
 				(font
@@ -8131,6 +8455,15 @@
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
 			(at 256.54 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C30926"
+			(at 256.54 102.87 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8200,6 +8533,15 @@
 			)
 		)
 		(property "Description" "Hall Effect Switch, SOT-23"
+			(at 222.25 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C22466024"
 			(at 222.25 134.62 0)
 			(effects
 				(font
@@ -8281,6 +8623,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 222.25 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "3e34c3e9-8774-4a1f-b0b7-c7a5e34b329e")
 		)
@@ -8354,6 +8705,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 99.06 116.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "984a6c28-d819-4236-b48a-839c78a9ebf0")
 		)
@@ -8389,7 +8749,7 @@
 				)
 			)
 		)
-		(property "Value" "100n"
+		(property "Value" "100nF"
 			(at 248.92 20.32 90)
 			(effects
 				(font
@@ -8417,6 +8777,15 @@
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
 			(at 254 21.59 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C30926"
+			(at 254 21.59 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8486,6 +8855,15 @@
 			)
 		)
 		(property "Description" "Hall Effect Switch, SOT-23"
+			(at 219.71 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C22466024"
 			(at 219.71 66.04 0)
 			(effects
 				(font
@@ -8567,6 +8945,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 222.25 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "be4676de-71d5-4350-9597-e838d8e1adfd")
 		)
@@ -8632,6 +9019,15 @@
 			)
 		)
 		(property "Description" "Hall Effect Switch, SOT-23"
+			(at 246.38 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C22466024"
 			(at 246.38 147.32 0)
 			(effects
 				(font
@@ -8742,7 +9138,7 @@
 				)
 			)
 		)
-		(property "Value" "100n"
+		(property "Value" "100nF"
 			(at 104.14 95.25 90)
 			(effects
 				(font
@@ -8770,6 +9166,15 @@
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
 			(at 109.22 96.52 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C30926"
+			(at 109.22 96.52 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8839,6 +9244,15 @@
 			)
 		)
 		(property "Description" "16-bit I/O expander, I2C and SMBus interface, interrupts, w/o pull-ups, TSSOP-24 package"
+			(at 59.69 57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C22396388"
 			(at 59.69 57.15 0)
 			(effects
 				(font
@@ -8945,7 +9359,7 @@
 				)
 			)
 		)
-		(property "Value" "100n"
+		(property "Value" "100nF"
 			(at 227.33 91.44 90)
 			(effects
 				(font
@@ -8973,6 +9387,15 @@
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
 			(at 232.41 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C30926"
+			(at 232.41 92.71 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9012,7 +9435,7 @@
 				)
 			)
 		)
-		(property "Value" "100n"
+		(property "Value" "100nF"
 			(at 173.99 97.79 90)
 			(effects
 				(font
@@ -9040,6 +9463,15 @@
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
 			(at 179.07 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C30926"
+			(at 179.07 99.06 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9184,6 +9616,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 124.46 68.58 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "cbbba3d6-528a-4743-80d7-1461dec5730d")
 		)
@@ -9219,7 +9660,7 @@
 				)
 			)
 		)
-		(property "Value" "100n"
+		(property "Value" "100nF"
 			(at 128.27 101.6 90)
 			(effects
 				(font
@@ -9247,6 +9688,15 @@
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
 			(at 133.35 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C30926"
+			(at 133.35 102.87 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9353,7 +9803,7 @@
 				)
 			)
 		)
-		(property "Value" "100n"
+		(property "Value" "100nF"
 			(at 129.54 31.75 90)
 			(effects
 				(font
@@ -9381,6 +9831,15 @@
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
 			(at 134.62 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C30926"
+			(at 134.62 33.02 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9450,6 +9909,15 @@
 			)
 		)
 		(property "Description" "Hall Effect Switch, SOT-23"
+			(at 99.06 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C22466024"
 			(at 99.06 144.78 0)
 			(effects
 				(font
@@ -9531,6 +9999,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 124.46 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "5f6e6dfd-2d6f-4b36-be5f-934302ad875d")
 		)
@@ -9596,6 +10073,15 @@
 			)
 		)
 		(property "Description" "Hall Effect Switch, SOT-23"
+			(at 100.33 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C22466024"
 			(at 100.33 53.34 0)
 			(effects
 				(font
@@ -9677,6 +10163,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 123.19 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "81482a14-d446-45f6-90dd-f0f673ca3615")
 		)
@@ -9750,6 +10245,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 99.06 111.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "e0e586b0-d6b7-40d0-b6cc-282c542910ba")
 		)
@@ -9815,6 +10319,15 @@
 			)
 		)
 		(property "Description" "Hall Effect Switch, SOT-23"
+			(at 222.25 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C22466024"
 			(at 222.25 139.7 0)
 			(effects
 				(font
@@ -9924,7 +10437,7 @@
 				)
 			)
 		)
-		(property "Value" "100n"
+		(property "Value" "100nF"
 			(at 251.46 97.79 90)
 			(effects
 				(font
@@ -9952,6 +10465,15 @@
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
 			(at 256.54 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C30926"
+			(at 256.54 99.06 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10095,6 +10617,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 99.06 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "3256e660-8bae-46a5-8519-5410940f256f")
 		)
@@ -10160,6 +10691,15 @@
 			)
 		)
 		(property "Description" "Hall Effect Switch, SOT-23"
+			(at 123.19 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C22466024"
 			(at 123.19 119.38 0)
 			(effects
 				(font
@@ -10241,6 +10781,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 123.19 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "737babe8-1608-4c23-945e-71c8959372a4")
 		)
@@ -10306,6 +10855,15 @@
 			)
 		)
 		(property "Description" "Hall Effect Switch, SOT-23"
+			(at 100.33 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C22466024"
 			(at 100.33 66.04 0)
 			(effects
 				(font
@@ -10387,6 +10945,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 243.84 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "859e25c5-c34f-4b88-b50b-97e2c8ba660e")
 		)
@@ -10422,7 +10989,7 @@
 				)
 			)
 		)
-		(property "Value" "100n"
+		(property "Value" "100nF"
 			(at 105.41 17.78 90)
 			(effects
 				(font
@@ -10450,6 +11017,15 @@
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
 			(at 110.49 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C30926"
+			(at 110.49 19.05 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10519,6 +11095,15 @@
 			)
 		)
 		(property "Description" "Hall Effect Switch, SOT-23"
+			(at 123.19 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C22466024"
 			(at 123.19 142.24 0)
 			(effects
 				(font
@@ -10600,6 +11185,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 246.38 142.24 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "7364081e-755b-458e-9ca8-0490fe8d0486")
 		)
@@ -10635,7 +11229,7 @@
 				)
 			)
 		)
-		(property "Value" "100n"
+		(property "Value" "100nF"
 			(at 224.79 17.78 90)
 			(effects
 				(font
@@ -10663,6 +11257,15 @@
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
 			(at 229.87 19.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C30926"
+			(at 229.87 19.05 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10901,7 +11504,7 @@
 				)
 			)
 		)
-		(property "Value" "100n"
+		(property "Value" "100nF"
 			(at 128.27 105.41 90)
 			(effects
 				(font
@@ -10929,6 +11532,15 @@
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
 			(at 133.35 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C30926"
+			(at 133.35 106.68 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11006,6 +11618,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 222.25 127 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "6854c8de-202e-4955-9053-863ea42e6861")
 		)
@@ -11041,7 +11662,7 @@
 				)
 			)
 		)
-		(property "Value" "100n"
+		(property "Value" "100nF"
 			(at 50.8 97.79 90)
 			(effects
 				(font
@@ -11069,6 +11690,15 @@
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
 			(at 55.88 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C30926"
+			(at 55.88 99.06 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11175,7 +11805,7 @@
 				)
 			)
 		)
-		(property "Value" "100n"
+		(property "Value" "100nF"
 			(at 105.41 29.21 90)
 			(effects
 				(font
@@ -11203,6 +11833,15 @@
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
 			(at 110.49 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C30926"
+			(at 110.49 30.48 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11309,7 +11948,7 @@
 				)
 			)
 		)
-		(property "Value" "100n"
+		(property "Value" "100nF"
 			(at 224.79 21.59 90)
 			(effects
 				(font
@@ -11337,6 +11976,15 @@
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
 			(at 229.87 22.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C30926"
+			(at 229.87 22.86 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11406,6 +12054,15 @@
 			)
 		)
 		(property "Description" "Hall Effect Switch, SOT-23"
+			(at 246.38 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C22466024"
 			(at 246.38 114.3 0)
 			(effects
 				(font
@@ -11487,6 +12144,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 246.38 152.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "4107e028-0d33-4264-a0f9-def0e0655d1d")
 		)
@@ -11522,7 +12188,7 @@
 				)
 			)
 		)
-		(property "Value" "100n"
+		(property "Value" "100nF"
 			(at 129.54 24.13 90)
 			(effects
 				(font
@@ -11550,6 +12216,15 @@
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
 			(at 134.62 25.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C30926"
+			(at 134.62 25.4 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11619,6 +12294,15 @@
 			)
 		)
 		(property "Description" "Hall Effect Switch, SOT-23"
+			(at 100.33 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C22466024"
 			(at 100.33 38.1 0)
 			(effects
 				(font
@@ -11700,6 +12384,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 124.46 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "7449e459-4cf8-474e-a9f5-f0a4de2df623")
 		)
@@ -11735,7 +12428,7 @@
 				)
 			)
 		)
-		(property "Value" "100n"
+		(property "Value" "100nF"
 			(at 171.45 24.13 90)
 			(effects
 				(font
@@ -11763,6 +12456,15 @@
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
 			(at 176.53 25.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C30926"
+			(at 176.53 25.4 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11868,7 +12570,7 @@
 				)
 			)
 		)
-		(property "Value" "100n"
+		(property "Value" "100nF"
 			(at 251.46 93.98 90)
 			(effects
 				(font
@@ -11896,6 +12598,15 @@
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
 			(at 256.54 95.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C30926"
+			(at 256.54 95.25 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12032,6 +12743,15 @@
 			)
 		)
 		(property "Description" "Hall Effect Switch, SOT-23"
+			(at 222.25 149.86 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C22466024"
 			(at 222.25 149.86 0)
 			(effects
 				(font
@@ -12246,6 +12966,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 243.84 78.74 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "03eb9c65-d1d8-4412-a65e-a1600579411e")
 		)
@@ -12386,6 +13115,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 99.06 134.62 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "a2e65746-d749-4e3d-8d5d-62852b1579c7")
 		)
@@ -12459,6 +13197,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 99.06 121.92 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "b78be03a-d652-4b61-a825-7491439cc09f")
 		)
@@ -12524,6 +13271,15 @@
 			)
 		)
 		(property "Description" "16-bit I/O expander, I2C and SMBus interface, interrupts, w/o pull-ups, TSSOP-24 package"
+			(at 179.07 57.15 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C22396388"
 			(at 179.07 57.15 0)
 			(effects
 				(font
@@ -12735,6 +13491,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 100.33 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "93ff9704-b3e5-4546-9f40-e1fbab36a092")
 		)
@@ -12800,6 +13565,15 @@
 			)
 		)
 		(property "Description" "Hall Effect Switch, SOT-23"
+			(at 222.25 116.84 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C22466024"
 			(at 222.25 116.84 0)
 			(effects
 				(font
@@ -12947,6 +13721,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 123.19 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "85d694cf-eae2-4ca0-816a-6f4fb742a4d6")
 		)
@@ -12982,7 +13765,7 @@
 				)
 			)
 		)
-		(property "Value" "100n"
+		(property "Value" "100nF"
 			(at 248.92 31.75 90)
 			(effects
 				(font
@@ -13010,6 +13793,15 @@
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
 			(at 254 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C30926"
+			(at 254 33.02 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13145,6 +13937,15 @@
 			)
 		)
 		(property "Description" "Hall Effect Switch, SOT-23"
+			(at 100.33 76.2 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C22466024"
 			(at 100.33 76.2 0)
 			(effects
 				(font
@@ -13293,6 +14094,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 219.71 60.96 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "1c92add5-3549-4fc2-a44e-743f92191896")
 		)
@@ -13328,7 +14138,7 @@
 				)
 			)
 		)
-		(property "Value" "100n"
+		(property "Value" "100nF"
 			(at 248.92 24.13 90)
 			(effects
 				(font
@@ -13356,6 +14166,15 @@
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
 			(at 254 25.4 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C30926"
+			(at 254 25.4 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13395,7 +14214,7 @@
 				)
 			)
 		)
-		(property "Value" "100n"
+		(property "Value" "100nF"
 			(at 128.27 97.79 90)
 			(effects
 				(font
@@ -13423,6 +14242,15 @@
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
 			(at 133.35 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C30926"
+			(at 133.35 99.06 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13500,6 +14328,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 243.84 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "0e49bb6c-1829-431f-bcb9-588c28fac832")
 		)
@@ -13535,7 +14372,7 @@
 				)
 			)
 		)
-		(property "Value" "100n"
+		(property "Value" "100nF"
 			(at 224.79 29.21 90)
 			(effects
 				(font
@@ -13563,6 +14400,15 @@
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
 			(at 229.87 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C30926"
+			(at 229.87 30.48 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13706,6 +14552,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 124.46 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "ee1942ac-f5bf-4cdc-aab8-cd8f5b4d0f1d")
 		)
@@ -13779,6 +14634,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 219.71 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "66788a17-30da-4d30-ae4f-2db5548adb9a")
 		)
@@ -13844,6 +14708,15 @@
 			)
 		)
 		(property "Description" "Hall Effect Switch, SOT-23"
+			(at 100.33 71.12 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C22466024"
 			(at 100.33 71.12 0)
 			(effects
 				(font
@@ -13992,6 +14865,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 219.71 48.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "75a6105a-e744-4154-b55f-cad5ddb1bc26")
 		)
@@ -14124,6 +15006,15 @@
 			)
 		)
 		(property "Description" "16-bit I/O expander, I2C and SMBus interface, interrupts, w/o pull-ups, TSSOP-24 package"
+			(at 58.42 130.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C22396388"
 			(at 58.42 130.81 0)
 			(effects
 				(font
@@ -14335,6 +15226,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 124.46 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "c634d9ea-93d3-4016-b275-16e118072ea2")
 		)
@@ -14370,7 +15270,7 @@
 				)
 			)
 		)
-		(property "Value" "100n"
+		(property "Value" "100nF"
 			(at 104.14 91.44 90)
 			(effects
 				(font
@@ -14398,6 +15298,15 @@
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
 			(at 109.22 92.71 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C30926"
+			(at 109.22 92.71 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14475,6 +15384,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C22466024"
+			(at 246.38 129.54 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "d4b6ab87-f7d9-4b3e-b4f3-934b656e224b")
 		)
@@ -14510,7 +15428,7 @@
 				)
 			)
 		)
-		(property "Value" "100n"
+		(property "Value" "100nF"
 			(at 227.33 99.06 90)
 			(effects
 				(font
@@ -14538,6 +15456,15 @@
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
 			(at 232.41 100.33 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C30926"
+			(at 232.41 100.33 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14673,6 +15600,15 @@
 			)
 		)
 		(property "Description" "16-bit I/O expander, I2C and SMBus interface, interrupts, w/o pull-ups, TSSOP-24 package"
+			(at 181.61 130.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C22396388"
 			(at 181.61 130.81 0)
 			(effects
 				(font
