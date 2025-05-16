@@ -6351,7 +6351,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -6921,7 +6921,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -7139,7 +7139,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -7709,7 +7709,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -9194,7 +9194,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -9764,7 +9764,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -10686,7 +10686,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -11474,7 +11474,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -11692,7 +11692,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -11910,7 +11910,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -12128,7 +12128,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -13268,7 +13268,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -13704,7 +13704,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -14274,7 +14274,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -14710,7 +14710,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -14928,7 +14928,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C2930027"
+		(property "LCSC" "C25804"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -15146,7 +15146,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C89632"
+		(property "LCSC" "C13585"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -16714,7 +16714,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -17502,7 +17502,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -17720,7 +17720,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -20134,7 +20134,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -20352,7 +20352,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -20570,7 +20570,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -21093,7 +21093,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -21311,7 +21311,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -22233,7 +22233,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -27104,7 +27104,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -28814,7 +28814,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -29736,7 +29736,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C89632"
+		(property "LCSC" "C13585"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -29954,7 +29954,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C2930027"
+		(property "LCSC" "C25804"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -31664,7 +31664,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -32100,7 +32100,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -32318,7 +32318,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -32536,7 +32536,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -33106,7 +33106,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -34028,7 +34028,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -35764,7 +35764,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -35982,7 +35982,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -38759,7 +38759,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C76808"
+		(property "LCSC" "C1002"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -39681,7 +39681,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C2930027"
+		(property "LCSC" "C25804"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -39899,7 +39899,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -41391,7 +41391,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -41609,7 +41609,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -41827,7 +41827,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -42045,7 +42045,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -42615,7 +42615,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -45610,7 +45610,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -45828,7 +45828,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -46046,7 +46046,7 @@
 				(justify mirror)
 			)
 		)
-		(property "LCSC" "C30926"
+		(property "LCSC" "C14663"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
