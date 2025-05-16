@@ -5358,6 +5358,16 @@
 		)
 		(uuid "16e2b819-8643-4335-8c95-74da5d38361a")
 	)
+	(label "MCU_TX"
+		(at 163.83 119.38 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1b494fc5-d5da-4884-86a4-e13b63c478cd")
+	)
 	(label "3V3"
 		(at 146.05 80.01 0)
 		(effects
@@ -5388,7 +5398,7 @@
 		)
 		(uuid "60d258ec-c5eb-4fef-9f82-f3f4e7738b2d")
 	)
-	(label "TXRX"
+	(label "MCU_RX"
 		(at 163.83 121.92 0)
 		(effects
 			(font
@@ -5396,7 +5406,7 @@
 			)
 			(justify left bottom)
 		)
-		(uuid "7abca515-7831-42fb-a712-b96c5e09301e")
+		(uuid "791a0da1-425b-4996-ae02-2cd5f53d94ea")
 	)
 	(label "3V3"
 		(at 125.73 26.67 0)
@@ -5478,16 +5488,6 @@
 		)
 		(uuid "98e985d7-258f-4a7f-84a9-3663f0a90fdb")
 	)
-	(label "TXRX"
-		(at 82.55 60.96 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "9a64525f-31fc-47ea-aaf8-de9556148d81")
-	)
 	(label "3V3"
 		(at 72.39 38.1 180)
 		(effects
@@ -5497,16 +5497,6 @@
 			(justify right bottom)
 		)
 		(uuid "9cb6c7b5-c8e3-4ec7-a347-3ad299f9e3b4")
-	)
-	(label "RXTX"
-		(at 163.83 119.38 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "9e221710-8d58-49f0-8fce-8f83aa1b6001")
 	)
 	(label "RST"
 		(at 195.58 152.4 180)
@@ -5578,16 +5568,6 @@
 		)
 		(uuid "b0c1c9ce-f9c7-4e33-8958-dd5c61bfbff2")
 	)
-	(label "RXTX"
-		(at 82.55 58.42 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left bottom)
-		)
-		(uuid "b6ba1519-155c-4da6-975b-6cb426ecc554")
-	)
 	(label "USB_N"
 		(at 62.23 63.5 180)
 		(effects
@@ -5627,6 +5607,26 @@
 			(justify right bottom)
 		)
 		(uuid "cc892b2d-1e2c-4780-99c5-3e8e736ece7c")
+	)
+	(label "MCU_TX"
+		(at 82.55 58.42 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "cfcc75af-dcb2-418a-8d10-c7fe853fdff0")
+	)
+	(label "MCU_RX"
+		(at 82.55 60.96 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "d0a37d5b-5889-4c03-9128-8184b6f5d3ec")
 	)
 	(label "USB_P"
 		(at 77.47 27.94 270)
@@ -5845,7 +5845,7 @@
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "047c01f8-46cf-4811-9c6f-62fdde9f4b24")
@@ -6780,7 +6780,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C318884 "
 			(at 35.56 135.89 0)
 			(effects
 				(font
@@ -6960,7 +6960,7 @@
 		(at 201.93 124.46 180)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -7403,7 +7403,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C318884 "
 			(at 114.3 93.98 0)
 			(effects
 				(font
@@ -7715,7 +7715,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C5446"
 			(at 114.3 26.67 0)
 			(effects
 				(font
@@ -8006,7 +8006,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C318884 "
 			(at 35.56 129.54 0)
 			(effects
 				(font
@@ -9008,7 +9008,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C62514"
 			(at 148.59 132.08 0)
 			(effects
 				(font
@@ -10244,7 +10244,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C318884 "
 			(at 35.56 142.24 0)
 			(effects
 				(font
@@ -10466,7 +10466,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C130462"
 			(at 72.39 63.5 0)
 			(effects
 				(font
@@ -11308,7 +11308,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C15999"
 			(at 74.93 22.86 0)
 			(effects
 				(font
@@ -11399,7 +11399,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C318884 "
 			(at 115.57 105.41 0)
 			(effects
 				(font

@@ -1,4 +1,6 @@
 (fp_lib_table
   (version 7)
   (lib (name "header")(type "KiCad")(uri "${KIPRJMOD}/libs/header")(options "")(descr ""))
+  (lib (name "chesspieces")(type "KiCad")(uri "${KIPRJMOD}/libs/chesspieces")(options "")(descr ""))
+  (lib (name "symbols")(type "KiCad")(uri "${KIPRJMOD}/libs/symbols")(options "")(descr ""))
 )
