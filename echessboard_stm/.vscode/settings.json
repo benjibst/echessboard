@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "main.h": "c",
+        "stdint.h": "c",
+        "dwt_stm32_delay.h": "c",
+        "stm32_sw_i2c.h": "c",
+        "stm32f0xx_hal.h": "c",
+        "stm32f0xx_hal_tim.h": "c",
+        "delay_us.h": "c",
+        "tca9535.h": "c",
+        "stm32f0xx_hal_gpio.h": "c"
+    }
+}
