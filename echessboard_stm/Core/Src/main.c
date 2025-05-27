@@ -47,10 +47,10 @@ TIM_HandleTypeDef htim1;
 UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
-TCA9535_handle_t io1 = {0x20};
-TCA9535_handle_t io2 = {0x21};
-TCA9535_handle_t io3 = {0x22};
-TCA9535_handle_t io4 = {0x23};
+TCA9535_handle_t io1 = {.i2c_address = 0x20};
+TCA9535_handle_t io2 = {.i2c_address = 0x21};
+TCA9535_handle_t io3 = {.i2c_address = 0x22};
+TCA9535_handle_t io4 = {.i2c_address = 0x23};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -60,13 +60,7 @@ static void MX_SPI1_Init(void);
 static void MX_USART1_UART_Init(void);
 static void MX_TIM1_Init(void);
 /* USER CODE BEGIN PFP */
-static void TCA9535_Init(TCA9535_handle_t *io)
-{
-  _Bool ret = TCA9535_write_reg(io, TCA9535_IN_POL_INVERT_PORT_0, 0xFF);
-  ret = TCA9535_write_reg(io, TCA9535_IN_POL_INVERT_PORT_1, 0xFF);
-  uint8_t a = TCA9535_read_reg(io, TCA9535_IN_POL_INVERT_PORT_0);
-  a = TCA9535_read_reg(io, TCA9535_IN_POL_INVERT_PORT_1);
-}
+
 static int interrupt_received = 0;
 static int interrupt_pin = 0;
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
@@ -116,69 +110,28 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   HAL_TIM_Base_Start(&htim1);
-  TCA9535_Init(&io2);
-  TCA9535_Init(&io1);
-  TCA9535_Init(&io3);
-  TCA9535_Init(&io4);
-  int addr = 0;
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  int a;
+  uint8_t data = 0;
+
   while (1)
   {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
 
-    for (int i = 0; i < 128; i++)
+    if (I2C_write_byte((io1.i2c_address << 1) | 1, 1, 0))
     {
-      // reset
-      I2C_SET_SDA
-      I2C_SET_SCL
-      I2C_DELAY
-
-      // start condition
-      I2C_CLEAR_SDA
-      I2C_DELAY
-      I2C_CLEAR_SCL
-      I2C_DELAY
-
-      // send address
-      for (int j = 6; j >= 0; j--)
-      {
-        if (i & (1 << j))
-        {
-          I2C_SET_SDA
-        }
-        else
-        {
-          I2C_CLEAR_SDA
-        }
-        I2C_DELAY;
-        I2C_SET_SCL;   // clock high
-        I2C_DELAY;     // wait for clock to stabilize
-        I2C_CLEAR_SCL; // clock low
-      }
-      // send R/W bit
-      I2C_SET_SDA
-      // send ACK
-      I2C_SET_SDA
-      I2C_DELAY
-      I2C_SET_SCL
-      I2C_DELAY
-      if (!I2C_read_SDA())
-      {
-        a = i;
-        a = i;
-      }
-      // stop condition128
-      I2C_SET_SCL
-      I2C_DELAY
-      I2C_SET_SDA
+      I2C_read_byte(&data, 0);
+      I2C_stop_condition();
+      data = ~data;
+      data = ~data;
     }
+    else
+      I2C_stop_condition();
   }
   /* USER CODE END 3 */
 }

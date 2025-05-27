@@ -1,6 +1,6 @@
-set(CMAKE_HOST_SYSTEM "Linux-6.14.6-arch1-1")
+set(CMAKE_HOST_SYSTEM "Linux-6.14.7-arch2-1")
 set(CMAKE_HOST_SYSTEM_NAME "Linux")
-set(CMAKE_HOST_SYSTEM_VERSION "6.14.6-arch1-1")
+set(CMAKE_HOST_SYSTEM_VERSION "6.14.7-arch2-1")
 set(CMAKE_HOST_SYSTEM_PROCESSOR "x86_64")
 
 include("/home/benni/dev/echessboard/echessboard_stm/cmake/gcc-arm-none-eabi.cmake")

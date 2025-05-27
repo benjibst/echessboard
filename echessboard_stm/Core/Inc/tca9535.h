@@ -1,6 +1,13 @@
+#include "main.h"
 #include <stdint.h>
-#include "stm32_sw_i2c.h"
 #include "stm32f0xx_hal_gpio.h"
+
+#define I2C_CLEAR_SDA HAL_GPIO_WritePin(SW_I2C_SDA_GPIO_Port, SW_I2C_SDA_Pin, GPIO_PIN_RESET);
+#define I2C_SET_SDA HAL_GPIO_WritePin(SW_I2C_SDA_GPIO_Port, SW_I2C_SDA_Pin, GPIO_PIN_SET);
+#define I2C_READ_SDA HAL_GPIO_ReadPin(SW_I2C_SDA_GPIO_Port, SW_I2C_SDA_Pin)
+#define I2C_CLEAR_SCL HAL_GPIO_WritePin(SW_I2C_SCL_GPIO_Port, SW_I2C_SCL_Pin, GPIO_PIN_RESET);
+#define I2C_SET_SCL HAL_GPIO_WritePin(SW_I2C_SCL_GPIO_Port, SW_I2C_SCL_Pin, GPIO_PIN_SET);
+#define I2C_DELAY delay_us(10); // 4 microsecond delay
 
 typedef enum
 {
@@ -19,12 +26,78 @@ typedef struct
     uint8_t i2c_address; // I2C address of the TCA9535
 } TCA9535_handle_t;
 
-_Bool TCA9535_write_reg(TCA9535_handle_t *io, TCA9535_Registers reg, uint8_t data)
+_Bool I2C_write_byte(uint8_t data, _Bool start, _Bool stop)
 {
-    // least significant bit is (1: read | 0: write)
-    return I2C_send_byte_data(io->i2c_address << 1, reg, data);
+    if (start)
+    {
+        I2C_CLEAR_SDA
+        I2C_DELAY
+        I2C_CLEAR_SCL
+        I2C_DELAY
+    }
+
+    for (int j = 7; j >= 0; j--)
+    {
+        if (data & (1 << j))
+            I2C_SET_SDA
+        else
+            I2C_CLEAR_SDA
+        I2C_DELAY
+        I2C_SET_SCL
+        I2C_DELAY
+        I2C_CLEAR_SCL
+    }
+    // read ack
+    I2C_SET_SDA
+    I2C_DELAY
+    I2C_SET_SCL
+    I2C_DELAY
+    // if slave pulled SDA low ACK
+    _Bool ret = !I2C_READ_SDA;
+    I2C_CLEAR_SCL
+    I2C_DELAY
+    if (stop)
+    {
+        I2C_CLEAR_SDA
+        I2C_SET_SCL
+        I2C_DELAY
+        I2C_SET_SDA
+    }
+    return ret;
 }
-uint8_t TCA9535_read_reg(TCA9535_handle_t *io, TCA9535_Registers reg)
+void I2C_read_byte(uint8_t *data, _Bool ack)
 {
-    return I2C_receive_byte_data((io->i2c_address << 1) | 1, reg);
+    uint8_t d;
+    for (int i = 7; i >= 0; i--)
+    {
+        I2C_SET_SCL
+        I2C_DELAY
+        d |= (I2C_READ_SDA << i);
+        I2C_CLEAR_SCL
+        I2C_DELAY
+    }
+    if (ack)
+    {
+        I2C_CLEAR_SDA
+        I2C_SET_SCL
+        I2C_DELAY
+        I2C_CLEAR_SCL
+    }
+    else
+    {
+        I2C_SET_SDA
+        I2C_SET_SCL
+        I2C_DELAY
+        I2C_CLEAR_SCL
+    }
+    *data = d;
+}
+void I2C_stop_condition(void)
+{
+    I2C_CLEAR_SDA
+    I2C_CLEAR_SCL
+    I2C_DELAY
+    I2C_SET_SCL
+    I2C_DELAY
+    I2C_SET_SDA
 }

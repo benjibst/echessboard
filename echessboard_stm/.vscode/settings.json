@@ -8,6 +8,7 @@
         "stm32f0xx_hal_tim.h": "c",
         "delay_us.h": "c",
         "tca9535.h": "c",
-        "stm32f0xx_hal_gpio.h": "c"
+        "stm32f0xx_hal_gpio.h": "c",
+        "stm32f0xx_hal_conf.h": "c"
     }
 }

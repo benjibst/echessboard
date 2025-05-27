@@ -83,19 +83,19 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 76,
+				"line" : 75,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 78,
+				"line" : 77,
 				"parent" : 0
 			},
 			{
 				"command" : 2,
 				"file" : 0,
-				"line" : 77,
+				"line" : 76,
 				"parent" : 0
 			}
 		]
@@ -106,7 +106,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : " -mcpu=cortex-m0  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -mcpu=cortex-m0  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11"
+					"fragment" : " -mcpu=cortex-m0  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -mcpu=cortex-m0  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -mcpu=cortex-m0  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11"
 				}
 			],
 			"defines" : 

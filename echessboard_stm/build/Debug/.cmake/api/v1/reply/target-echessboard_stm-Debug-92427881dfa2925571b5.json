@@ -36,13 +36,13 @@
 			{
 				"command" : 1,
 				"file" : 1,
-				"line" : 88,
+				"line" : 87,
 				"parent" : 2
 			},
 			{
 				"command" : 2,
 				"file" : 1,
-				"line" : 82,
+				"line" : 81,
 				"parent" : 2
 			}
 		]
@@ -53,7 +53,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : " -mcpu=cortex-m0  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -mcpu=cortex-m0  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11"
+					"fragment" : " -mcpu=cortex-m0  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -mcpu=cortex-m0  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -mcpu=cortex-m0  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -O0 -g3 -std=gnu11"
 				}
 			],
 			"defines" : 
@@ -110,15 +110,14 @@
 				2,
 				3,
 				4,
-				5,
-				6
+				5
 			]
 		},
 		{
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : " -mcpu=cortex-m0  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -mcpu=cortex-m0  -x assembler-with-cpp -MMD -MP -g"
+					"fragment" : " -mcpu=cortex-m0  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -mcpu=cortex-m0  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -mcpu=cortex-m0  -x assembler-with-cpp -MMD -MP -g"
 				}
 			],
 			"defines" : 
@@ -162,7 +161,7 @@
 			"language" : "ASM",
 			"sourceIndexes" : 
 			[
-				7
+				6
 			]
 		}
 	],
@@ -179,7 +178,7 @@
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "-mcpu=cortex-m0  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -mcpu=cortex-m0  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -O0 -g3",
+				"fragment" : "-mcpu=cortex-m0  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -mcpu=cortex-m0  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -mcpu=cortex-m0  -Wall -Wextra -Wpedantic -fdata-sections -ffunction-sections -O0 -g3",
 				"role" : "flags"
 			},
 			{
@@ -207,21 +206,21 @@
 				2,
 				3,
 				4,
-				5,
-				6
+				5
 			]
 		},
 		{
 			"name" : "",
 			"sourceIndexes" : 
 			[
-				7
+				6
 			]
 		},
 		{
 			"name" : "Object Libraries",
 			"sourceIndexes" : 
 			[
+				7,
 				8,
 				9,
 				10,
@@ -240,8 +239,7 @@
 				23,
 				24,
 				25,
-				26,
-				27
+				26
 			]
 		}
 	],
@@ -257,12 +255,6 @@
 			"backtrace" : 4,
 			"compileGroupIndex" : 0,
 			"path" : "Core/Src/delay_us.c",
-			"sourceGroupIndex" : 0
-		},
-		{
-			"backtrace" : 4,
-			"compileGroupIndex" : 0,
-			"path" : "Core/Src/stm32_sw_i2c.c",
 			"sourceGroupIndex" : 0
 		},
 		{
