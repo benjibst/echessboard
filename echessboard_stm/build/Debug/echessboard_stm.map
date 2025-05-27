@@ -3218,6 +3218,8 @@ Discarded input sections
                 0x00000000       0x2a CMakeFiles/echessboard_stm.dir/Core/Src/stm32_sw_i2c.c.obj
  .text.I2C_send_byte
                 0x00000000       0x48 CMakeFiles/echessboard_stm.dir/Core/Src/stm32_sw_i2c.c.obj
+ .text.I2C_receive_byte
+                0x00000000       0x42 CMakeFiles/echessboard_stm.dir/Core/Src/stm32_sw_i2c.c.obj
  .text.I2C_transmit
                 0x00000000       0x96 CMakeFiles/echessboard_stm.dir/Core/Src/stm32_sw_i2c.c.obj
  .text.I2C_receive
@@ -3738,7 +3740,7 @@ LOAD /home/benni/st/stm32cubeclt_1.18.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-n
                 0x08000000                g_pfnVectors
                 0x080000c0                        . = ALIGN (0x4)
 
-.text           0x080000c0     0x2c28
+.text           0x080000c0     0x2ce8
                 0x080000c0                        . = ALIGN (0x4)
  *(.text)
  .text          0x080000c0       0x48 /home/benni/st/stm32cubeclt_1.18.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o
@@ -3874,199 +3876,195 @@ LOAD /home/benni/st/stm32cubeclt_1.18.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-n
  .text.HAL_GPIO_EXTI_Callback
                 0x0800220c       0x2c CMakeFiles/echessboard_stm.dir/Core/Src/main.c.obj
                 0x0800220c                HAL_GPIO_EXTI_Callback
- .text.main     0x08002238       0xa8 CMakeFiles/echessboard_stm.dir/Core/Src/main.c.obj
+ .text.main     0x08002238      0x198 CMakeFiles/echessboard_stm.dir/Core/Src/main.c.obj
                 0x08002238                main
  .text.SystemClock_Config
-                0x080022e0       0xc2 CMakeFiles/echessboard_stm.dir/Core/Src/main.c.obj
-                0x080022e0                SystemClock_Config
- *fill*         0x080023a2        0x2 
+                0x080023d0       0xc2 CMakeFiles/echessboard_stm.dir/Core/Src/main.c.obj
+                0x080023d0                SystemClock_Config
+ *fill*         0x08002492        0x2 
  .text.MX_SPI1_Init
-                0x080023a4       0x7c CMakeFiles/echessboard_stm.dir/Core/Src/main.c.obj
+                0x08002494       0x7c CMakeFiles/echessboard_stm.dir/Core/Src/main.c.obj
  .text.MX_TIM1_Init
-                0x08002420       0xb0 CMakeFiles/echessboard_stm.dir/Core/Src/main.c.obj
+                0x08002510       0xb0 CMakeFiles/echessboard_stm.dir/Core/Src/main.c.obj
  .text.MX_USART1_UART_Init
-                0x080024d0       0x60 CMakeFiles/echessboard_stm.dir/Core/Src/main.c.obj
+                0x080025c0       0x60 CMakeFiles/echessboard_stm.dir/Core/Src/main.c.obj
  .text.MX_GPIO_Init
-                0x08002530      0x12c CMakeFiles/echessboard_stm.dir/Core/Src/main.c.obj
+                0x08002620      0x12c CMakeFiles/echessboard_stm.dir/Core/Src/main.c.obj
  .text.Error_Handler
-                0x0800265c        0xc CMakeFiles/echessboard_stm.dir/Core/Src/main.c.obj
-                0x0800265c                Error_Handler
+                0x0800274c        0xc CMakeFiles/echessboard_stm.dir/Core/Src/main.c.obj
+                0x0800274c                Error_Handler
  .text.delay_us
-                0x08002668       0x30 CMakeFiles/echessboard_stm.dir/Core/Src/delay_us.c.obj
-                0x08002668                delay_us
+                0x08002758       0x30 CMakeFiles/echessboard_stm.dir/Core/Src/delay_us.c.obj
+                0x08002758                delay_us
  .text.I2C_start_cond
-                0x08002698       0x5c CMakeFiles/echessboard_stm.dir/Core/Src/stm32_sw_i2c.c.obj
-                0x08002698                I2C_start_cond
+                0x08002788       0x5c CMakeFiles/echessboard_stm.dir/Core/Src/stm32_sw_i2c.c.obj
+                0x08002788                I2C_start_cond
  .text.I2C_stop_cond
-                0x080026f4       0x4c CMakeFiles/echessboard_stm.dir/Core/Src/stm32_sw_i2c.c.obj
-                0x080026f4                I2C_stop_cond
+                0x080027e4       0x4c CMakeFiles/echessboard_stm.dir/Core/Src/stm32_sw_i2c.c.obj
+                0x080027e4                I2C_stop_cond
  .text.I2C_write_bit
-                0x08002740       0x6a CMakeFiles/echessboard_stm.dir/Core/Src/stm32_sw_i2c.c.obj
-                0x08002740                I2C_write_bit
+                0x08002830       0x6a CMakeFiles/echessboard_stm.dir/Core/Src/stm32_sw_i2c.c.obj
+                0x08002830                I2C_write_bit
  .text.I2C_read_SDA
-                0x080027aa       0x26 CMakeFiles/echessboard_stm.dir/Core/Src/stm32_sw_i2c.c.obj
-                0x080027aa                I2C_read_SDA
+                0x0800289a       0x1c CMakeFiles/echessboard_stm.dir/Core/Src/stm32_sw_i2c.c.obj
+                0x0800289a                I2C_read_SDA
  .text.I2C_read_bit
-                0x080027d0       0x58 CMakeFiles/echessboard_stm.dir/Core/Src/stm32_sw_i2c.c.obj
-                0x080027d0                I2C_read_bit
+                0x080028b6       0x58 CMakeFiles/echessboard_stm.dir/Core/Src/stm32_sw_i2c.c.obj
+                0x080028b6                I2C_read_bit
  .text.I2C_write_byte
-                0x08002828       0x98 CMakeFiles/echessboard_stm.dir/Core/Src/stm32_sw_i2c.c.obj
-                0x08002828                I2C_write_byte
+                0x0800290e       0xb6 CMakeFiles/echessboard_stm.dir/Core/Src/stm32_sw_i2c.c.obj
+                0x0800290e                I2C_write_byte
  .text.I2C_read_byte
-                0x080028c0       0x88 CMakeFiles/echessboard_stm.dir/Core/Src/stm32_sw_i2c.c.obj
-                0x080028c0                I2C_read_byte
- .text.I2C_receive_byte
-                0x08002948       0x42 CMakeFiles/echessboard_stm.dir/Core/Src/stm32_sw_i2c.c.obj
-                0x08002948                I2C_receive_byte
+                0x080029c4       0x88 CMakeFiles/echessboard_stm.dir/Core/Src/stm32_sw_i2c.c.obj
+                0x080029c4                I2C_read_byte
  .text.I2C_send_byte_data
-                0x0800298a       0x66 CMakeFiles/echessboard_stm.dir/Core/Src/stm32_sw_i2c.c.obj
-                0x0800298a                I2C_send_byte_data
+                0x08002a4c       0x66 CMakeFiles/echessboard_stm.dir/Core/Src/stm32_sw_i2c.c.obj
+                0x08002a4c                I2C_send_byte_data
  .text.I2C_receive_byte_data
-                0x080029f0       0x70 CMakeFiles/echessboard_stm.dir/Core/Src/stm32_sw_i2c.c.obj
-                0x080029f0                I2C_receive_byte_data
+                0x08002ab2       0x70 CMakeFiles/echessboard_stm.dir/Core/Src/stm32_sw_i2c.c.obj
+                0x08002ab2                I2C_receive_byte_data
  .text.NMI_Handler
-                0x08002a60        0x8 CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_it.c.obj
-                0x08002a60                NMI_Handler
+                0x08002b22        0x8 CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_it.c.obj
+                0x08002b22                NMI_Handler
  .text.HardFault_Handler
-                0x08002a68        0x8 CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_it.c.obj
-                0x08002a68                HardFault_Handler
+                0x08002b2a        0x8 CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_it.c.obj
+                0x08002b2a                HardFault_Handler
  .text.SVC_Handler
-                0x08002a70        0xa CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_it.c.obj
-                0x08002a70                SVC_Handler
+                0x08002b32        0xa CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_it.c.obj
+                0x08002b32                SVC_Handler
  .text.PendSV_Handler
-                0x08002a7a        0xa CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_it.c.obj
-                0x08002a7a                PendSV_Handler
+                0x08002b3c        0xa CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_it.c.obj
+                0x08002b3c                PendSV_Handler
  .text.SysTick_Handler
-                0x08002a84        0xe CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_it.c.obj
-                0x08002a84                SysTick_Handler
+                0x08002b46        0xe CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_it.c.obj
+                0x08002b46                SysTick_Handler
  .text.EXTI0_1_IRQHandler
-                0x08002a92       0x16 CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_it.c.obj
-                0x08002a92                EXTI0_1_IRQHandler
+                0x08002b54       0x16 CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_it.c.obj
+                0x08002b54                EXTI0_1_IRQHandler
  .text.EXTI2_3_IRQHandler
-                0x08002aa8       0x16 CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_it.c.obj
-                0x08002aa8                EXTI2_3_IRQHandler
- *fill*         0x08002abe        0x2 
+                0x08002b6a       0x16 CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_it.c.obj
+                0x08002b6a                EXTI2_3_IRQHandler
  .text.HAL_MspInit
-                0x08002ac0       0x48 CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_hal_msp.c.obj
-                0x08002ac0                HAL_MspInit
+                0x08002b80       0x48 CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_hal_msp.c.obj
+                0x08002b80                HAL_MspInit
  .text.HAL_SPI_MspInit
-                0x08002b08       0x98 CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_hal_msp.c.obj
-                0x08002b08                HAL_SPI_MspInit
+                0x08002bc8       0x98 CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_hal_msp.c.obj
+                0x08002bc8                HAL_SPI_MspInit
  .text.HAL_TIM_Base_MspInit
-                0x08002ba0       0x40 CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_hal_msp.c.obj
-                0x08002ba0                HAL_TIM_Base_MspInit
+                0x08002c60       0x40 CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_hal_msp.c.obj
+                0x08002c60                HAL_TIM_Base_MspInit
  .text.HAL_UART_MspInit
-                0x08002be0       0x9c CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_hal_msp.c.obj
-                0x08002be0                HAL_UART_MspInit
+                0x08002ca0       0x9c CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_hal_msp.c.obj
+                0x08002ca0                HAL_UART_MspInit
  .text.Reset_Handler
-                0x08002c7c       0x50 CMakeFiles/echessboard_stm.dir/startup_stm32f030x6.s.obj
-                0x08002c7c                Reset_Handler
+                0x08002d3c       0x50 CMakeFiles/echessboard_stm.dir/startup_stm32f030x6.s.obj
+                0x08002d3c                Reset_Handler
  .text.Default_Handler
-                0x08002ccc        0x2 CMakeFiles/echessboard_stm.dir/startup_stm32f030x6.s.obj
-                0x08002ccc                TIM1_CC_IRQHandler
-                0x08002ccc                I2C1_IRQHandler
-                0x08002ccc                SPI1_IRQHandler
-                0x08002ccc                ADC1_IRQHandler
-                0x08002ccc                TIM17_IRQHandler
-                0x08002ccc                RTC_IRQHandler
-                0x08002ccc                TIM16_IRQHandler
-                0x08002ccc                TIM3_IRQHandler
-                0x08002ccc                EXTI4_15_IRQHandler
-                0x08002ccc                RCC_IRQHandler
-                0x08002ccc                DMA1_Channel1_IRQHandler
-                0x08002ccc                Default_Handler
-                0x08002ccc                TIM14_IRQHandler
-                0x08002ccc                DMA1_Channel4_5_IRQHandler
-                0x08002ccc                WWDG_IRQHandler
-                0x08002ccc                DMA1_Channel2_3_IRQHandler
-                0x08002ccc                FLASH_IRQHandler
-                0x08002ccc                USART1_IRQHandler
-                0x08002ccc                TIM1_BRK_UP_TRG_COM_IRQHandler
+                0x08002d8c        0x2 CMakeFiles/echessboard_stm.dir/startup_stm32f030x6.s.obj
+                0x08002d8c                TIM1_CC_IRQHandler
+                0x08002d8c                I2C1_IRQHandler
+                0x08002d8c                SPI1_IRQHandler
+                0x08002d8c                ADC1_IRQHandler
+                0x08002d8c                TIM17_IRQHandler
+                0x08002d8c                RTC_IRQHandler
+                0x08002d8c                TIM16_IRQHandler
+                0x08002d8c                TIM3_IRQHandler
+                0x08002d8c                EXTI4_15_IRQHandler
+                0x08002d8c                RCC_IRQHandler
+                0x08002d8c                DMA1_Channel1_IRQHandler
+                0x08002d8c                Default_Handler
+                0x08002d8c                TIM14_IRQHandler
+                0x08002d8c                DMA1_Channel4_5_IRQHandler
+                0x08002d8c                WWDG_IRQHandler
+                0x08002d8c                DMA1_Channel2_3_IRQHandler
+                0x08002d8c                FLASH_IRQHandler
+                0x08002d8c                USART1_IRQHandler
+                0x08002d8c                TIM1_BRK_UP_TRG_COM_IRQHandler
  *(.glue_7)
- .glue_7        0x08002cce        0x0 linker stubs
+ .glue_7        0x08002d8e        0x0 linker stubs
  *(.glue_7t)
- .glue_7t       0x08002cce        0x0 linker stubs
+ .glue_7t       0x08002d8e        0x0 linker stubs
  *(.eh_frame)
- *fill*         0x08002cce        0x2 
- .eh_frame      0x08002cd0        0x0 /home/benni/st/stm32cubeclt_1.18.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o
+ *fill*         0x08002d8e        0x2 
+ .eh_frame      0x08002d90        0x0 /home/benni/st/stm32cubeclt_1.18.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o
  *(.init)
- .init          0x08002cd0        0x4 /home/benni/st/stm32cubeclt_1.18.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crti.o
-                0x08002cd0                _init
- .init          0x08002cd4        0x8 /home/benni/st/stm32cubeclt_1.18.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtn.o
+ .init          0x08002d90        0x4 /home/benni/st/stm32cubeclt_1.18.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crti.o
+                0x08002d90                _init
+ .init          0x08002d94        0x8 /home/benni/st/stm32cubeclt_1.18.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtn.o
  *(.fini)
- .fini          0x08002cdc        0x4 /home/benni/st/stm32cubeclt_1.18.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crti.o
-                0x08002cdc                _fini
- .fini          0x08002ce0        0x8 /home/benni/st/stm32cubeclt_1.18.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtn.o
-                0x08002ce8                        . = ALIGN (0x4)
-                0x08002ce8                        _etext = .
+ .fini          0x08002d9c        0x4 /home/benni/st/stm32cubeclt_1.18.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crti.o
+                0x08002d9c                _fini
+ .fini          0x08002da0        0x8 /home/benni/st/stm32cubeclt_1.18.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtn.o
+                0x08002da8                        . = ALIGN (0x4)
+                0x08002da8                        _etext = .
 
-.vfp11_veneer   0x08002ce8        0x0
- .vfp11_veneer  0x08002ce8        0x0 linker stubs
+.vfp11_veneer   0x08002da8        0x0
+ .vfp11_veneer  0x08002da8        0x0 linker stubs
 
-.v4_bx          0x08002ce8        0x0
- .v4_bx         0x08002ce8        0x0 linker stubs
+.v4_bx          0x08002da8        0x0
+ .v4_bx         0x08002da8        0x0 linker stubs
 
-.iplt           0x08002ce8        0x0
- .iplt          0x08002ce8        0x0 /home/benni/st/stm32cubeclt_1.18.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o
+.iplt           0x08002da8        0x0
+ .iplt          0x08002da8        0x0 /home/benni/st/stm32cubeclt_1.18.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o
 
-.rodata         0x08002ce8       0x38
-                0x08002ce8                        . = ALIGN (0x4)
+.rodata         0x08002da8       0x38
+                0x08002da8                        . = ALIGN (0x4)
  *(.rodata)
  *(.rodata*)
  .rodata.AHBPrescTable
-                0x08002ce8       0x10 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32f0xx.c.obj
-                0x08002ce8                AHBPrescTable
+                0x08002da8       0x10 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32f0xx.c.obj
+                0x08002da8                AHBPrescTable
  .rodata.APBPrescTable
-                0x08002cf8        0x8 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32f0xx.c.obj
-                0x08002cf8                APBPrescTable
+                0x08002db8        0x8 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32f0xx.c.obj
+                0x08002db8                APBPrescTable
  .rodata.aPLLMULFactorTable.1
-                0x08002d00       0x10 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
+                0x08002dc0       0x10 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
  .rodata.aPredivFactorTable.0
-                0x08002d10       0x10 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
-                0x08002d20                        . = ALIGN (0x4)
+                0x08002dd0       0x10 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
+                0x08002de0                        . = ALIGN (0x4)
 
-.ARM.extab      0x08002d20        0x0
-                0x08002d20                        . = ALIGN (0x4)
+.ARM.extab      0x08002de0        0x0
+                0x08002de0                        . = ALIGN (0x4)
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x08002d20                        . = ALIGN (0x4)
+                0x08002de0                        . = ALIGN (0x4)
 
-.ARM            0x08002d20        0x0
-                0x08002d20                        . = ALIGN (0x4)
-                0x08002d20                        __exidx_start = .
+.ARM            0x08002de0        0x0
+                0x08002de0                        . = ALIGN (0x4)
+                0x08002de0                        __exidx_start = .
  *(.ARM.exidx*)
-                0x08002d20                        __exidx_end = .
-                0x08002d20                        . = ALIGN (0x4)
+                0x08002de0                        __exidx_end = .
+                0x08002de0                        . = ALIGN (0x4)
 
-.preinit_array  0x08002d20        0x0
-                0x08002d20                        . = ALIGN (0x4)
-                0x08002d20                        PROVIDE (__preinit_array_start = .)
+.preinit_array  0x08002de0        0x0
+                0x08002de0                        . = ALIGN (0x4)
+                0x08002de0                        PROVIDE (__preinit_array_start = .)
  *(.preinit_array*)
-                0x08002d20                        PROVIDE (__preinit_array_end = .)
-                0x08002d20                        . = ALIGN (0x4)
+                0x08002de0                        PROVIDE (__preinit_array_end = .)
+                0x08002de0                        . = ALIGN (0x4)
 
-.init_array     0x08002d20        0x4
-                0x08002d20                        . = ALIGN (0x4)
-                0x08002d20                        PROVIDE (__init_array_start = .)
+.init_array     0x08002de0        0x4
+                0x08002de0                        . = ALIGN (0x4)
+                0x08002de0                        PROVIDE (__init_array_start = .)
  *(SORT_BY_NAME(.init_array.*))
  *(.init_array*)
- .init_array    0x08002d20        0x4 /home/benni/st/stm32cubeclt_1.18.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o
-                0x08002d24                        PROVIDE (__init_array_end = .)
-                0x08002d24                        . = ALIGN (0x4)
+ .init_array    0x08002de0        0x4 /home/benni/st/stm32cubeclt_1.18.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o
+                0x08002de4                        PROVIDE (__init_array_end = .)
+                0x08002de4                        . = ALIGN (0x4)
 
-.fini_array     0x08002d24        0x4
-                0x08002d24                        . = ALIGN (0x4)
+.fini_array     0x08002de4        0x4
+                0x08002de4                        . = ALIGN (0x4)
                 [!provide]                        PROVIDE (__fini_array_start = .)
  *(SORT_BY_NAME(.fini_array.*))
  *(.fini_array*)
- .fini_array    0x08002d24        0x4 /home/benni/st/stm32cubeclt_1.18.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o
+ .fini_array    0x08002de4        0x4 /home/benni/st/stm32cubeclt_1.18.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o
                 [!provide]                        PROVIDE (__fini_array_end = .)
-                0x08002d28                        . = ALIGN (0x4)
-                0x08002d28                        _sidata = LOADADDR (.data)
+                0x08002de8                        . = ALIGN (0x4)
+                0x08002de8                        _sidata = LOADADDR (.data)
 
-.rel.dyn        0x08002d28        0x0
- .rel.iplt      0x08002d28        0x0 /home/benni/st/stm32cubeclt_1.18.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o
+.rel.dyn        0x08002de8        0x0
+ .rel.iplt      0x08002de8        0x0 /home/benni/st/stm32cubeclt_1.18.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o
 
-.data           0x20000000       0x1c load address 0x08002d28
+.data           0x20000000       0x1c load address 0x08002de8
                 0x20000000                        . = ALIGN (0x4)
                 0x20000000                        _sdata = .
  *(.data)
@@ -4098,11 +4096,11 @@ LOAD /home/benni/st/stm32cubeclt_1.18.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-n
  *fill*         0x20000019        0x3 
                 0x2000001c                        _edata = .
 
-.igot.plt       0x2000001c        0x0 load address 0x08002d44
+.igot.plt       0x2000001c        0x0 load address 0x08002e04
  .igot.plt      0x2000001c        0x0 /home/benni/st/stm32cubeclt_1.18.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/crtbegin.o
                 0x2000001c                        . = ALIGN (0x4)
 
-.bss            0x2000001c      0x15c load address 0x08002d44
+.bss            0x2000001c      0x15c load address 0x08002e04
                 0x2000001c                        _sbss = .
                 0x2000001c                        __bss_start__ = _sbss
  *(.bss)
@@ -4126,7 +4124,7 @@ LOAD /home/benni/st/stm32cubeclt_1.18.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-n
                 0x20000178                        __bss_end__ = _ebss
 
 ._user_heap_stack
-                0x20000178      0x600 load address 0x08002d44
+                0x20000178      0x600 load address 0x08002e04
                 0x20000178                        . = ALIGN (0x8)
                 [!provide]                        PROVIDE (end = .)
                 0x20000178                        PROVIDE (_end = .)
@@ -4213,7 +4211,7 @@ LOAD /home/benni/st/stm32cubeclt_1.18.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-n
  .comment       0x00000043       0x44 CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_it.c.obj
  .comment       0x00000043       0x44 CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_hal_msp.c.obj
 
-.debug_frame    0x00000000     0x31b0
+.debug_frame    0x00000000     0x31b4
  .debug_frame   0x00000000       0x20 /home/benni/st/stm32cubeclt_1.18.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc_nano.a(libc_a-memset.o)
  .debug_frame   0x00000020       0x2c /home/benni/st/stm32cubeclt_1.18.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc_nano.a(libc_a-init.o)
  .debug_frame   0x0000004c       0x4c cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32f0xx.c.obj
@@ -4228,12 +4226,12 @@ LOAD /home/benni/st/stm32cubeclt_1.18.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-n
  .debug_frame   0x00002464      0x810 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
  .debug_frame   0x00002c74      0x168 CMakeFiles/echessboard_stm.dir/Core/Src/main.c.obj
  .debug_frame   0x00002ddc       0x30 CMakeFiles/echessboard_stm.dir/Core/Src/delay_us.c.obj
- .debug_frame   0x00002e0c      0x1c0 CMakeFiles/echessboard_stm.dir/Core/Src/stm32_sw_i2c.c.obj
- .debug_frame   0x00002fcc       0xd4 CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_it.c.obj
- .debug_frame   0x000030a0       0xf0 CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_hal_msp.c.obj
- .debug_frame   0x00003190       0x20 /home/benni/st/stm32cubeclt_1.18.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+ .debug_frame   0x00002e0c      0x1c4 CMakeFiles/echessboard_stm.dir/Core/Src/stm32_sw_i2c.c.obj
+ .debug_frame   0x00002fd0       0xd4 CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_it.c.obj
+ .debug_frame   0x000030a4       0xf0 CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_hal_msp.c.obj
+ .debug_frame   0x00003194       0x20 /home/benni/st/stm32cubeclt_1.18.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-none-eabi/13.3.1/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
 
-.debug_info     0x00000000     0xdc1a
+.debug_info     0x00000000     0xdc23
  .debug_info    0x00000000      0x242 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32f0xx.c.obj
  .debug_info    0x00000242     0x1618 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_spi.c.obj
  .debug_info    0x0000185a      0x844 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
@@ -4244,14 +4242,14 @@ LOAD /home/benni/st/stm32cubeclt_1.18.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-n
  .debug_info    0x00003692     0x2946 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim.c.obj
  .debug_info    0x00005fd8     0x1488 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim_ex.c.obj
  .debug_info    0x00007460     0x3a2a cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
- .debug_info    0x0000ae8a     0x1606 CMakeFiles/echessboard_stm.dir/Core/Src/main.c.obj
- .debug_info    0x0000c490      0x1c8 CMakeFiles/echessboard_stm.dir/Core/Src/delay_us.c.obj
- .debug_info    0x0000c658      0x4dc CMakeFiles/echessboard_stm.dir/Core/Src/stm32_sw_i2c.c.obj
- .debug_info    0x0000cb34      0x11c CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_it.c.obj
- .debug_info    0x0000cc50      0xf9a CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_hal_msp.c.obj
- .debug_info    0x0000dbea       0x30 CMakeFiles/echessboard_stm.dir/startup_stm32f030x6.s.obj
+ .debug_info    0x0000ae8a     0x15ed CMakeFiles/echessboard_stm.dir/Core/Src/main.c.obj
+ .debug_info    0x0000c477      0x1c8 CMakeFiles/echessboard_stm.dir/Core/Src/delay_us.c.obj
+ .debug_info    0x0000c63f      0x4fe CMakeFiles/echessboard_stm.dir/Core/Src/stm32_sw_i2c.c.obj
+ .debug_info    0x0000cb3d      0x11c CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_it.c.obj
+ .debug_info    0x0000cc59      0xf9a CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_hal_msp.c.obj
+ .debug_info    0x0000dbf3       0x30 CMakeFiles/echessboard_stm.dir/startup_stm32f030x6.s.obj
 
-.debug_abbrev   0x00000000     0x1e3f
+.debug_abbrev   0x00000000     0x1e54
  .debug_abbrev  0x00000000      0x11c cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32f0xx.c.obj
  .debug_abbrev  0x0000011c      0x265 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_spi.c.obj
  .debug_abbrev  0x00000381      0x28b cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
@@ -4262,12 +4260,12 @@ LOAD /home/benni/st/stm32cubeclt_1.18.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-n
  .debug_abbrev  0x00000e18      0x28c cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim.c.obj
  .debug_abbrev  0x000010a4      0x297 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim_ex.c.obj
  .debug_abbrev  0x0000133b      0x2cc cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
- .debug_abbrev  0x00001607      0x338 CMakeFiles/echessboard_stm.dir/Core/Src/main.c.obj
- .debug_abbrev  0x0000193f       0xb0 CMakeFiles/echessboard_stm.dir/Core/Src/delay_us.c.obj
- .debug_abbrev  0x000019ef      0x1b0 CMakeFiles/echessboard_stm.dir/Core/Src/stm32_sw_i2c.c.obj
- .debug_abbrev  0x00001b9f       0xa0 CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_it.c.obj
- .debug_abbrev  0x00001c3f      0x1dc CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_hal_msp.c.obj
- .debug_abbrev  0x00001e1b       0x24 CMakeFiles/echessboard_stm.dir/startup_stm32f030x6.s.obj
+ .debug_abbrev  0x00001607      0x34d CMakeFiles/echessboard_stm.dir/Core/Src/main.c.obj
+ .debug_abbrev  0x00001954       0xb0 CMakeFiles/echessboard_stm.dir/Core/Src/delay_us.c.obj
+ .debug_abbrev  0x00001a04      0x1b0 CMakeFiles/echessboard_stm.dir/Core/Src/stm32_sw_i2c.c.obj
+ .debug_abbrev  0x00001bb4       0xa0 CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_it.c.obj
+ .debug_abbrev  0x00001c54      0x1dc CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_hal_msp.c.obj
+ .debug_abbrev  0x00001e30       0x24 CMakeFiles/echessboard_stm.dir/startup_stm32f030x6.s.obj
 
 .debug_aranges  0x00000000      0xdc8
  .debug_aranges
@@ -4399,7 +4397,7 @@ LOAD /home/benni/st/stm32cubeclt_1.18.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-n
  .debug_macro   0x0000fcab      0x1ef CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_it.c.obj
  .debug_macro   0x0000fe9a      0x1e5 CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_hal_msp.c.obj
 
-.debug_line     0x00000000     0xfa32
+.debug_line     0x00000000     0xfa6c
  .debug_line    0x00000000      0x6f2 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32f0xx.c.obj
  .debug_line    0x000006f2     0x1f62 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_spi.c.obj
  .debug_line    0x00002654      0xd92 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
@@ -4410,31 +4408,31 @@ LOAD /home/benni/st/stm32cubeclt_1.18.0/GNU-tools-for-STM32/bin/../lib/gcc/arm-n
  .debug_line    0x0000595f     0x3592 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim.c.obj
  .debug_line    0x00008ef1     0x1791 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim_ex.c.obj
  .debug_line    0x0000a682     0x2b75 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
- .debug_line    0x0000d1f7      0x933 CMakeFiles/echessboard_stm.dir/Core/Src/main.c.obj
- .debug_line    0x0000db2a      0x691 CMakeFiles/echessboard_stm.dir/Core/Src/delay_us.c.obj
- .debug_line    0x0000e1bb      0x997 CMakeFiles/echessboard_stm.dir/Core/Src/stm32_sw_i2c.c.obj
- .debug_line    0x0000eb52      0x711 CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_it.c.obj
- .debug_line    0x0000f263      0x754 CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_hal_msp.c.obj
- .debug_line    0x0000f9b7       0x7b CMakeFiles/echessboard_stm.dir/startup_stm32f030x6.s.obj
+ .debug_line    0x0000d1f7      0x95f CMakeFiles/echessboard_stm.dir/Core/Src/main.c.obj
+ .debug_line    0x0000db56      0x691 CMakeFiles/echessboard_stm.dir/Core/Src/delay_us.c.obj
+ .debug_line    0x0000e1e7      0x9a5 CMakeFiles/echessboard_stm.dir/Core/Src/stm32_sw_i2c.c.obj
+ .debug_line    0x0000eb8c      0x711 CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_it.c.obj
+ .debug_line    0x0000f29d      0x754 CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_hal_msp.c.obj
+ .debug_line    0x0000f9f1       0x7b CMakeFiles/echessboard_stm.dir/startup_stm32f030x6.s.obj
 
-.debug_str      0x00000000    0x62a8f
- .debug_str     0x00000000    0x62a8f cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32f0xx.c.obj
+.debug_str      0x00000000    0x62a90
+ .debug_str     0x00000000    0x62a90 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Core/Src/system_stm32f0xx.c.obj
                               0x5ede5 (size before relaxing)
- .debug_str     0x00062a8f    0x5f74f cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_spi.c.obj
- .debug_str     0x00062a8f    0x5f221 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
- .debug_str     0x00062a8f    0x5ef2e cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc_ex.c.obj
- .debug_str     0x00062a8f    0x5f344 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c.obj
- .debug_str     0x00062a8f    0x5ef86 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.c.obj
- .debug_str     0x00062a8f    0x5f135 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c.obj
- .debug_str     0x00062a8f    0x601fb cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim.c.obj
- .debug_str     0x00062a8f    0x5fa07 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim_ex.c.obj
- .debug_str     0x00062a8f    0x5fafe cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
- .debug_str     0x00062a8f    0x5ffe3 CMakeFiles/echessboard_stm.dir/Core/Src/main.c.obj
- .debug_str     0x00062a8f    0x5ed5a CMakeFiles/echessboard_stm.dir/Core/Src/delay_us.c.obj
- .debug_str     0x00062a8f    0x5f0ef CMakeFiles/echessboard_stm.dir/Core/Src/stm32_sw_i2c.c.obj
- .debug_str     0x00062a8f    0x5ee2c CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_it.c.obj
- .debug_str     0x00062a8f    0x5f7a8 CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_hal_msp.c.obj
- .debug_str     0x00062a8f       0x96 CMakeFiles/echessboard_stm.dir/startup_stm32f030x6.s.obj
+ .debug_str     0x00062a90    0x5f74f cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_spi.c.obj
+ .debug_str     0x00062a90    0x5f221 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
+ .debug_str     0x00062a90    0x5ef2e cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc_ex.c.obj
+ .debug_str     0x00062a90    0x5f344 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c.obj
+ .debug_str     0x00062a90    0x5ef86 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.c.obj
+ .debug_str     0x00062a90    0x5f135 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c.obj
+ .debug_str     0x00062a90    0x601fb cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim.c.obj
+ .debug_str     0x00062a90    0x5fa07 cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim_ex.c.obj
+ .debug_str     0x00062a90    0x5fafe cmake/stm32cubemx/CMakeFiles/STM32_Drivers.dir/__/__/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
+ .debug_str     0x00062a90    0x5ffe0 CMakeFiles/echessboard_stm.dir/Core/Src/main.c.obj
+ .debug_str     0x00062a90    0x5ed5a CMakeFiles/echessboard_stm.dir/Core/Src/delay_us.c.obj
+ .debug_str     0x00062a90    0x5f0f7 CMakeFiles/echessboard_stm.dir/Core/Src/stm32_sw_i2c.c.obj
+ .debug_str     0x00062a90    0x5ee2c CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_it.c.obj
+ .debug_str     0x00062a90    0x5f7a8 CMakeFiles/echessboard_stm.dir/Core/Src/stm32f0xx_hal_msp.c.obj
+ .debug_str     0x00062a90       0x96 CMakeFiles/echessboard_stm.dir/startup_stm32f030x6.s.obj
 
 .debug_line_str
                 0x00000000       0x7a

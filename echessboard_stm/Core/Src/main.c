@@ -130,21 +130,55 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-    uint8_t data[2];
-    for (int i = 0; i < 256; i++)
-    {
-      if (I2C_receive_byte(i) != 0) // start, send address, write
-      {
-        addr = i;
-      }
-      delay_us(100); // 1 ms delay
-    }
-    if (interrupt_received)
-    {
-      a = interrupt_pin;
-      interrupt_received = 0;
-    }
+
     /* USER CODE BEGIN 3 */
+
+    for (int i = 0; i < 128; i++)
+    {
+      // reset
+      I2C_SET_SDA
+      I2C_SET_SCL
+      I2C_DELAY
+
+      // start condition
+      I2C_CLEAR_SDA
+      I2C_DELAY
+      I2C_CLEAR_SCL
+      I2C_DELAY
+
+      // send address
+      for (int j = 6; j >= 0; j--)
+      {
+        if (i & (1 << j))
+        {
+          I2C_SET_SDA
+        }
+        else
+        {
+          I2C_CLEAR_SDA
+        }
+        I2C_DELAY;
+        I2C_SET_SCL;   // clock high
+        I2C_DELAY;     // wait for clock to stabilize
+        I2C_CLEAR_SCL; // clock low
+      }
+      // send R/W bit
+      I2C_SET_SDA
+      // send ACK
+      I2C_SET_SDA
+      I2C_DELAY
+      I2C_SET_SCL
+      I2C_DELAY
+      if (!I2C_read_SDA())
+      {
+        a = i;
+        a = i;
+      }
+      // stop condition128
+      I2C_SET_SCL
+      I2C_DELAY
+      I2C_SET_SDA
+    }
   }
   /* USER CODE END 3 */
 }

@@ -15,7 +15,7 @@
 // #define I2C_READ_SDA {if (HAL_GPIO_ReadPin(SW_I2C_SDA_GPIO_Port, SW_I2C_SDA_Pin)) == GPIO_PIN_SET) return 1; else return 0; return 0;};
 #define I2C_CLEAR_SCL HAL_GPIO_WritePin(SW_I2C_SCL_GPIO_Port, SW_I2C_SCL_Pin, GPIO_PIN_RESET);
 #define I2C_SET_SCL HAL_GPIO_WritePin(SW_I2C_SCL_GPIO_Port, SW_I2C_SCL_Pin, GPIO_PIN_SET);
-#define I2C_DELAY delay_us(1); // 4 microsecond delay
+#define I2C_DELAY delay_us(10); // 4 microsecond delay
 
 // void I2C_bus_init(uint8_t scl_pin, uint8_t sda_pin, uint8_t port);
 

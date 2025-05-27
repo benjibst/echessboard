@@ -55,7 +55,7 @@ void I2C_write_bit(uint8_t b)
 
 uint8_t I2C_read_SDA(void)
 {
-    return HAL_GPIO_ReadPin(SW_I2C_SDA_GPIO_Port, SW_I2C_SDA_Pin) == GPIO_PIN_SET;
+    return HAL_GPIO_ReadPin(SW_I2C_SDA_GPIO_Port, SW_I2C_SDA_Pin);
 }
 
 // Reading a bit in I2C:
@@ -90,8 +90,12 @@ _Bool I2C_write_byte(uint8_t B,
         I2C_write_bit(B & 0x80); // write the most-significant bit
         B <<= 1;
     }
-
-    ack = I2C_read_bit();
+    for (size_t i = 0; i < 10; i++)
+    {
+        ack = I2C_read_bit();
+        if (!ack)  // if ACK received
+            break; // exit loop if ACK received
+    }
 
     if (stop)
         I2C_stop_cond();
