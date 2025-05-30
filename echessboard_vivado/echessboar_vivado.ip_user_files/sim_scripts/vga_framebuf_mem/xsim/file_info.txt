@@ -1,0 +1,1 @@
+vga_framebuf_mem_sim_netlist.vhdl,vhdl,xil_defaultlib,../../../../echessboar_vivado.gen/sources_1/ip/vga_framebuf_mem/vga_framebuf_mem_sim_netlist.vhdl,

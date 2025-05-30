@@ -22,5 +22,10 @@ package riscv_types_pkg is
       comp_ltu,
       comp_geu
     );
+  type mem_op_sz is (
+      sz_byte,
+      sz_half,
+      sz_word
+    );
   type op_class is (op_alu, op_load, op_store, op_branch, op_jump);
 end package;

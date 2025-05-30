@@ -1,0 +1,1 @@
+vopt -64 -l elaborate.log +acc=npr -suppress 10016  -L xil_defaultlib -L xpm -L unisims_ver -L unimacro_ver -L secureip -work xil_defaultlib xil_defaultlib.vga_framebuf_mem xil_defaultlib.glbl -o vga_framebuf_mem_opt

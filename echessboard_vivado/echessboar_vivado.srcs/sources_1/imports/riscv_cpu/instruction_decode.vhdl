@@ -12,6 +12,8 @@ entity DecodeUnit is
     du_b_sel   : out STD_LOGIC; --RS2 or IMM
     du_alu_op  : out alu_op;
     du_comp_op : out comp_op;
+    du_mem_op_sz: out mem_op_sz;
+    du_mem_op_signed: out STD_LOGIC; -- Sign extension for load/store
     du_opclass : out op_class
   );
 end entity;
@@ -62,31 +64,31 @@ begin
         b_sel <= '0' when du_opcode = "0110011" else '1'; -- RS2 or IMM
       -----------------------------------------------------------------------------
       when "0100011" => -- Store
-        case funct3 is
-          when "000" => -- SB
-            alu_op <= alu_add;
-          when "001" => -- SH
-            alu_op <= alu_add;
-          when "010" => -- SW
-            alu_op <= alu_add;
+        case funct3(1 downto 0) is
+          when "00" => -- SB
+            du_mem_op_sz <= sz_byte;
+          when "01" => -- SH
+            du_mem_op_sz <= sz_half;
+          when "10" => -- SW
+            du_mem_op_sz <= sz_word;
         end case;
+        du_mem_op_signed <= '0'; -- No sign extension for store
+        alu_op <= alu_add;
         class <= op_store;
         a_sel <= '0';
         b_sel <= '1';
       -----------------------------------------------------------------------------
       when "0000011" => -- Load
-        case funct3 is
-          when "000" => -- LB
-            alu_op <= alu_add;
-          when "001" => -- LH
-            alu_op <= alu_add;
-          when "010" => -- LW
-            alu_op <= alu_add;
-          when "100" => -- LBU
-            alu_op <= alu_add;
-          when "101" => -- LHU
-            alu_op <= alu_add;
+        case funct3(1 downto 0) is
+          when "00" => -- LB
+            du_mem_op_sz <= sz_byte;
+          when "01" => -- LH
+            du_mem_op_sz <= sz_half;
+          when "10" => -- LW
+            du_mem_op_sz <= sz_word;
         end case;
+        du_mem_op_signed <= not funct3(2); -- Sign extension for load
+        alu_op <= alu_add;
         class <= op_load;
         a_sel <= '0';
         b_sel <= '1';

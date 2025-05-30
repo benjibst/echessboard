@@ -1,5 +1,0 @@
-vhdl xil_defaultlib  \
-"../../../../echessboar_vivado.gen/sources_1/ip/blk_mem_gen_1/blk_mem_gen_1_sim_netlist.vhdl" \
-
-# Do not sort compile order
-nosort

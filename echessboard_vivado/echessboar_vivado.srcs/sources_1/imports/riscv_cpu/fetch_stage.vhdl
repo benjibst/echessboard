@@ -24,7 +24,7 @@ begin
     pc_curr    => if_pc_curr_reg,
     pc_next    => if_pc_next
   );
-  im: entity work.blk_mem_gen_0 port map (
+  im: entity work.instr_mem port map (
     clka  => if_clk,
     addra => if_pc_curr_reg(11 downto 2),
     douta => if_instruction

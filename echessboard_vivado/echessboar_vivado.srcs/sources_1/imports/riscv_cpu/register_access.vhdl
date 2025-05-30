@@ -28,10 +28,10 @@ begin
             mp_out => addr_mux_out, -- Output to register file
             mp_s   => ra_write_en -- Select signal for multiplexer
         );
-    registerfile: entity work.dist_mem_gen_0
+    registerfile: entity work.register_file
         port map (
-            clk     => ra_clk,
             a  => addr_mux_out, -- Address input from the multiplexer
+            clk     => ra_clk,
             dpra => ra_rs2addr,   -- External address input
             we      => ra_write_en,
             d   => ra_rdval,
