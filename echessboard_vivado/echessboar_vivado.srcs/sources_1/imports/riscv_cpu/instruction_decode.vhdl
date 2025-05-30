@@ -36,7 +36,7 @@ begin
             if (du_funct7(5) = '0') then
               alu_op <= alu_add;
             else
-              comp_op <= alu_sub;
+              alu_op <= alu_sub;
             end if;
           when "001" => -- SLL
             alu_op <= alu_sll;
@@ -107,19 +107,21 @@ begin
             comp_op <= comp_geu;
         end case;
         class <= op_branch;
-        a_sel <= '0';
+        alu_op<=alu_add;
+        a_sel <= '1';
         b_sel <= '1';
       -----------------------------------------------------------------------------
       when "1101111" | "1100111" => -- JUMP
         case funct3 is
           when "000" => -- JAL
-            alu_op <= alu_add;
+            a_sel <= '1';
+            b_sel <= '1';
           when "001" => -- JALR
-            alu_op <= alu_add;
+            a_sel <= '0';
+            b_sel <= '1'; 
         end case;
+        alu_op <= alu_add;
         class <= op_jump;
-        a_sel <= '1';
-        b_sel <= '1';
       -----------------------------------------------------------------------------
       when "0010111" => -- AUIPC
         alu_op <= alu_add;

@@ -134,7 +134,7 @@
         </FileInfo>
       </File>
       <File Path="$PSRCDIR/sources_1/imports/riscv_cpu/instruction_decode.vhdl">
-        <FileInfo>
+        <FileInfo SFType="VHDL2008">
           <Attr Name="ImportPath" Val="$PPRDIR/../riscv_cpu/instruction_decode.vhdl"/>
           <Attr Name="ImportTime" Val="1747934912"/>
           <Attr Name="UsedIn" Val="synthesis"/>
@@ -204,7 +204,7 @@
         </FileInfo>
       </File>
       <File Path="$PSRCDIR/sources_1/imports/riscv_cpu/pc_out_mux.vhdl">
-        <FileInfo>
+        <FileInfo SFType="VHDL2008">
           <Attr Name="AutoDisabled" Val="1"/>
           <Attr Name="ImportPath" Val="$PPRDIR/../riscv_cpu/pc_out_mux.vhdl"/>
           <Attr Name="ImportTime" Val="1747933600"/>

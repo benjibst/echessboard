@@ -10,5 +10,6 @@
         "tca9535.h": "c",
         "stm32f0xx_hal_gpio.h": "c",
         "stm32f0xx_hal_conf.h": "c"
-    }
+    },
+    "cortex-debug.variableUseNaturalFormat": true
 }

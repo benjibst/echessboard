@@ -51,6 +51,7 @@ TCA9535_handle_t io1 = {.i2c_address = 0x20};
 TCA9535_handle_t io2 = {.i2c_address = 0x21};
 TCA9535_handle_t io3 = {.i2c_address = 0x22};
 TCA9535_handle_t io4 = {.i2c_address = 0x23};
+TCA9535_handle_t *io_handles[] = {&io1, &io2, &io3, &io4};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -115,25 +116,41 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  uint8_t data = 0;
-
+  uint8_t data[8];
+  for (int i = 0; i < 4; i++)
+  {
+    if (!I2C_write_byte_at(io_handles[i]->i2c_address, 0, 0xFF))
+    {
+      __NOP();
+    }
+    if (!I2C_write_byte_at(io_handles[i]->i2c_address, 1, 0xFF))
+    {
+      __NOP();
+    }
+  }
   while (1)
   {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-
-    if (I2C_write_byte((io1.i2c_address << 1) | 1, 1, 0))
+    for (int i = 0; i < 4; i++)
     {
-      I2C_read_byte(&data, 0);
-      I2C_stop_condition();
-      data = ~data;
-      data = ~data;
+      if (!I2C_read_byte_at(io_handles[i]->i2c_address, 0, data + i * 2))
+      {
+        __NOP();
+      }
+      if (!I2C_read_byte_at(io_handles[i]->i2c_address, 1, data + i * 2 + 1))
+      {
+        __NOP();
+      }
     }
-    else
-      I2C_stop_condition();
+    for (int i = 0; i < 8; i++)
+    {
+      data[i] = ~data[i];
+    }
+    HAL_Delay(10);
+    /* USER CODE END 3 */
   }
-  /* USER CODE END 3 */
 }
 
 /**
