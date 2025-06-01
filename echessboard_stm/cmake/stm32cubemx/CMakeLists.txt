@@ -20,8 +20,6 @@ set(MX_Include_Dirs
 # STM32CubeMX generated application sources
 set(MX_Application_Src
     ${CMAKE_SOURCE_DIR}/Core/Src/main.c
-    ${CMAKE_SOURCE_DIR}/Core/Src/delay_us.c
-    ${CMAKE_SOURCE_DIR}/Core/Src/main.c
     ${CMAKE_SOURCE_DIR}/Core/Src/stm32f0xx_it.c
     ${CMAKE_SOURCE_DIR}/Core/Src/stm32f0xx_hal_msp.c
     ${CMAKE_SOURCE_DIR}/Core/Src/sysmem.c

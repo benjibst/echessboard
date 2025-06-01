@@ -23,6 +23,7 @@
 /* USER CODE BEGIN Includes */
 #include "delay_us.h"
 #include "tca9535.h"
+#include "stm32f0xx_hal_gpio.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -61,19 +62,116 @@ static void MX_SPI1_Init(void);
 static void MX_USART1_UART_Init(void);
 static void MX_TIM1_Init(void);
 /* USER CODE BEGIN PFP */
-
 static int interrupt_received = 0;
 static int interrupt_pin = 0;
+static int game_state = 0;
+static uint8_t game_pos[8];
+
+typedef enum
+{
+  STARTED = 1 << 0,
+  WHITEWON = 1 << 1,
+  BLACKWON = 1 << 2,
+  DRAW = 1 << 3,
+  PROM_QUEEN = 1 << 4,
+  PROM_KNIGHT = 1 << 5,
+  PROM_ROOK = 1 << 6,
+  PROM_BISHOP = 1 << 7,
+  WHITE_TO_MOVE = 1 << 8,
+  BLACK_TO_MOVE = 1 << 9,
+  ILLEGAL_MOVE = 1 << 10,
+} GameStateBits;
+#define GET_GAMESTATE(bit) ((game_state & bit) > 0)
+#define SET_GAMESTATE(bit) (game_state |= bit)
+#define RESET_GAMESTATE(bit) (game_state &= ~bit)
+#define IRQ_START_GAME_BIT 1
+#define IRQ_PROMOTION_BIT 2
+#define IRQ_CONFIRM_MOVE_BIT 4
+
+#define LED_PORT GPIOB
+#define GAMESTARTED_LED_PIN GPIO_PIN_15
+#define BLACKWON_LED_PIN GPIO_PIN_12
+#define WHITEWON_LED_PIN GPIO_PIN_11
+#define DRAW_LED_PIN GPIO_PIN_13
+#define QUEENPROM_LED_PIN GPIO_PIN_3
+#define KNIGHTPROM_LED_PIN GPIO_PIN_4
+#define ROOKPROM_LED_PIN GPIO_PIN_6
+#define BISHOPPROM_LED_PIN GPIO_PIN_5
+#define BLACKMOVE_LED_PIN GPIO_PIN_10
+#define ILLEGALMOVE_LED_PIN GPIO_PIN_14
+#define WHITEMOVE_LED_PIN GPIO_PIN_9
+#define SET_LED(led_pin) HAL_GPIO_WritePin(LED_PORT, led_pin, GPIO_PIN_SET)
+#define RESET_LED(led_pin) HAL_GPIO_WritePin(LED_PORT, led_pin, GPIO_PIN_RESET)
+#define PUT_LED(led_pin, state) HAL_GPIO_WritePin(LED_PORT, led_pin, state)
+
+void SetWaitResetLed(uint32_t delay_ms, uint16_t led_pin)
+{
+  SET_LED(led_pin);
+  HAL_Delay(delay_ms);
+  RESET_LED(led_pin);
+}
+
+void CycleLeds(uint32_t delay_ms)
+{
+  SetWaitResetLed(delay_ms, GAMESTARTED_LED_PIN);
+  SetWaitResetLed(delay_ms, BLACKWON_LED_PIN);
+  SetWaitResetLed(delay_ms, DRAW_LED_PIN);
+  SetWaitResetLed(delay_ms, WHITEWON_LED_PIN);
+  SetWaitResetLed(delay_ms, QUEENPROM_LED_PIN);
+  SetWaitResetLed(delay_ms, KNIGHTPROM_LED_PIN);
+  SetWaitResetLed(delay_ms, ROOKPROM_LED_PIN);
+  SetWaitResetLed(delay_ms, BISHOPPROM_LED_PIN);
+  SetWaitResetLed(delay_ms, BLACKMOVE_LED_PIN);
+  SetWaitResetLed(delay_ms, ILLEGALMOVE_LED_PIN);
+  SetWaitResetLed(delay_ms, WHITEMOVE_LED_PIN);
+}
+
+void SetLedsToGamestate()
+{
+  PUT_LED(GAMESTARTED_LED_PIN, GET_GAMESTATE(STARTED));
+  PUT_LED(BLACKWON_LED_PIN, GET_GAMESTATE(BLACKWON));
+  PUT_LED(WHITEWON_LED_PIN, GET_GAMESTATE(WHITEWON));
+  PUT_LED(DRAW_LED_PIN, GET_GAMESTATE(DRAW));
+  PUT_LED(QUEENPROM_LED_PIN, GET_GAMESTATE(PROM_QUEEN));
+  PUT_LED(KNIGHTPROM_LED_PIN, GET_GAMESTATE(PROM_KNIGHT));
+  PUT_LED(ROOKPROM_LED_PIN, GET_GAMESTATE(PROM_ROOK));
+  PUT_LED(BISHOPPROM_LED_PIN, GET_GAMESTATE(PROM_BISHOP));
+  PUT_LED(BLACKMOVE_LED_PIN, GET_GAMESTATE(BLACK_TO_MOVE));
+  PUT_LED(ILLEGALMOVE_LED_PIN, GET_GAMESTATE(ILLEGAL_MOVE));
+  PUT_LED(WHITEMOVE_LED_PIN, GET_GAMESTATE(WHITE_TO_MOVE));
+}
+
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
   interrupt_received = 1;
   interrupt_pin = GPIO_Pin;
 }
+
+_Bool ReadGamePosition()
+{
+  uint8_t i;
+  for (i = 0; i < 4; i++)
+  {
+    if (!I2C_read_byte_at(io_handles[i]->i2c_address, 0, game_pos + i * 2))
+    {
+      return 0;
+    }
+    if (!I2C_read_byte_at(io_handles[i]->i2c_address, 1, game_pos + i * 2 + 1))
+    {
+      return 0;
+    }
+  }
+  for (size_t i = 0; i < 8; i++)
+  {
+    game_pos[i] = ~game_pos[i];
+  }
+
+  return 1;
+}
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
 /* USER CODE END 0 */
 
 /**
@@ -109,46 +207,67 @@ int main(void)
   MX_USART1_UART_Init();
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
-
   HAL_TIM_Base_Start(&htim1);
-
+  HAL_GPIO_WritePin(GPIOB, 0xFFFF, GPIO_PIN_RESET);
+  CycleLeds(200);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  uint8_t data[8];
-  for (int i = 0; i < 4; i++)
-  {
-    if (!I2C_write_byte_at(io_handles[i]->i2c_address, 0, 0xFF))
-    {
-      __NOP();
-    }
-    if (!I2C_write_byte_at(io_handles[i]->i2c_address, 1, 0xFF))
-    {
-      __NOP();
-    }
-  }
   while (1)
   {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    for (int i = 0; i < 4; i++)
+    if (interrupt_received)
     {
-      if (!I2C_read_byte_at(io_handles[i]->i2c_address, 0, data + i * 2))
+      interrupt_received = 0;
+      if (interrupt_pin == IRQ_START_GAME_BIT && !GET_GAMESTATE(STARTED))
       {
+        SET_GAMESTATE(STARTED);
+        SET_GAMESTATE(WHITE_TO_MOVE);
+        SET_GAMESTATE(PROM_QUEEN);
+      }
+      if (interrupt_pin == IRQ_CONFIRM_MOVE_BIT && GET_GAMESTATE(STARTED))
+      {
+        if (GET_GAMESTATE(WHITE_TO_MOVE))
+        {
+          RESET_GAMESTATE(WHITE_TO_MOVE);
+          SET_GAMESTATE(BLACK_TO_MOVE);
+        }
+        else
+        {
+          RESET_GAMESTATE(BLACK_TO_MOVE);
+          SET_GAMESTATE(WHITE_TO_MOVE);
+        }
+        ReadGamePosition();
         __NOP();
       }
-      if (!I2C_read_byte_at(io_handles[i]->i2c_address, 1, data + i * 2 + 1))
+      if (interrupt_pin == IRQ_PROMOTION_BIT && GET_GAMESTATE(STARTED))
       {
-        __NOP();
+        if (GET_GAMESTATE(PROM_QUEEN))
+        {
+          RESET_GAMESTATE(PROM_QUEEN);
+          SET_GAMESTATE(PROM_KNIGHT);
+        }
+        else if (GET_GAMESTATE(PROM_KNIGHT))
+        {
+          RESET_GAMESTATE(PROM_KNIGHT);
+          SET_GAMESTATE(PROM_ROOK);
+        }
+        else if (GET_GAMESTATE(PROM_ROOK))
+        {
+          RESET_GAMESTATE(PROM_ROOK);
+          SET_GAMESTATE(PROM_BISHOP);
+        }
+        else if (GET_GAMESTATE(PROM_BISHOP))
+        {
+          RESET_GAMESTATE(PROM_BISHOP);
+          SET_GAMESTATE(PROM_QUEEN);
+        }
       }
+      SetLedsToGamestate();
     }
-    for (int i = 0; i < 8; i++)
-    {
-      data[i] = ~data[i];
-    }
-    HAL_Delay(10);
     /* USER CODE END 3 */
   }
 }
@@ -335,18 +454,18 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_10 | GPIO_PIN_11 | GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14 | GPIO_PIN_15 | GPIO_PIN_3 | GPIO_PIN_4 | GPIO_PIN_5 | GPIO_PIN_6 | GPIO_PIN_9, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, SW_I2C_SCL_Pin | SW_I2C_SDA_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, SW_I2C_SDA_Pin | SW_I2C_SCL_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : PA0 PA1 PA2 PA3 */
   GPIO_InitStruct.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2 | GPIO_PIN_3;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PB0 PB1 PB2 */
   GPIO_InitStruct.Pin = GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_2;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PB10 PB11 PB12 PB13
@@ -358,8 +477,8 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : SW_I2C_SCL_Pin SW_I2C_SDA_Pin */
-  GPIO_InitStruct.Pin = SW_I2C_SCL_Pin | SW_I2C_SDA_Pin;
+  /*Configure GPIO pins : SW_I2C_SDA_Pin SW_I2C_SCL_Pin */
+  GPIO_InitStruct.Pin = SW_I2C_SDA_Pin | SW_I2C_SCL_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
