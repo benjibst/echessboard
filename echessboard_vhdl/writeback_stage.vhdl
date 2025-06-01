@@ -6,9 +6,9 @@ library ieee;
 entity WriteBackStage is
   port (
     wb_clk                : in  STD_LOGIC;
-    wb_class              : in  op_class;
+    wb_class              : in  op_class_t;
     wb_branch_cond        : in  STD_LOGIC;
-    wb_mem_op_sz          : in  mem_op_sz;
+    wb_mem_op_sz          : in  mem_op_sz_t;
     wb_next_pc            : in  STD_LOGIC_VECTOR(31 downto 0);
     wb_alu_result         : in  STD_LOGIC_VECTOR(31 downto 0);
     wb_alu_result_pre     : in  STD_LOGIC_VECTOR(31 downto 0);

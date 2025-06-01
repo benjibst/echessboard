@@ -10,20 +10,20 @@ entity DecodeUnit is
     du_opcode        : in  STD_LOGIC_VECTOR(6 downto 0);
     du_a_sel         : out STD_LOGIC; --RS1 or PC
     du_b_sel         : out STD_LOGIC; --RS2 or IMM
-    du_alu_op        : out alu_op;
+    du_alu_op        : out alu_op_t;
     du_comp_op       : out comp_op;
-    du_mem_op_sz     : out mem_op_sz;
+    du_mem_op_sz     : out mem_op_sz_t;
     du_mem_op_signed : out STD_LOGIC; -- Sign extension for load/store
-    du_opclass       : out op_class
+    du_opclass       : out op_class_t
   );
 end entity;
 
 architecture RTL of DecodeUnit is
-  signal class   : op_class;
+  signal class   : op_class_t;
   signal funct3  : STD_LOGIC_VECTOR(2 downto 0);
   signal a_sel   : STD_LOGIC;
   signal b_sel   : STD_LOGIC;
-  signal alu_op  : alu_op;
+  signal alu_op  : alu_op_t;
   signal comp_op : comp_op;
 begin
   funct3 <= du_funct3;

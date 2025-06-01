@@ -8,7 +8,7 @@ entity ALU is
     alu_clk        : in  STD_LOGIC;
     alu_a          : in  STD_LOGIC_VECTOR(31 downto 0);
     alu_b          : in  STD_LOGIC_VECTOR(31 downto 0);
-    alu_op         : in  alu_op;
+    alu_op         : in  alu_op_t;
     alu_result     : out STD_LOGIC_VECTOR(31 downto 0);
     alu_result_pre : out STD_LOGIC_VECTOR(31 downto 0)
   );

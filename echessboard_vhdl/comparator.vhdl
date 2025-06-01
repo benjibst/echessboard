@@ -1,14 +1,14 @@
 library IEEE;
   use IEEE.STD_LOGIC_1164.all;
   use IEEE.numeric_std.all;
-  use work.riscv_types_pkg.comp_op;
+  use work.riscv_types_pkg.comp_op_t;
 
 entity ComparatorUnit is
   port (
     cu_clk     : in  STD_LOGIC;
     cu_rs1_val : in  STD_LOGIC_VECTOR(31 downto 0);
     cu_rs2_val : in  STD_LOGIC_VECTOR(31 downto 0);
-    cu_comp_op : in  comp_op;
+    cu_comp_op : in  comp_op_t;
     cu_result  : out STD_LOGIC
   );
 end entity;
@@ -68,7 +68,7 @@ architecture RTL of ComparatorUnitTB is
   signal tb_clk        : STD_LOGIC                     := '0';
   signal tb_rs1_val    : STD_LOGIC_VECTOR(31 downto 0) := (others => '0');
   signal tb_rs2_val    : STD_LOGIC_VECTOR(31 downto 0) := (others => '0');
-  signal tb_comp_op    : comp_op                       := comp_eq;
+  signal tb_comp_op    : comp_op_t                     := comp_eq;
   signal tb_result     : STD_LOGIC                     := '0';
   signal comp_op_logic : integer;
 begin
@@ -79,7 +79,7 @@ begin
     cu_comp_op => tb_comp_op,
     cu_result  => tb_result
   );
-  comp_op_logic <= comp_op'pos(tb_comp_op);
+  comp_op_logic <= comp_op_t'pos(tb_comp_op);
 
   process
   begin

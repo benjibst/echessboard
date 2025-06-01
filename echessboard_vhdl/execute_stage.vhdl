@@ -10,8 +10,8 @@ entity ExecuteStage is
     ex_rs2_val        : in  STD_LOGIC_VECTOR(31 downto 0);
     ex_curr_pc        : in  STD_LOGIC_VECTOR(31 downto 0);
     ex_imm_val        : in  STD_LOGIC_VECTOR(31 downto 0);
-    ex_alu_op         : in  alu_op;
-    ex_comp_op        : in  comp_op;
+    ex_alu_op         : in  alu_op_t;
+    ex_comp_op        : in  comp_op_t;
     ex_a_sel          : in  STD_LOGIC;
     ex_b_sel          : in  STD_LOGIC;
     ex_alu_result     : out STD_LOGIC_VECTOR(31 downto 0);

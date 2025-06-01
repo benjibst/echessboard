@@ -4,22 +4,24 @@ library IEEE;
 
 entity DecodeStage is
   port (
-    id_clk         : in  STD_LOGIC;
-    id_instruction : in  STD_LOGIC_VECTOR(31 downto 0);
-    id_rd_write_en : in  STD_LOGIC;
-    id_rd_val      : in  STD_LOGIC_VECTOR(31 downto 0);
-    id_pc_curr     : in  STD_LOGIC_VECTOR(11 downto 0);
-    id_pc_next     : in  STD_LOGIC_VECTOR(11 downto 0);
-    id_pc_curr_se  : out STD_LOGIC_VECTOR(31 downto 0);
-    id_pc_next_se  : out STD_LOGIC_VECTOR(31 downto 0);
-    id_rs1_val     : out STD_LOGIC_VECTOR(31 downto 0);
-    id_rs2_val     : out STD_LOGIC_VECTOR(31 downto 0);
-    id_imm_val     : out STD_LOGIC_VECTOR(31 downto 0);
-    id_opclass     : out op_class;
-    id_a_sel       : out STD_LOGIC;
-    id_b_sel       : out STD_LOGIC;
-    id_alu_op      : out alu_op;
-    id_comp_op     : out comp_op
+    id_clk           : in  STD_LOGIC;
+    id_instruction   : in  STD_LOGIC_VECTOR(31 downto 0);
+    id_rd_write_en   : in  STD_LOGIC;
+    id_rd_val        : in  STD_LOGIC_VECTOR(31 downto 0);
+    id_pc_curr       : in  STD_LOGIC_VECTOR(11 downto 0);
+    id_pc_next       : in  STD_LOGIC_VECTOR(11 downto 0);
+    id_pc_curr_se    : out STD_LOGIC_VECTOR(31 downto 0);
+    id_pc_next_se    : out STD_LOGIC_VECTOR(31 downto 0);
+    id_rs1_val       : out STD_LOGIC_VECTOR(31 downto 0);
+    id_rs2_val       : out STD_LOGIC_VECTOR(31 downto 0);
+    id_imm_val       : out STD_LOGIC_VECTOR(31 downto 0);
+    id_opclass       : out op_class_t;
+    id_mem_op_signed : out STD_LOGIC;
+    id_mem_op_sz     : out mem_op_sz_t;
+    id_a_sel         : out STD_LOGIC;
+    id_b_sel         : out STD_LOGIC;
+    id_alu_op        : out alu_op_t;
+    id_comp_op       : out comp_op_t
   );
 end entity;
 
@@ -68,14 +70,16 @@ begin
     ie_imm_out => id_imm_val
   );
   decode_unit: entity work.DecodeUnit(RTL) port map (
-    du_clk     => id_clk,
-    du_funct3  => funct3,
-    du_funct7  => funct7,
-    du_opcode  => opcode,
-    du_a_sel   => id_a_sel,
-    du_b_sel   => id_b_sel,
-    du_alu_op  => id_alu_op,
-    du_comp_op => id_comp_op,
-    du_opclass => id_opclass
+    du_clk           => id_clk,
+    du_funct3        => funct3,
+    du_funct7        => funct7,
+    du_opcode        => opcode,
+    du_a_sel         => id_a_sel,
+    du_b_sel         => id_b_sel,
+    du_alu_op        => id_alu_op,
+    du_comp_op       => id_comp_op,
+    du_opclass       => id_opclass,
+    du_mem_op_signed => id_mem_op_signed,
+    du_mem_op_sz     => id_mem_op_sz
   );
 end architecture;

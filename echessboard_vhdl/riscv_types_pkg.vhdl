@@ -1,7 +1,7 @@
 library IEEE;
 
 package riscv_types_pkg is
-  type alu_op is (
+  type alu_op_t is (
       alu_add,
       alu_sub,
       alu_xor,
@@ -14,7 +14,7 @@ package riscv_types_pkg is
       alu_sltu,
       alu_lui
     );
-  type comp_op is (
+  type comp_op_t is (
       comp_eq,
       comp_ne,
       comp_lt,
@@ -22,10 +22,10 @@ package riscv_types_pkg is
       comp_ltu,
       comp_geu
     );
-  type mem_op_sz is (
+  type mem_op_sz_t is (
       sz_byte,
       sz_half,
       sz_word
     );
-  type op_class is (op_alu, op_load, op_store, op_branch, op_jump);
+  type op_class_t is (op_alu, op_load, op_store, op_branch, op_jump);
 end package;
