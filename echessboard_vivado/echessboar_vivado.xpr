@@ -189,6 +189,12 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
+      <File Path="$PPRDIR/../echessboard_vhdl/vga_img_gen.vhd">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <File Path="$PPRDIR/../echessboard_vhdl/data_path.vhdl">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
@@ -196,6 +202,13 @@
         </FileInfo>
       </File>
       <File Path="$PPRDIR/../echessboard_vhdl/hw_image_generator.vhd">
+        <FileInfo>
+          <Attr Name="AutoDisabled" Val="1"/>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PPRDIR/../echessboard_vhdl/vga_tb.vhdl">
         <FileInfo>
           <Attr Name="AutoDisabled" Val="1"/>
           <Attr Name="UsedIn" Val="synthesis"/>
