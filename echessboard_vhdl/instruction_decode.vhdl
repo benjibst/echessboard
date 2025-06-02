@@ -8,23 +8,28 @@ entity DecodeUnit is
     du_funct3        : in  STD_LOGIC_VECTOR(2 downto 0);
     du_funct7        : in  STD_LOGIC_VECTOR(6 downto 0);
     du_opcode        : in  STD_LOGIC_VECTOR(6 downto 0);
-    du_a_sel         : out STD_LOGIC; --RS1 or PC
-    du_b_sel         : out STD_LOGIC; --RS2 or IMM
+    du_a_sel         : out STD_LOGIC;       --RS1 or PC
+    du_b_sel         : out STD_LOGIC;       --RS2 or IMM
     du_alu_op        : out alu_op_t;
-    du_comp_op       : out comp_op;
+    du_comp_op       : out comp_op_t;
     du_mem_op_sz     : out mem_op_sz_t;
-    du_mem_op_signed : out STD_LOGIC; -- Sign extension for load/store
-    du_opclass       : out op_class_t
+    du_mem_op_signed : out STD_LOGIC;       -- Sign extension for load/store
+    du_opclass       : out op_class_t;
+    du_reg_we        : out STD_LOGIC := '0'; -- Register write enable
+    du_error         : out std_logic := '0'
   );
 end entity;
 
 architecture RTL of DecodeUnit is
-  signal class   : op_class_t;
-  signal funct3  : STD_LOGIC_VECTOR(2 downto 0);
-  signal a_sel   : STD_LOGIC;
-  signal b_sel   : STD_LOGIC;
-  signal alu_op  : alu_op_t;
-  signal comp_op : comp_op;
+  signal class         : op_class_t;
+  signal funct3        : STD_LOGIC_VECTOR(2 downto 0);
+  signal a_sel         : STD_LOGIC;
+  signal b_sel         : STD_LOGIC;
+  signal alu_op        : alu_op_t;
+  signal comp_op       : comp_op_t;
+  signal mem_op_sz     : mem_op_sz_t;
+  signal mem_op_signed : STD_LOGIC;
+  signal reg_we        : STD_LOGIC;
 begin
   funct3 <= du_funct3;
 
@@ -58,22 +63,26 @@ begin
             alu_op <= alu_or;
           when "111" => -- AND
             alu_op <= alu_and;
+          when others => du_error <= '1';
         end case;
         class <= op_alu;
+        reg_we <= '1';
         a_sel <= '0';
         b_sel <= '0' when du_opcode = "0110011" else '1'; -- RS2 or IMM
       -----------------------------------------------------------------------------
       when "0100011" => -- Store
         case funct3(1 downto 0) is
           when "00" => -- SB
-            du_mem_op_sz <= sz_byte;
+            mem_op_sz <= sz_byte;
           when "01" => -- SH
-            du_mem_op_sz <= sz_half;
+            mem_op_sz <= sz_half;
           when "10" => -- SW
-            du_mem_op_sz <= sz_word;
+            mem_op_sz <= sz_word;
+          when others => du_error <= '1';
         end case;
-        du_mem_op_signed <= '0'; -- No sign extension for store
+        mem_op_signed <= '0'; -- No sign extension for store
         alu_op <= alu_add;
+        reg_we <= '0';
         class <= op_store;
         a_sel <= '0';
         b_sel <= '1';
@@ -81,15 +90,17 @@ begin
       when "0000011" => -- Load
         case funct3(1 downto 0) is
           when "00" => -- LB
-            du_mem_op_sz <= sz_byte;
+            mem_op_sz <= sz_byte;
           when "01" => -- LH
-            du_mem_op_sz <= sz_half;
+            mem_op_sz <= sz_half;
           when "10" => -- LW
-            du_mem_op_sz <= sz_word;
+            mem_op_sz <= sz_word;
+          when others => du_error <= '1';
         end case;
-        du_mem_op_signed <= not funct3(2); -- Sign extension for load
+        mem_op_signed <= not funct3(2); -- Sign extension for load
         alu_op <= alu_add;
         class <= op_load;
+        reg_we <= '1';
         a_sel <= '0';
         b_sel <= '1';
       -----------------------------------------------------------------------------
@@ -107,9 +118,11 @@ begin
             comp_op <= comp_ltu;
           when "111" => -- BGEU
             comp_op <= comp_geu;
+           when others => du_error <= '1';
         end case;
         class <= op_branch;
         alu_op <= alu_add;
+        reg_we <= '0';
         a_sel <= '1';
         b_sel <= '1';
       -----------------------------------------------------------------------------
@@ -121,12 +134,15 @@ begin
           when "001" => -- JALR
             a_sel <= '0';
             b_sel <= '1';
+          when others => du_error <= '1';
         end case;
         alu_op <= alu_add;
+        reg_we <= '1';
         class <= op_jump;
       -----------------------------------------------------------------------------
       when "0010111" => -- AUIPC
         alu_op <= alu_add;
+        reg_we <= '1';
         class <= op_alu;
         a_sel <= '1';
         b_sel <= '1';
@@ -134,8 +150,11 @@ begin
       when "0110111" => -- LUI
         alu_op <= alu_lui;
         class <= op_alu;
+        reg_we <= '1';
         a_sel <= '0';
         b_sel <= '1';
+      when others=>du_error <= '1';
+        
     end case;
   end process;
 
@@ -147,6 +166,9 @@ begin
       du_b_sel <= b_sel;
       du_alu_op <= alu_op;
       du_comp_op <= comp_op;
+      du_mem_op_sz <= mem_op_sz;
+      du_mem_op_signed <= mem_op_signed;
+      du_reg_we <= reg_we;
     end if;
   end process;
 end architecture;

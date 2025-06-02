@@ -9,8 +9,8 @@ entity SignExtension is
     se_output_width : INTEGER
   );
   port (
-    se_in  : in  STD_LOGIC_VECTOR(se_input_width downto 0)  := (others => '0');
-    se_out : out STD_LOGIC_VECTOR(se_output_width downto 0) := (others => '0')
+    se_in  : in  STD_LOGIC_VECTOR(se_input_width-1 downto 0)  := (others => '0');
+    se_out : out STD_LOGIC_VECTOR(se_output_width-1 downto 0) := (others => '0')
   );
 end entity;
 

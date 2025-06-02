@@ -5,7 +5,7 @@ library ieee;
 
 entity PCOutMux is
   port (
-    pom_class       : in  op_class;
+    pom_class       : in  op_class_t;
     pom_branch_cond : in  STD_LOGIC;
     pom_next_pc     : in  STD_LOGIC_VECTOR(31 downto 0);
     pom_alu_result  : in  STD_LOGIC_VECTOR(31 downto 0);

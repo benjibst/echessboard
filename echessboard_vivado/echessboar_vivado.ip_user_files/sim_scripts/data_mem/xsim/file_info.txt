@@ -1,0 +1,1 @@
+data_mem_sim_netlist.vhdl,vhdl,xil_defaultlib,../../../../echessboar_vivado.gen/sources_1/ip/data_mem/data_mem_sim_netlist.vhdl,

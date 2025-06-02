@@ -2,10 +2,13 @@ library IEEE;
   use IEEE.STD_LOGIC_1164.all;
   use work.riscv_types_pkg.all;
 
-entity data_path is
+entity DataPath is
   port (
     dp_clk         : in  STD_LOGIC := '0';             -- clock input
     dp_pc_load_en  : in  STD_LOGIC := '0';             -- load enable for program counter
+    dp_spi_clk     : in STD_LOGIC;
+    dp_spi_addr    : in std_logic_vector(11 downto 0);
+    dp_spi_data    : in std_logic_vector(31 downto 0);
     dp_vga_clk     : in  STD_LOGIC := '0';             -- VGA clock input
     dp_vga_reset_n : in  STD_LOGIC := '0';             -- VGA reset signal
     dp_vga_h_sync  : out STD_LOGIC;                    -- VGA horizontal sync output
@@ -19,7 +22,7 @@ entity data_path is
   );
 end entity;
 
-architecture RTL of data_path is
+architecture RTL of DataPath is
   signal next_pc        : std_logic_vector(11 downto 0);
   signal curr_pc        : std_logic_vector(11 downto 0);
   signal curr_pc_se     : std_logic_vector(31 downto 0);
@@ -43,6 +46,9 @@ architecture RTL of data_path is
   signal vga_disp_en    : std_logic;
   signal vga_img_x      : integer;
   signal vga_img_y      : integer;
+  signal fb_data        : std_logic_vector(31 downto 0);
+  signal fb_addr        : std_logic_vector(14 downto 0);
+  signal error          : std_logic;
 begin
 
   fetch_stage: entity work.FetchStage(RTL) port map (
@@ -71,7 +77,8 @@ begin
     id_a_sel         => a_sel,
     id_b_sel         => b_sel,
     id_alu_op        => alu_op,
-    id_comp_op       => comp_op
+    id_comp_op       => comp_op,
+    id_error         => error
   );
   execute_stage: entity work.ExecuteStage(RTL) port map (
     ex_clk            => dp_clk,
@@ -87,21 +94,25 @@ begin
     ex_alu_result_pre => alu_result_pre,
     ex_branch_cond    => branch_cond
   );
-  writeback_stage: entity work.WritebackStage(RTL) port map (
+  writeback_stage: entity work.WritebackStage port map (
     wb_clk                => dp_clk,
     wb_class              => op_class,
     wb_branch_cond        => branch_cond,
     wb_mem_op_sz          => mem_op_sz,
+    wb_mem_op_signed => mem_op_signed,
     wb_next_pc            => next_pc_se,
     wb_alu_result         => alu_result,
     wb_alu_result_pre     => alu_result_pre,
     wb_rs2_val            => reg_rs2_val,
-    wb_mem_we             => '1', --TODO check if this is ok
+    wb_mem_we             => '1',
     wb_vga_framebuf_clkb  => dp_vga_clk,
-    wb_vga_framebuf_addrb => x,
+    wb_vga_framebuf_addrb => fb_addr,
+    wb_spi_mem_clk   =>  dp_spi_clk,
+    wb_spi_mem_data => dp_spi_data,
+    wb_spi_mem_addr => dp_spi_addr,
     wb_pc_out             => pc_out,
     wb_rd_val             => rd_val,
-    wb_vga_framebuf_doutb => x
+    wb_vga_framebuf_doutb => fb_data
   );
   vga_controller: entity work.VGAController(RTL) port map (
     vga_pixel_clk => dp_vga_clk,
@@ -112,9 +123,11 @@ begin
     vga_img_x     => vga_img_x,
     vga_img_y     => vga_img_y);
   vga_img_gen: entity work.VGAImageGenerator(RTL) port map (
-    ig_disp_ena => STD_LOGIC,
-    ig_row      => vga_img_y,
-    ig_column   => vga_img_x,
+    ig_disp_ena => dp_vga_disp_en,
+    ig_y        => vga_img_y,
+    ig_x        => vga_img_x,
+    ig_fb_data  => fb_data,
+    ig_fb_addr  => fb_addr,
     ig_red      => dp_vga_red,
     ig_green    => dp_vga_green,
     ig_blue     => dp_vga_blue);

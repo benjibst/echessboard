@@ -44,6 +44,7 @@ begin
       ----------------------------------------------------------------
       when "0110111" | "0010111" => -- U format instructions (LUI and AUIPC)
         sign_extended <= ie_instr(31 downto 12) & x"000";
+      when others=> sign_extended <= x"00000000";
     end case;
   end process;
 

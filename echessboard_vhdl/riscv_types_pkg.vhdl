@@ -29,3 +29,5 @@ package riscv_types_pkg is
     );
   type op_class_t is (op_alu, op_load, op_store, op_branch, op_jump);
 end package;
+package body riscv_types_pkg is
+end package body;

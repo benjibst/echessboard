@@ -24,13 +24,18 @@ architecture RTL of ExecuteStage is
   signal alu_a : STD_LOGIC_VECTOR(31 downto 0);
   signal alu_b : STD_LOGIC_VECTOR(31 downto 0);
 begin
-  rs1_pc_mux: entity work.Multiplexer2_1(RTL) port map (
+  rs1_pc_mux: entity work.Multiplexer2_1(RTL) generic map(
+    WIDTH => 32
+  )
+  port map (
     mp_a   => ex_rs1_val,
     mp_b   => ex_curr_pc,
     mp_s   => ex_a_sel,
     mp_out => alu_a
   );
-  rs2_imm_mux: entity work.Multiplexer2_1(RTL) port map (
+  rs2_imm_mux: entity work.Multiplexer2_1(RTL) generic map(
+    WIDTH => 32
+  )port map (
     mp_a   => ex_rs2_val,
     mp_b   => ex_imm_val,
     mp_s   => ex_b_sel,

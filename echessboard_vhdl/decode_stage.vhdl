@@ -21,7 +21,9 @@ entity DecodeStage is
     id_a_sel         : out STD_LOGIC;
     id_b_sel         : out STD_LOGIC;
     id_alu_op        : out alu_op_t;
-    id_comp_op       : out comp_op_t
+    id_comp_op       : out comp_op_t;
+    id_reg_we        : out STD_LOGIC; -- Register write enable
+    id_error         : out STD_LOGIC
   );
 end entity;
 
@@ -80,6 +82,8 @@ begin
     du_comp_op       => id_comp_op,
     du_opclass       => id_opclass,
     du_mem_op_signed => id_mem_op_signed,
-    du_mem_op_sz     => id_mem_op_sz
+    du_mem_op_sz     => id_mem_op_sz,
+    du_reg_we        => id_reg_we,
+    du_error         => id_error
   );
 end architecture;

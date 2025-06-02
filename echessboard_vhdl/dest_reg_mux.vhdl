@@ -5,7 +5,7 @@ library ieee;
 
 entity DestRegMux is
   port (
-    drm_class      : in  op_class;
+    drm_class      : in  op_class_t;
     drm_next_pc    : in  STD_LOGIC_VECTOR(31 downto 0);
     drm_alu_result : in  STD_LOGIC_VECTOR(31 downto 0);
     drm_mem_data   : in  STD_LOGIC_VECTOR(31 downto 0);
@@ -24,6 +24,7 @@ begin
         drm_rd_val <= drm_alu_result;
       when op_load =>
         drm_rd_val <= drm_mem_data;
+      when others => drm_rd_val <= x"00000000";
     end case;
   end process;
 end architecture;
