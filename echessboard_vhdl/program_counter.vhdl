@@ -13,7 +13,7 @@ entity ProgramCounter is
 end entity;
 
 architecture RTL of ProgramCounter is
-    signal pc_num : UNSIGNED(11 downto 0);
+    signal pc_num : UNSIGNED(11 downto 0):=(others=>'0');
 begin
     process (pc_clk)
     begin

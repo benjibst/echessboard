@@ -5,11 +5,11 @@ library ieee;
 
 entity PCOutMux is
   port (
-    pom_class       : in  op_class_t;
-    pom_branch_cond : in  STD_LOGIC;
-    pom_next_pc     : in  STD_LOGIC_VECTOR(31 downto 0);
-    pom_alu_result  : in  STD_LOGIC_VECTOR(31 downto 0);
-    pom_pc_out      : out STD_LOGIC_VECTOR(31 downto 0)
+    pom_class       : in  op_class_t:=op_alu;
+    pom_branch_cond : in  std_logic := '0';
+    pom_next_pc     : in  word:=(others=>'0');
+    pom_alu_result  : in  word:=(others=>'0');
+    pom_pc_out      : out word:=(others=>'0')
   );
 end entity;
 
@@ -18,7 +18,7 @@ begin
   process (pom_class, pom_next_pc, pom_alu_result, pom_branch_cond)
   begin
     case pom_class is
-      when op_alu | op_store | op_load  =>
+      when op_alu | op_store | op_load =>
         pom_pc_out <= pom_next_pc;
       when op_jump =>
         pom_pc_out <= pom_alu_result;

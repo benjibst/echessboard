@@ -4,32 +4,32 @@ library IEEE;
 
 entity DecodeUnit is
   port (
-    du_clk           : in  STD_LOGIC;
-    du_funct3        : in  STD_LOGIC_VECTOR(2 downto 0);
-    du_funct7        : in  STD_LOGIC_VECTOR(6 downto 0);
-    du_opcode        : in  STD_LOGIC_VECTOR(6 downto 0);
-    du_a_sel         : out STD_LOGIC;       --RS1 or PC
-    du_b_sel         : out STD_LOGIC;       --RS2 or IMM
-    du_alu_op        : out alu_op_t;
-    du_comp_op       : out comp_op_t;
-    du_mem_op_sz     : out mem_op_sz_t;
-    du_mem_op_signed : out STD_LOGIC;       -- Sign extension for load/store
-    du_opclass       : out op_class_t;
-    du_reg_we        : out STD_LOGIC := '0'; -- Register write enable
-    du_error         : out std_logic := '0'
+    du_clk           : in  std_logic                    := '0';
+    du_funct3        : in  STD_LOGIC_VECTOR(2 downto 0) := (others => '0');
+    du_funct7        : in  std_logic_vector(6 downto 0) := (others => '0');
+    du_opcode        : in  std_logic_vector(6 downto 0) := (others => '0');
+    du_a_sel         : out std_logic                    := '0';     --RS1 or PC
+    du_b_sel         : out std_logic                    := '0';     --RS2 or IMM
+    du_alu_op        : out alu_op_t                     := alu_add; -- Default operation is addition
+    du_comp_op       : out comp_op_t                    := comp_eq; -- Default comparison operation
+    du_mem_op_sz     : out mem_op_sz_t                  := sz_word; -- Default memory operation size
+    du_mem_op_signed : out std_logic                    := '0';     -- Sign extension for load/store
+    du_opclass       : out op_class_t                   := op_alu;  -- Default operation class
+    du_reg_we        : out STD_LOGIC                    := '0';     -- Register write enable
+    du_error         : out std_logic                    := '0'
   );
 end entity;
 
 architecture RTL of DecodeUnit is
-  signal class         : op_class_t;
+  signal class         : op_class_t  := op_alu;  -- Default operation class
   signal funct3        : STD_LOGIC_VECTOR(2 downto 0);
-  signal a_sel         : STD_LOGIC;
-  signal b_sel         : STD_LOGIC;
-  signal alu_op        : alu_op_t;
-  signal comp_op       : comp_op_t;
-  signal mem_op_sz     : mem_op_sz_t;
-  signal mem_op_signed : STD_LOGIC;
-  signal reg_we        : STD_LOGIC;
+  signal a_sel         : std_logic   := '0';
+  signal b_sel         : std_logic   := '0';
+  signal alu_op        : alu_op_t    := alu_add; -- Default operation is addition
+  signal comp_op       : comp_op_t   := comp_eq; -- Default comparison operation
+  signal mem_op_sz     : mem_op_sz_t := sz_word; -- Default memory operation size
+  signal mem_op_signed : std_logic   := '0';
+  signal reg_we        : std_logic   := '0';
 begin
   funct3 <= du_funct3;
 
@@ -118,7 +118,7 @@ begin
             comp_op <= comp_ltu;
           when "111" => -- BGEU
             comp_op <= comp_geu;
-           when others => du_error <= '1';
+          when others => du_error <= '1';
         end case;
         class <= op_branch;
         alu_op <= alu_add;
@@ -153,8 +153,8 @@ begin
         reg_we <= '1';
         a_sel <= '0';
         b_sel <= '1';
-      when others=>du_error <= '1';
-        
+      when others => du_error <= '1';
+
     end case;
   end process;
 

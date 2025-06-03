@@ -14,13 +14,14 @@ entity VGAController is
     v_sync_pulse  : INTEGER := 2;
     v_back_porch  : INTEGER := 33);
   port (
-    vga_pixel_clk : in  STD_LOGIC:= '0';
-    vga_reset_n   : in  STD_LOGIC:= '0';
-    vga_h_sync    : out STD_LOGIC:= '0';
-    vga_v_sync    : out STD_LOGIC:= '0';
-    vga_disp_en   : out STD_LOGIC:= '0';
-    vga_img_x     : out INTEGER range 0 to h_pixels:= 0; --x coordinate of image as input to image generator   
-    vga_img_y     : out INTEGER range 0 to v_pixels:= 0); --y coordinate of image as input to image generator);
+    vga_pixel_clk : in  STD_LOGIC                   := '0';
+    vga_reset_n   : in  STD_LOGIC                   := '0';
+    vga_h_sync    : out STD_LOGIC                   := '0';
+    vga_v_sync    : out STD_LOGIC                   := '0';
+    vga_disp_en   : out STD_LOGIC                   := '0';
+    vga_img_x     : out INTEGER range 0 to h_pixels := 0; --x coordinate of image as input to image generator   
+    vga_img_y     : out INTEGER range 0 to v_pixels := 0
+  ); --y coordinate of image as input to image generator);
 end entity;
 
 architecture RTL of VGAController is

@@ -7,9 +7,9 @@ ENTITY Multiplexer4_1 IS
         WIDTH : INTEGER := 8 -- Default width
     );
     PORT (
-        mp_a, mp_b, mp_c, mp_d : IN STD_LOGIC_VECTOR(WIDTH - 1 DOWNTO 0);
-        mp_out : OUT STD_LOGIC_VECTOR(WIDTH - 1 DOWNTO 0);
-        mp_s0, mp_s1 : IN STD_LOGIC
+        mp_a, mp_b, mp_c, mp_d : IN STD_LOGIC_VECTOR(WIDTH - 1 DOWNTO 0):=(others=>'0');
+        mp_out : OUT STD_LOGIC_VECTOR(WIDTH - 1 DOWNTO 0):=(others=>'0');
+        mp_s0, mp_s1 : IN STD_LOGIC:='0'
     );
 END Multiplexer4_1;
 

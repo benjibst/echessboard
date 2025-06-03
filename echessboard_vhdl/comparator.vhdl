@@ -1,23 +1,23 @@
 library IEEE;
   use IEEE.STD_LOGIC_1164.all;
   use IEEE.numeric_std.all;
-  use work.riscv_types_pkg.comp_op_t;
+  use work.riscv_types_pkg.all;
 
 entity ComparatorUnit is
   port (
-    cu_clk     : in  STD_LOGIC;
-    cu_rs1_val : in  STD_LOGIC_VECTOR(31 downto 0);
-    cu_rs2_val : in  STD_LOGIC_VECTOR(31 downto 0);
+    cu_clk     : in  std_logic := '0';
+    cu_rs1_val : in  word:=(others=>'0');
+    cu_rs2_val : in  word:=(others=>'0');
     cu_comp_op : in  comp_op_t;
     cu_result  : out STD_LOGIC
   );
 end entity;
 
 architecture RTL of ComparatorUnit is
-  signal result : STD_LOGIC;
-  signal lt     : STD_LOGIC;
-  signal eq     : STD_LOGIC;
-  signal ltu    : STD_LOGIC;
+  signal result : std_logic := '0';
+  signal lt     : std_logic := '0';
+  signal eq     : std_logic := '0';
+  signal ltu    : std_logic := '0';
 begin
   process (cu_rs1_val, cu_rs2_val)
   begin
@@ -66,8 +66,8 @@ architecture RTL of ComparatorUnitTB is
   signal clk_period : TIME := 10 ns;
 
   signal tb_clk        : STD_LOGIC                     := '0';
-  signal tb_rs1_val    : STD_LOGIC_VECTOR(31 downto 0) := (others => '0');
-  signal tb_rs2_val    : STD_LOGIC_VECTOR(31 downto 0) := (others => '0');
+  signal tb_rs1_val    : word := (others => '0');
+  signal tb_rs2_val    : word := (others => '0');
   signal tb_comp_op    : comp_op_t                     := comp_eq;
   signal tb_result     : STD_LOGIC                     := '0';
   signal comp_op_logic : integer;

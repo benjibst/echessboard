@@ -1,17 +1,18 @@
 library IEEE;
   use IEEE.STD_LOGIC_1164.all;
+  use work.riscv_types_pkg.all;
 
 entity ImmediateExtension is --Extracts the immediate value from the instruction and sign extends it if necessary
   port (
-    ie_clk     : in  STD_LOGIC;
-    ie_instr   : in  STD_LOGIC_VECTOR(31 downto 0);
-    ie_imm_out : out STD_LOGIC_VECTOR(31 downto 0)
+    ie_clk     : in  std_logic := '0';
+    ie_instr   : in  word:=(others=>'0');
+    ie_imm_out : out word := (others => '0')
   );
 end entity;
 
 architecture RTL of ImmediateExtension is
-  signal opcode        : STD_LOGIC_VECTOR(6 downto 0);
-  signal sign_extended : STD_LOGIC_VECTOR(31 downto 0);
+  signal opcode        : std_logic_vector(6 downto 0):=(others=>'0');
+  signal sign_extended : word:=(others=>'0');
 begin
   opcode <= ie_instr(6 downto 0);
 
@@ -44,7 +45,7 @@ begin
       ----------------------------------------------------------------
       when "0110111" | "0010111" => -- U format instructions (LUI and AUIPC)
         sign_extended <= ie_instr(31 downto 12) & x"000";
-      when others=> sign_extended <= x"00000000";
+      when others => sign_extended <= x"00000000";
     end case;
   end process;
 

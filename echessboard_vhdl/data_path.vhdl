@@ -1,65 +1,79 @@
 library IEEE;
   use IEEE.STD_LOGIC_1164.all;
   use work.riscv_types_pkg.all;
+  use ieee.numeric_std.all;
 
 entity DataPath is
   port (
-    dp_clk         : in  STD_LOGIC := '0';             -- clock input
-    dp_pc_load_en  : in  STD_LOGIC := '0';             -- load enable for program counter
-    dp_spi_clk     : in  STD_LOGIC;
-    dp_spi_addr    : in  std_logic_vector(11 downto 0);
-    dp_spi_data    : in  std_logic_vector(31 downto 0);
-    dp_vga_clk     : in  STD_LOGIC := '0';             -- VGA clock input
-    dp_vga_reset_n : in  STD_LOGIC := '0';             -- VGA reset signal
-    dp_vga_h_sync  : out STD_LOGIC;                    -- VGA horizontal sync output
-    dp_vga_v_sync  : out STD_LOGIC;                    -- VGA vertical sync output
-    dp_vga_disp_en : out STD_LOGIC;                    -- VGA display enable output
-    dp_vga_n_blank : out STD_LOGIC;                    -- VGA blanking signal
-    dp_vga_n_sync  : out STD_LOGIC;                    -- VGA sync signal
-    dp_vga_red     : out STD_LOGIC_VECTOR(3 downto 0); -- VGA red color output
-    dp_vga_green   : out STD_LOGIC_VECTOR(3 downto 0); -- VGA green color output
-    dp_vga_blue    : out STD_LOGIC_VECTOR(3 downto 0)  -- VGA blue color output
+    dp_clk         : in  STD_LOGIC                     := '0';    -- clock input
+    dp_spi_clk     : in  std_logic                     := '0';
+    dp_spi_addr    : in  STD_LOGIC_VECTOR(11 downto 0) := (others => '0');
+    dp_spi_data    : in  word := (others => '0');
+    dp_vga_clk     : in  STD_LOGIC                     := '0';    -- VGA clock input
+    dp_vga_reset_n : in  STD_LOGIC                     := '0';    -- VGA reset signal
+    dp_vga_h_sync  : out std_logic                     := '0';    -- VGA horizontal sync output
+    dp_vga_v_sync  : out std_logic                     := '0';    -- VGA vertical sync output
+    dp_vga_disp_en : out std_logic                     := '0';    -- VGA display enable output
+    dp_vga_n_blank : out std_logic                     := '0';    -- VGA blanking signal
+    dp_vga_n_sync  : out std_logic                     := '0';    -- VGA sync signal
+    dp_vga_red     : out STD_LOGIC_VECTOR(3 downto 0)  := "0000"; -- VGA red color output
+    dp_vga_green   : out STD_LOGIC_VECTOR(3 downto 0)  := "0000"; -- VGA green color output
+    dp_vga_blue    : out STD_LOGIC_VECTOR(3 downto 0)  := "0000"  -- VGA blue color output
   );
 end entity;
 
 architecture RTL of DataPath is
-  signal next_pc        : std_logic_vector(11 downto 0);
-  signal curr_pc        : std_logic_vector(11 downto 0);
-  signal curr_pc_se     : std_logic_vector(31 downto 0);
-  signal next_pc_se     : std_logic_vector(31 downto 0);
-  signal curr_instr     : std_logic_vector(31 downto 0);
-  signal reg_we         : std_logic;
-  signal reg_rs1_val    : std_logic_vector(31 downto 0);
-  signal reg_rs2_val    : std_logic_vector(31 downto 0);
-  signal imm_val        : std_logic_vector(31 downto 0);
-  signal op_class       : op_class_t;
-  signal mem_op_signed  : std_logic;
-  signal mem_op_sz      : mem_op_sz_t;
-  signal a_sel, b_sel   : std_logic;
-  signal alu_op         : alu_op_t;
-  signal comp_op        : comp_op_t;
-  signal alu_result     : std_logic_vector(31 downto 0);
-  signal alu_result_pre : std_logic_vector(31 downto 0);
-  signal branch_cond    : std_logic;
-  signal pc_out         : std_logic_vector(31 downto 0);
-  signal rd_val         : std_logic_vector(31 downto 0);
-  signal vga_disp_en    : std_logic;
-  signal vga_img_x      : integer;
-  signal vga_img_y      : integer;
-  signal fb_data        : std_logic_vector(31 downto 0);
-  signal fb_addr        : std_logic_vector(14 downto 0);
-  signal error          : std_logic;
+  signal next_pc        : std_logic_vector(11 downto 0) := (others => '0');
+  signal curr_pc        : std_logic_vector(11 downto 0) := (others => '0');
+  signal curr_pc_se     : word := (others => '0');
+  signal next_pc_se     : word := (others => '0');
+  signal curr_instr     : word := (others => '0');
+  signal reg_we         : std_logic                     := '0';
+  signal reg_rs1_val    : word := (others => '0');
+  signal reg_rs2_val    : word := (others => '0');
+  signal imm_val        : word := (others => '0');
+  signal op_class       : op_class_t                    := op_alu;          -- Default operation class
+  signal mem_op_signed  : std_logic                     := '0';
+  signal mem_op_sz      : mem_op_sz_t                   := sz_word;         -- Default memory operation size
+  signal a_sel, b_sel   : std_logic                     := '0';
+  signal alu_op         : alu_op_t                      := alu_add;         -- Default operation is addition
+  signal comp_op        : comp_op_t                     := comp_eq;         -- Default comparison operation
+  signal alu_result     : word := (others => '0');
+  signal alu_result_pre : word := (others => '0');
+  signal branch_cond    : std_logic                     := '0';
+  signal pc_out         : word := (others => '0');
+  signal rd_val         : word := (others => '0');
+  signal vga_disp_en    : std_logic                     := '0';
+  signal vga_img_x      : integer                       := 0;               -- x coordinate of image as input to image generator
+  signal vga_img_y      : integer                       := 0;               -- y coordinate of image as input to image generator
+  signal fb_data        : word := (others => '0');
+  signal fb_addr        : std_logic_vector(14 downto 0) := (others => '0'); -- framebuffer address
+  signal error          : std_logic                     := '0';
+  signal load_en : std_logic := '0';
+  signal counter : unsigned(1 downto 0) := "11";
 begin
-
-  fetch_stage: entity work.FetchStage(RTL) port map (
+  process(dp_clk)
+    begin
+        if rising_edge(dp_clk) then
+            if counter = "11" then -- 3 in binary
+                load_en <= '1';
+                counter <= (others => '0');
+            else
+                load_en <= '0';
+                counter <= counter + 1;
+            end if;
+        end if;
+    end process;
+  
+  fetch_stage: entity work.FetchStage port map (
     if_clk         => dp_clk,
-    if_load_en     => dp_pc_load_en,
+    if_load_en     => load_en,
     if_pc_in       => pc_out(11 downto 0),
     if_instruction => curr_instr,
     if_pc_curr     => curr_pc,
     if_pc_next     => next_pc
   );
-  decode_stage: entity work.DecodeStage(RTL) port map (
+  decode_stage: entity work.DecodeStage port map (
     id_clk           => dp_clk,
     id_instruction   => curr_instr,
     id_rd_write_en   => reg_we,
@@ -70,6 +84,7 @@ begin
     id_pc_next_se    => next_pc_se,
     id_rs1_val       => reg_rs1_val,
     id_rs2_val       => reg_rs2_val,
+    id_reg_we        => reg_we,
     id_imm_val       => imm_val,
     id_opclass       => op_class,
     id_mem_op_signed => mem_op_signed,
@@ -80,7 +95,7 @@ begin
     id_comp_op       => comp_op,
     id_error         => error
   );
-  execute_stage: entity work.ExecuteStage(RTL) port map (
+  execute_stage: entity work.ExecuteStage port map (
     ex_clk            => dp_clk,
     ex_rs1_val        => reg_rs1_val,
     ex_rs2_val        => reg_rs1_val,
@@ -115,7 +130,7 @@ begin
       wb_rd_val             => rd_val,
       wb_vga_framebuf_doutb => fb_data
     );
-  vga_controller: entity work.VGAController(RTL) port map (
+  vga_controller: entity work.VGAController port map (
     vga_pixel_clk => dp_vga_clk,
     vga_reset_n   => dp_vga_reset_n,
     vga_h_sync    => dp_vga_h_sync,
@@ -123,7 +138,8 @@ begin
     vga_disp_en   => dp_vga_disp_en,
     vga_img_x     => vga_img_x,
     vga_img_y     => vga_img_y);
-  vga_img_gen: entity work.VGAImageGenerator(RTL) port map (
+    
+  vga_img_gen: entity work.VGAImageGenerator port map (
     ig_disp_ena => dp_vga_disp_en,
     ig_y        => vga_img_y,
     ig_x        => vga_img_x,
@@ -160,7 +176,6 @@ begin
   uut: entity work.DataPath
     port map (
       dp_clk         => tb_clk,          -- Clock will be generated in the testbench
-      dp_pc_load_en  => '1',             -- Enable loading of program counter
       dp_spi_clk     => '0',             -- SPI clock input
       dp_spi_addr    => (others => '0'), -- SPI address input
       dp_spi_data    => (others => '0'), -- SPI data input

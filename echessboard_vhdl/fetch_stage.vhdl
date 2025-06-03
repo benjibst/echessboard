@@ -1,13 +1,14 @@
 library ieee;
   use ieee.std_logic_1164.all;
   use ieee.numeric_std.all;
+  use work.riscv_types_pkg.all;
 
 entity FetchStage is
   port (
     if_clk         : in  STD_LOGIC                     := '0';
     if_load_en     : in  STD_LOGIC                     := '1';
     if_pc_in       : in  STD_LOGIC_VECTOR(11 downto 0) := (others => '0');
-    if_instruction : out STD_LOGIC_VECTOR(31 downto 0) := (others => '0');
+    if_instruction : out word := (others => '0');
     if_pc_curr     : out STD_LOGIC_VECTOR(11 downto 0) := (others => '0');
     if_pc_next     : out STD_LOGIC_VECTOR(11 downto 0) := (others => '0')
   );
@@ -43,6 +44,8 @@ end architecture;
 library ieee;
   use ieee.std_logic_1164.all;
   use ieee.numeric_std.all;
+    use work.riscv_types_pkg.all;
+
 
 entity FetchStageTB is
 end entity;
@@ -53,7 +56,7 @@ architecture RTL of FetchStageTB is
   signal tb_clk         : STD_LOGIC                     := '0';
   signal tb_load_en     : STD_LOGIC                     := '1';
   signal tb_pc_in       : STD_LOGIC_VECTOR(11 downto 0) := (others => '0');
-  signal tb_instruction : STD_LOGIC_VECTOR(31 downto 0) := (others => '0');
+  signal tb_instruction : word := (others => '0');
   signal tb_pc_curr     : STD_LOGIC_VECTOR(11 downto 0) := (others => '0');
   signal tb_pc_next     : STD_LOGIC_VECTOR(11 downto 0) := (others => '0');
 begin

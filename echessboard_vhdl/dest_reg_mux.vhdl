@@ -6,10 +6,10 @@ library ieee;
 entity DestRegMux is
   port (
     drm_class      : in  op_class_t;
-    drm_next_pc    : in  STD_LOGIC_VECTOR(31 downto 0);
-    drm_alu_result : in  STD_LOGIC_VECTOR(31 downto 0);
-    drm_mem_data   : in  STD_LOGIC_VECTOR(31 downto 0);
-    drm_rd_val     : out STD_LOGIC_VECTOR(31 downto 0)
+    drm_next_pc    : in  word:=(others=>'0');
+    drm_alu_result : in  word:=(others=>'0');
+    drm_mem_data   : in  word:=(others=>'0');
+    drm_rd_val     : out word
   );
 end entity;
 

@@ -4,36 +4,36 @@ library IEEE;
 
 entity DecodeStage is
   port (
-    id_clk           : in  STD_LOGIC;
-    id_instruction   : in  STD_LOGIC_VECTOR(31 downto 0);
-    id_rd_write_en   : in  STD_LOGIC;
-    id_rd_val        : in  STD_LOGIC_VECTOR(31 downto 0);
-    id_pc_curr       : in  STD_LOGIC_VECTOR(11 downto 0);
-    id_pc_next       : in  STD_LOGIC_VECTOR(11 downto 0);
-    id_pc_curr_se    : out STD_LOGIC_VECTOR(31 downto 0);
-    id_pc_next_se    : out STD_LOGIC_VECTOR(31 downto 0);
-    id_rs1_val       : out STD_LOGIC_VECTOR(31 downto 0);
-    id_rs2_val       : out STD_LOGIC_VECTOR(31 downto 0);
-    id_imm_val       : out STD_LOGIC_VECTOR(31 downto 0);
-    id_opclass       : out op_class_t;
-    id_mem_op_signed : out STD_LOGIC;
-    id_mem_op_sz     : out mem_op_sz_t;
-    id_a_sel         : out STD_LOGIC;
-    id_b_sel         : out STD_LOGIC;
-    id_alu_op        : out alu_op_t;
-    id_comp_op       : out comp_op_t;
-    id_reg_we        : out STD_LOGIC; -- Register write enable
-    id_error         : out STD_LOGIC
+    id_clk           : in  std_logic                     := '0';
+    id_instruction   : in  word := (others => '0');
+    id_rd_write_en   : in  std_logic                     := '0';
+    id_rd_val        : in  word := (others => '0');
+    id_pc_curr       : in  STD_LOGIC_VECTOR(11 downto 0) := (others => '0');
+    id_pc_next       : in  STD_LOGIC_VECTOR(11 downto 0) := (others => '0');
+    id_pc_curr_se    : out word := (others => '0');
+    id_pc_next_se    : out word := (others => '0');
+    id_rs1_val       : out word := (others => '0');
+    id_rs2_val       : out word := (others => '0');
+    id_imm_val       : out word := (others => '0');
+    id_opclass       : out op_class_t                    := op_alu;  -- Default operation class
+    id_mem_op_signed : out std_logic                     := '0';
+    id_mem_op_sz     : out mem_op_sz_t                   := sz_word; -- Default memory operation size
+    id_a_sel         : out std_logic                     := '0';
+    id_b_sel         : out std_logic                     := '0';
+    id_alu_op        : out alu_op_t                      := alu_add; -- Default operation is addition
+    id_comp_op       : out comp_op_t                     := comp_eq; -- Default comparison operation
+    id_reg_we        : out std_logic                     := '0';     -- Register write enable
+    id_error         : out STD_LOGIC                     := '0'      -- Error signal
   );
 end entity;
 
 architecture RTL of DecodeStage is
-  signal rd     : STD_LOGIC_VECTOR(4 downto 0);
-  signal rs1    : STD_LOGIC_VECTOR(4 downto 0);
-  signal rs2    : STD_LOGIC_VECTOR(4 downto 0);
-  signal opcode : STD_LOGIC_VECTOR(6 downto 0);
-  signal funct3 : STD_LOGIC_VECTOR(2 downto 0);
-  signal funct7 : STD_LOGIC_VECTOR(6 downto 0);
+  signal rd     : STD_LOGIC_VECTOR(4 downto 0) := (others => '0');
+  signal rs1    : STD_LOGIC_VECTOR(4 downto 0) := (others => '0');
+  signal rs2    : STD_LOGIC_VECTOR(4 downto 0) := (others => '0');
+  signal opcode : std_logic_vector(6 downto 0) := (others => '0');
+  signal funct3 : STD_LOGIC_VECTOR(2 downto 0) := (others => '0');
+  signal funct7 : std_logic_vector(6 downto 0) := (others => '0');
 begin
   rs1    <= id_instruction(19 downto 15);
   rs2    <= id_instruction(24 downto 20);
