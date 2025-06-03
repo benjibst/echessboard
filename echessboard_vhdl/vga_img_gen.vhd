@@ -1,15 +1,14 @@
-
 library ieee;
   use ieee.std_logic_1164.all;
   use ieee.numeric_std.all;
 
 entity VGAImageGenerator is
   port (
-    ig_disp_ena : in  STD_LOGIC;                                       --display enable ('1' = display time, '0' = blanking time)
+    ig_disp_ena : in  STD_LOGIC:='0';                                       --display enable ('1' = display time, '0' = blanking time)
     ig_x        : in  INTEGER range 0 to 640       := 0;
     ig_y        : in  INTEGER range 0 to 480       := 0;               --row pixel coordinate
-    ig_fb_data  : in  std_logic_vector(31 downto 0);
-    ig_fb_addr  : out std_logic_vector(14 downto 0);                   --column pixel coordinate
+    ig_fb_data  : in  std_logic_vector(31 downto 0):=(others => '0');
+    ig_fb_addr  : out std_logic_vector(14 downto 0):=(others => '0');                   --column pixel coordinate
     ig_red      : out STD_LOGIC_VECTOR(3 downto 0) := (others => '0'); --red magnitude output to DAC
     ig_green    : out STD_LOGIC_VECTOR(3 downto 0) := (others => '0'); --green magnitude output to DAC
     ig_blue     : out STD_LOGIC_VECTOR(3 downto 0) := (others => '0')); --blue magnitude output to DAC
@@ -32,8 +31,11 @@ architecture RTL of VGAImageGenerator is
   signal lut_idx : integer := 0; --index for color lookup table
 begin
   fb_data <= ig_fb_data; -- framebuffer data input
-
-  process (ig_disp_ena, ig_x, ig_y)
+  pixel_in_word <= to_integer(unsigned(x_vector(3 downto 0)));
+  ig_fb_addr <= std_logic_vector(to_unsigned(fb_addr,15));
+  lut_idx <= to_integer(unsigned(fb_pixel_color)); --get index for color lookup table
+  
+  process (ig_x)
   begin
     x_vector <= std_logic_vector(to_unsigned(ig_x, x_vector'length)); --convert column to std_logic_vector
     y_vector <= std_logic_vector(to_unsigned(ig_y, y_vector'length)); --convert row to std_logic_vector
@@ -42,10 +44,6 @@ begin
       if (fb_addr = 19200) then --reset framebuffer address after 19200 pixels (640x480/16)
         fb_addr <= 0;
       end if;
-    end if;
-    pixel_in_word <= to_integer(unsigned(x_vector(3 downto 0))); --get pixel index in word (0-15)
-    if (pixel_in_word = 16) then
-      pixel_in_word <= 0; --reset pixel index after 16 pixels
     end if;
     case pixel_in_word is
       when 0 => fb_pixel_color <= fb_data(1 downto 0); --first pixel in word
@@ -65,7 +63,7 @@ begin
       when 14 => fb_pixel_color <= fb_data(29 downto 28);
       when others => fb_pixel_color <= fb_data(31 downto 30); --last pixel in word
     end case;
-    lut_idx <= to_integer(unsigned(fb_pixel_color)); --get index for color lookup table
+    
 
     if (ig_disp_ena = '1') then --display time
       ig_red <= color_lut(lut_idx)(11 downto 8); --extract red component from color lookup table

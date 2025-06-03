@@ -6,9 +6,9 @@ entity DataPath is
   port (
     dp_clk         : in  STD_LOGIC := '0';             -- clock input
     dp_pc_load_en  : in  STD_LOGIC := '0';             -- load enable for program counter
-    dp_spi_clk     : in STD_LOGIC;
-    dp_spi_addr    : in std_logic_vector(11 downto 0);
-    dp_spi_data    : in std_logic_vector(31 downto 0);
+    dp_spi_clk     : in  STD_LOGIC;
+    dp_spi_addr    : in  std_logic_vector(11 downto 0);
+    dp_spi_data    : in  std_logic_vector(31 downto 0);
     dp_vga_clk     : in  STD_LOGIC := '0';             -- VGA clock input
     dp_vga_reset_n : in  STD_LOGIC := '0';             -- VGA reset signal
     dp_vga_h_sync  : out STD_LOGIC;                    -- VGA horizontal sync output
@@ -94,26 +94,27 @@ begin
     ex_alu_result_pre => alu_result_pre,
     ex_branch_cond    => branch_cond
   );
-  writeback_stage: entity work.WritebackStage port map (
-    wb_clk                => dp_clk,
-    wb_class              => op_class,
-    wb_branch_cond        => branch_cond,
-    wb_mem_op_sz          => mem_op_sz,
-    wb_mem_op_signed => mem_op_signed,
-    wb_next_pc            => next_pc_se,
-    wb_alu_result         => alu_result,
-    wb_alu_result_pre     => alu_result_pre,
-    wb_rs2_val            => reg_rs2_val,
-    wb_mem_we             => '1',
-    wb_vga_framebuf_clkb  => dp_vga_clk,
-    wb_vga_framebuf_addrb => fb_addr,
-    wb_spi_mem_clk   =>  dp_spi_clk,
-    wb_spi_mem_data => dp_spi_data,
-    wb_spi_mem_addr => dp_spi_addr,
-    wb_pc_out             => pc_out,
-    wb_rd_val             => rd_val,
-    wb_vga_framebuf_doutb => fb_data
-  );
+  writeback_stage: entity work.WritebackStage
+    port map (
+      wb_clk                => dp_clk,
+      wb_class              => op_class,
+      wb_branch_cond        => branch_cond,
+      wb_mem_op_sz          => mem_op_sz,
+      wb_mem_op_signed      => mem_op_signed,
+      wb_next_pc            => next_pc_se,
+      wb_alu_result         => alu_result,
+      wb_alu_result_pre     => alu_result_pre,
+      wb_rs2_val            => reg_rs2_val,
+      wb_mem_we             => '1',
+      wb_vga_framebuf_clkb  => dp_vga_clk,
+      wb_vga_framebuf_addrb => fb_addr,
+      wb_spi_mem_clk        => dp_spi_clk,
+      wb_spi_mem_data       => dp_spi_data,
+      wb_spi_mem_addr       => dp_spi_addr,
+      wb_pc_out             => pc_out,
+      wb_rd_val             => rd_val,
+      wb_vga_framebuf_doutb => fb_data
+    );
   vga_controller: entity work.VGAController(RTL) port map (
     vga_pixel_clk => dp_vga_clk,
     vga_reset_n   => dp_vga_reset_n,
@@ -132,4 +133,47 @@ begin
     ig_green    => dp_vga_green,
     ig_blue     => dp_vga_blue);
 
+end architecture;
+
+library ieee;
+  use ieee.std_logic_1164.all;
+  use ieee.numeric_std.all;
+
+entity DataPathTB is
+end entity;
+
+architecture RTL of DataPathTB is
+  signal tb_clk : std_logic := '0'; -- Testbench clock signal
+begin
+  process
+    constant clk_period : time := 10 ns; -- Clock period for the testbench
+  begin
+    wait for clk_period / 2; -- Wait for half the clock period
+    while true loop
+      tb_clk <= '1';
+      wait for clk_period / 2;
+      tb_clk <= '0';
+      wait for clk_period / 2;
+    end loop;
+  end process;
+
+  uut: entity work.DataPath
+    port map (
+      dp_clk         => tb_clk,          -- Clock will be generated in the testbench
+      dp_pc_load_en  => '1',             -- Enable loading of program counter
+      dp_spi_clk     => '0',             -- SPI clock input
+      dp_spi_addr    => (others => '0'), -- SPI address input
+      dp_spi_data    => (others => '0'), -- SPI data input
+      dp_vga_clk     => tb_clk,          -- VGA clock input
+      dp_vga_reset_n => '1',             -- VGA reset signal
+      dp_vga_h_sync  => open,            -- VGA horizontal sync output
+      dp_vga_v_sync  => open,            -- VGA vertical sync output
+      dp_vga_disp_en => open,            -- VGA display enable output
+      dp_vga_n_blank => open,            -- VGA blanking signal
+      dp_vga_n_sync  => open,            -- VGA sync signal
+      dp_vga_red     => open,            -- VGA red color output
+      dp_vga_green   => open,            -- VGA green color output
+      dp_vga_blue    => open -- VGA blue color output
+
+    );
 end architecture;
