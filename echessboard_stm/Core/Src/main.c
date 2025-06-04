@@ -24,6 +24,7 @@
 #include "delay_us.h"
 #include "tca9535.h"
 #include "stm32f0xx_hal_gpio.h"
+#include "string.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -65,7 +66,18 @@ static void MX_TIM1_Init(void);
 static int interrupt_received = 0;
 static int interrupt_pin = 0;
 static int game_state = 0;
-static uint8_t game_pos[8];
+typedef struct
+{
+  uint8_t pos[8];
+} game_pos_t;
+static game_pos_t game_pos_confirmed = {0};
+static game_pos_t game_pos_old = {0};
+static game_pos_t game_pos_curr = {0};
+
+_Bool game_pos_equal(game_pos_t *pos1, game_pos_t *pos2)
+{
+  return memcmp(pos1->pos, pos2->pos, sizeof(pos1->pos)) == 0;
+}
 
 typedef enum
 {
@@ -147,26 +159,28 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
   interrupt_pin = GPIO_Pin;
 }
 
-_Bool ReadGamePosition()
+_Bool ReadGamePosition(game_pos_t *dest)
 {
   uint8_t i;
   for (i = 0; i < 4; i++)
   {
-    if (!I2C_read_byte_at(io_handles[i]->i2c_address, 0, game_pos + i * 2))
+    if (!I2C_read_byte_at(io_handles[i]->i2c_address, 0, dest->pos + i * 2))
     {
       return 0;
     }
-    if (!I2C_read_byte_at(io_handles[i]->i2c_address, 1, game_pos + i * 2 + 1))
+    if (!I2C_read_byte_at(io_handles[i]->i2c_address, 1, dest->pos + i * 2 + 1))
     {
       return 0;
     }
   }
   for (size_t i = 0; i < 8; i++)
   {
-    game_pos[i] = ~game_pos[i];
+    dest->pos[i] = ~dest->pos[i];
   }
-
   return 1;
+}
+void SendGamePosSPI(game_pos_t *pos)
+{
 }
 /* USER CODE END PFP */
 
@@ -240,7 +254,7 @@ int main(void)
           RESET_GAMESTATE(BLACK_TO_MOVE);
           SET_GAMESTATE(WHITE_TO_MOVE);
         }
-        ReadGamePosition();
+        ReadGamePosition(&game_pos_confirmed);
         __NOP();
       }
       if (interrupt_pin == IRQ_PROMOTION_BIT && GET_GAMESTATE(STARTED))
@@ -267,6 +281,15 @@ int main(void)
         }
       }
       SetLedsToGamestate();
+    }
+    if (GET_GAMESTATE(STARTED))
+    {
+      ReadGamePosition(&game_pos_curr);
+      if (!game_pos_equal(&game_pos_curr, &game_pos_old))
+      {
+        SendGamePosSPI(&game_pos_curr);
+      }
+      memcpy(&game_pos_old, &game_pos_curr, sizeof(game_pos_t));
     }
     /* USER CODE END 3 */
   }
