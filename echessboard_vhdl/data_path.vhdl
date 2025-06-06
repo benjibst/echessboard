@@ -188,7 +188,6 @@ begin
       dp_vga_n_sync  => open,            -- VGA sync signal
       dp_vga_red     => open,            -- VGA red color output
       dp_vga_green   => open,            -- VGA green color output
-      dp_vga_blue    => open -- VGA blue color output
-
+      dp_vga_blue    => open             -- VGA blue color output
     );
 end architecture;
