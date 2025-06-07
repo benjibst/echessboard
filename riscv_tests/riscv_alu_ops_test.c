@@ -1,55 +1,60 @@
-
-int test_alu_arithmetic_ops(int a, int b)
+#define FAIL_IF_NEQ(var, val) \
+    if ((var != val))         \
+    {                         \
+        fail = 1;             \
+        goto end;             \
+    }
+int _start(void)
 {
-    int result;
-
-    result = a + b; // add
-    result = a - b; // sub
-    return result;
-}
-int test_alu_logic_ops(int a, int b)
-{
-    int result;
-
-    result = a ^ b; // xor
-    result = a | b; // or
-    result = a & b; // and
-    return result;
-}
-int test_alu_shifts(int a, int b)
-{
-    int result;
-
-    result = (unsigned int)a >> (unsigned int)b; // logical right shift
-    result = a << b;                             // left shift
-    result = a >> b;                             // arithmetic right shift
-    return result;
-}
-int test_alu_slt(int a, int b)
-{
-    int result;
-
-    result = a < b ? 1 : 0;                             // slt
-    result = (unsigned int)a < (unsigned int)b ? 1 : 0; // sltu
-    return result;
-}
-int main(void)
-{
-    // test logic_ops
-    //  01^11 = 10
-    //  01|11 = 11
-    //  01&11 = 01
-    test_alu_logic_ops(1, 3);
-    // test arithmetic_ops
-    test_alu_arithmetic_ops(1, 2);
-    test_alu_arithmetic_ops(-2, 1);
-    test_alu_arithmetic_ops(-1, 2);
-    // test shifts
-    // left shift: 1 << 2 = 4
-    test_alu_shifts(1, 2);
-    // right shift: 4 >> 2 = 1
-    test_alu_shifts(4, 2);
-    // shift -1 >> 1 = -1 (arithmetic right shift)
-    // shift -1>>1 = 0x7FFFFFFF (logical right shift)
-    test_alu_shifts(-1, 1);
+    register const int a asm("a3") = 5;
+    register const int b asm("a4") = 3;
+    register int result asm("a5") = 0;
+    register int fail asm("a6") = 0;
+    for (int i = 0; i < b; i++)
+    {
+        result += a;
+    }
+    // 15
+    FAIL_IF_NEQ(result, 15);
+    for (int i = 0; i < b; i++)
+    {
+        result -= b;
+    }
+    // 6 (110)
+    FAIL_IF_NEQ(result, 6);
+    result |= b;
+    // 7 (111)
+    FAIL_IF_NEQ(result, 7);
+    result &= a;
+    // 5 (101)
+    FAIL_IF_NEQ(result, 5);
+    result ^= b;
+    // 101 ^ 011 = 110 (6)
+    FAIL_IF_NEQ(result, 6);
+    result <<= a;
+    // 110 << 5 = 11000000 (192)
+    FAIL_IF_NEQ(result, 192);
+    result = -result;
+    FAIL_IF_NEQ(result, -192);
+    result >>= b;
+    FAIL_IF_NEQ(result, -24);
+    // 24 = 11000
+    // -24 =               11111111111111111111111111101000 (in 32-bit two's complement representation)
+    // -24 >> 3(logical) = 00011111111111111111111111111101 (in 32-bit two's complement representation)
+    result = (unsigned int)result >> b;
+    FAIL_IF_NEQ(result, 536870909);
+    result = (a < b) ? 1 : 0;
+    FAIL_IF_NEQ(result, 0);
+    result = (b < a) ? 1 : 0;
+    FAIL_IF_NEQ(result, 1);
+    result = -result; //-1
+    result = (result < a) ? 1 : 0;
+    FAIL_IF_NEQ(result, 1);
+    result = -result;
+    result = ((unsigned int)result < (unsigned int)b) ? 1 : 0;
+    FAIL_IF_NEQ(result, 0);
+end:
+    while (1)
+    {
+    }
 }
