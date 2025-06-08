@@ -33,7 +33,7 @@ architecture RTL of DecodeUnit is
 begin
   funct3 <= du_funct3;
 
-  process (du_opcode)
+  process (du_opcode,du_funct3,du_funct7)
   begin
     case (du_opcode) is
       -----------------------------------------------------------------------------
