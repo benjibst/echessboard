@@ -6,34 +6,31 @@
     }
 int _start(void)
 {
-    register const int a asm("a3") = 5;
-    register const int b asm("a4") = 3;
     register int result asm("a5") = 0;
-    register int fail asm("a6") = 0;
-    result += a;
-    result += a;
-    result += a;
-    result += a;
-    result += a;
-    result += a;
-    result += a;
-    result += a;
-    result += a;
-    result += a;
-    result += a;
-    result += a;
-    result += a;
-    result += a;
-    result += a;
-    result += a;
-    result += a;
-    result += a;
-    result += a;
-    result += a;
-    result += a;
-    result += a;
-    result += a;
-    result += a;
+    result += 5;
+    result += 5;
+    result += 5;
+    result += 5;
+    result += 5;
+    result += 5;
+    result += 5;
+    result += 5;
+    result += 5;
+    result += 5;
+    result += 5;
+    result += 5;
+    result += 5;
+    result += 5;
+    result += 5;
+    result += 5;
+    result += 5;
+    result += 5;
+    result += 5;
+    result += 5;
+    result += 5;
+    result += 5;
+    result += 5;
+    result += 5;
     while (1)
     {
     }

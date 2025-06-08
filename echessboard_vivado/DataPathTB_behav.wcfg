@@ -12,11 +12,11 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0.000 ns"></ZoomStartTime>
-      <ZoomEndTime time="168.701 ns"></ZoomEndTime>
-      <Cursor1Time time="133.200 ns"></Cursor1Time>
+      <ZoomEndTime time="212.293 ns"></ZoomEndTime>
+      <Cursor1Time time="176.766 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="129"></NameColumnWidth>
+      <NameColumnWidth column_width="125"></NameColumnWidth>
       <ValueColumnWidth column_width="60"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="23" />
@@ -40,6 +40,7 @@
    <wvobject type="array" fp_name="/DataPathTB/uut/execute_stage/alu/alu_result_pre">
       <obj_property name="ElementShortName">alu_result_pre[31:0]</obj_property>
       <obj_property name="ObjectShortName">alu_result_pre[31:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/DataPathTB/uut/decode_stage/decode_unit/du_a_sel">
       <obj_property name="ElementShortName">du_a_sel</obj_property>

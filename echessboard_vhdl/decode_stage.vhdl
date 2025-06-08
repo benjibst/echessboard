@@ -5,16 +5,16 @@ library IEEE;
 entity DecodeStage is
   port (
     id_clk           : in  std_logic                     := '0';
-    id_instruction   : in  word := (others => '0');
+    id_instruction   : in  word                          := (others => '0');
     id_rd_write_en   : in  std_logic                     := '0';
-    id_rd_val        : in  word := (others => '0');
+    id_rd_val        : in  word                          := (others => '0');
     id_pc_curr       : in  STD_LOGIC_VECTOR(11 downto 0) := (others => '0');
     id_pc_next       : in  STD_LOGIC_VECTOR(11 downto 0) := (others => '0');
-    id_pc_curr_se    : out word := (others => '0');
-    id_pc_next_se    : out word := (others => '0');
-    id_rs1_val       : out word := (others => '0');
-    id_rs2_val       : out word := (others => '0');
-    id_imm_val       : out word := (others => '0');
+    id_pc_curr_se    : out word                          := (others => '0');
+    id_pc_next_se    : out word                          := (others => '0');
+    id_rs1_val       : out word                          := (others => '0');
+    id_rs2_val       : out word                          := (others => '0');
+    id_imm_val       : out word                          := (others => '0');
     id_opclass       : out op_class_t                    := op_alu;  -- Default operation class
     id_mem_op_signed : out std_logic                     := '0';
     id_mem_op_sz     : out mem_op_sz_t                   := sz_word; -- Default memory operation size
@@ -72,7 +72,6 @@ begin
     ie_imm_out => id_imm_val
   );
   decode_unit: entity work.DecodeUnit(RTL) port map (
-    du_clk           => id_clk,
     du_funct3        => funct3,
     du_funct7        => funct7,
     du_opcode        => opcode,
