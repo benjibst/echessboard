@@ -15,23 +15,16 @@ end entity;
 architecture RTL of ProgramCounter is
   signal pc_num : UNSIGNED(11 downto 0);
   signal div : unsigned(1 downto 0);
-  signal justreset : std_logic;
 begin
   process (pc_clk)
   begin
     if rising_edge(pc_clk) then
       if (pc_reset = '0') then 
         pc_num <= x"000";
-        justreset <= '1';
         div <= "11";
       elsif(div="11") then
-       if( justreset = '0') then
         pc_num <= unsigned(pc_in);
         div <= "00";
-        else 
-         pc_num <= x"000";
-         justreset <= '0';
-        end if;
       else  
         div <= div+1;
       end if;
