@@ -5,6 +5,7 @@ library IEEE;
 
 entity DataPath is
   port (
+    dp_reset       : in  STD_LOGIC;
     dp_clk         : in  STD_LOGIC;                              -- clock input
     dp_spi_clk     : in  std_logic;
     dp_spi_addr    : in  STD_LOGIC_VECTOR(11 downto 0);
@@ -44,31 +45,16 @@ architecture RTL of DataPath is
   signal pc_out         : word;
   signal rd_val         : word;
   signal vga_disp_en    : std_logic;
-  signal vga_img_x      : unsigned(9 downto 0);                       -- x coordinate of image as input to image generator
-  signal vga_img_y      : unsigned(8 downto 0);                       -- y coordinate of image as input to image generator
+  signal vga_img_x      : unsigned(9 downto 0);          -- x coordinate of image as input to image generator
+  signal vga_img_y      : unsigned(8 downto 0);          -- y coordinate of image as input to image generator
   signal fb_data        : word;
   signal fb_addr        : std_logic_vector(14 downto 0); -- framebuffer address
   signal error          : std_logic;
-  signal load_en        : std_logic;
-  signal counter        : unsigned(1 downto 0) := "11";
 begin
-  process (dp_clk)
-  begin
-    if rising_edge(dp_clk) then
-      if counter = "11" then -- 3 in binary
-        load_en <= '1';
-        counter <= (others => '0');
-      else
-        load_en <= '0';
-        counter <= counter + 1;
-      end if;
-    end if;
-  end process;
-
   fetch_stage: entity work.FetchStage
     port map (
+      if_reset      => dp_reset,
       if_clk         => dp_clk,
-      if_load_en     => load_en,
       if_pc_in       => pc_out(11 downto 0),
       if_instruction => curr_instr,
       if_pc_curr     => curr_pc,
@@ -114,6 +100,7 @@ begin
     );
   writeback_stage: entity work.WritebackStage
     port map (
+      wb_reset      => dp_reset,
       wb_clk                => dp_clk,
       wb_class              => op_class,
       wb_branch_cond        => branch_cond,
@@ -164,11 +151,20 @@ entity DataPathTB is
 end entity;
 
 architecture RTL of DataPathTB is
-  signal tb_clk : std_logic; -- Testbench clock signal
+  signal tb_clk   : std_logic;        -- Testbench clock signal
+  signal tb_reset : std_logic := '0'; -- Testbench reset signal, can be controlled in the testbench
 begin
   process
     constant clk_period : time := 10 ns; -- Clock period for the testbench
   begin
+    tb_reset <= '0'; -- Initialize reset to '0'
+    tb_clk <= '0'; -- Initialize clock to '0'
+    wait for clk_period / 2; -- Wait for half the clock period
+    tb_clk <= '1'; -- Set clock to '1'
+    wait for clk_period / 2; -- Wait for half the clock period
+    tb_reset <= '1';
+    wait for clk_period / 2; -- Wait for one clock period before starting the test
+    tb_clk <= '0'; -- Set clock to '0'
     wait for clk_period / 2; -- Wait for half the clock period
     while true loop
       tb_clk <= '1';
@@ -180,6 +176,7 @@ begin
 
   uut: entity work.DataPath
     port map (
+      dp_reset       => tb_reset,        -- Reset signal, can be controlled in the testbench
       dp_clk         => tb_clk,          -- Clock will be generated in the testbench
       dp_spi_clk     => '0',             -- SPI clock input
       dp_spi_addr    => (others => '0'), -- SPI address input

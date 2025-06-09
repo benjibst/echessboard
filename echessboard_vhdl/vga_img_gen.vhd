@@ -25,7 +25,7 @@ architecture RTL of VGAImageGenerator is
   );
 begin
   process (ig_x)
-    variable fb_addr        : unsigned(14 downto 0);   -- framebuffer address
+    variable fb_addr        : unsigned(14 downto 0):="000000000000000";   -- framebuffer address
     variable pixel_in_word  : unsigned(3 downto 0);    --pixel index in word (32 bits
     variable fb_pixel_color : std_logic_vector(1 downto 0);
     variable lut_idx        : unsigned(1 downto 0);    --index for color lookup table
@@ -35,8 +35,8 @@ begin
     if (ig_x(3 downto 0) = "0000") then --reset pixel index in word after every 16 pixels
       fb_data := ig_fb_data; --read framebuffer data from input before address gets updated
     end if;
-    if (ig_x(3 downto 0) = "0001") then --in memory every word (32 bits) stores 16 pixels (every pixel is 1 of 4 colors)
-      fb_addr := fb_addr + 1;
+    if (ig_x(3 downto 0) = "0100") then --update a few clock cycles later(doesnt matter exactly when)
+      fb_addr := fb_addr + 1; 
       if (fb_addr = 19200) then --reset framebuffer address after 19200 pixels (640x480/16)
         fb_addr := "000000000000000";
       end if;

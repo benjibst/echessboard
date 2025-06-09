@@ -8,7 +8,7 @@ end entity;
 architecture RTL of VGATestbench is
   signal clk     : STD_LOGIC;
   signal x       : unsigned(9 downto 0);
-  signal y       : unsigned(9 downto 0);
+  signal y       : unsigned(8 downto 0);
   signal h_sync  : STD_LOGIC;
   signal v_sync  : STD_LOGIC;
   signal disp_en : STD_LOGIC;
@@ -19,6 +19,7 @@ architecture RTL of VGATestbench is
 begin
   process
   begin
+    clk<='0';
     wait for 10 ns;
     while true loop
       clk <= not clk after 5 ns;

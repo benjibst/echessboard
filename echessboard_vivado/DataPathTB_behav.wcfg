@@ -12,106 +12,60 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0.000 ns"></ZoomStartTime>
-      <ZoomEndTime time="212.293 ns"></ZoomEndTime>
-      <Cursor1Time time="176.766 ns"></Cursor1Time>
+      <ZoomEndTime time="135.300 ns"></ZoomEndTime>
+      <Cursor1Time time="3.070 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="125"></NameColumnWidth>
-      <ValueColumnWidth column_width="60"></ValueColumnWidth>
+      <NameColumnWidth column_width="152"></NameColumnWidth>
+      <ValueColumnWidth column_width="91"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="23" />
-   <wvobject type="logic" fp_name="/DataPathTB/tb_clk">
-      <obj_property name="ElementShortName">tb_clk</obj_property>
-      <obj_property name="ObjectShortName">tb_clk</obj_property>
+   <WVObjectSize size="12" />
+   <wvobject type="logic" fp_name="/DataPathTB/uut/dp_clk">
+      <obj_property name="ElementShortName">dp_clk</obj_property>
+      <obj_property name="ObjectShortName">dp_clk</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/DataPathTB/uut/execute_stage/ex_alu_result_pre">
+      <obj_property name="ElementShortName">ex_alu_result_pre[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ex_alu_result_pre[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/DataPathTB/tb_reset">
+      <obj_property name="ElementShortName">tb_reset</obj_property>
+      <obj_property name="ObjectShortName">tb_reset</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/DataPathTB/uut/writeback_stage/wb_pc_out">
+      <obj_property name="ElementShortName">wb_pc_out[31:0]</obj_property>
+      <obj_property name="ObjectShortName">wb_pc_out[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/DataPathTB/uut/writeback_stage/wb_next_pc">
+      <obj_property name="ElementShortName">wb_next_pc[31:0]</obj_property>
+      <obj_property name="ObjectShortName">wb_next_pc[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/DataPathTB/uut/fetch_stage/pc/pc_in">
+      <obj_property name="ElementShortName">pc_in[11:0]</obj_property>
+      <obj_property name="ObjectShortName">pc_in[11:0]</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/DataPathTB/uut/fetch_stage/pc/pc_curr">
       <obj_property name="ElementShortName">pc_curr[11:0]</obj_property>
       <obj_property name="ObjectShortName">pc_curr[11:0]</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/DataPathTB/uut/decode_stage/immediate_ext/ie_instr">
-      <obj_property name="ElementShortName">ie_instr[31:0]</obj_property>
-      <obj_property name="ObjectShortName">ie_instr[31:0]</obj_property>
+   <wvobject type="array" fp_name="/DataPathTB/uut/fetch_stage/pc/pc_next">
+      <obj_property name="ElementShortName">pc_next[11:0]</obj_property>
+      <obj_property name="ObjectShortName">pc_next[11:0]</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/DataPathTB/uut/decode_stage/immediate_ext/ie_imm_out">
-      <obj_property name="ElementShortName">ie_imm_out[31:0]</obj_property>
-      <obj_property name="ObjectShortName">ie_imm_out[31:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   <wvobject type="array" fp_name="/DataPathTB/uut/fetch_stage/pc/div">
+      <obj_property name="ElementShortName">div[1:0]</obj_property>
+      <obj_property name="ObjectShortName">div[1:0]</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/DataPathTB/uut/execute_stage/alu/alu_result_pre">
-      <obj_property name="ElementShortName">alu_result_pre[31:0]</obj_property>
-      <obj_property name="ObjectShortName">alu_result_pre[31:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   <wvobject type="array" fp_name="/DataPathTB/uut/fetch_stage/pc/pc_num">
+      <obj_property name="ElementShortName">pc_num[11:0]</obj_property>
+      <obj_property name="ObjectShortName">pc_num[11:0]</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/DataPathTB/uut/decode_stage/decode_unit/du_a_sel">
-      <obj_property name="ElementShortName">du_a_sel</obj_property>
-      <obj_property name="ObjectShortName">du_a_sel</obj_property>
+   <wvobject type="logic" fp_name="/DataPathTB/uut/fetch_stage/pc/justreset">
+      <obj_property name="ElementShortName">justreset</obj_property>
+      <obj_property name="ObjectShortName">justreset</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/DataPathTB/uut/decode_stage/decode_unit/du_b_sel">
-      <obj_property name="ElementShortName">du_b_sel</obj_property>
-      <obj_property name="ObjectShortName">du_b_sel</obj_property>
-   </wvobject>
-   <wvobject type="other" fp_name="/DataPathTB/uut/decode_stage/decode_unit/du_alu_op">
-      <obj_property name="ElementShortName">du_alu_op</obj_property>
-      <obj_property name="ObjectShortName">du_alu_op</obj_property>
-   </wvobject>
-   <wvobject type="other" fp_name="/DataPathTB/uut/decode_stage/decode_unit/du_comp_op">
-      <obj_property name="ElementShortName">du_comp_op</obj_property>
-      <obj_property name="ObjectShortName">du_comp_op</obj_property>
-   </wvobject>
-   <wvobject type="other" fp_name="/DataPathTB/uut/decode_stage/decode_unit/du_mem_op_sz">
-      <obj_property name="ElementShortName">du_mem_op_sz</obj_property>
-      <obj_property name="ObjectShortName">du_mem_op_sz</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/DataPathTB/uut/decode_stage/decode_unit/du_mem_op_signed">
-      <obj_property name="ElementShortName">du_mem_op_signed</obj_property>
-      <obj_property name="ObjectShortName">du_mem_op_signed</obj_property>
-   </wvobject>
-   <wvobject type="other" fp_name="/DataPathTB/uut/decode_stage/decode_unit/du_opclass">
-      <obj_property name="ElementShortName">du_opclass</obj_property>
-      <obj_property name="ObjectShortName">du_opclass</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/DataPathTB/uut/writeback_stage/pc_mux/pom_next_pc">
-      <obj_property name="ElementShortName">pom_next_pc[31:0]</obj_property>
-      <obj_property name="ObjectShortName">pom_next_pc[31:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/DataPathTB/uut/writeback_stage/pc_mux/pom_pc_out">
-      <obj_property name="ElementShortName">pom_pc_out[31:0]</obj_property>
-      <obj_property name="ObjectShortName">pom_pc_out[31:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/DataPathTB/uut/execute_stage/alu/alu_a">
-      <obj_property name="ElementShortName">alu_a[31:0]</obj_property>
-      <obj_property name="ObjectShortName">alu_a[31:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/DataPathTB/uut/execute_stage/alu/alu_b">
-      <obj_property name="ElementShortName">alu_b[31:0]</obj_property>
-      <obj_property name="ObjectShortName">alu_b[31:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/DataPathTB/uut/decode_stage/reg_file/ra_rs1val">
-      <obj_property name="ElementShortName">ra_rs1val[31:0]</obj_property>
-      <obj_property name="ObjectShortName">ra_rs1val[31:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/DataPathTB/uut/decode_stage/reg_file/ra_rs2val">
-      <obj_property name="ElementShortName">ra_rs2val[31:0]</obj_property>
-      <obj_property name="ObjectShortName">ra_rs2val[31:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/DataPathTB/uut/decode_stage/reg_file/ra_rs1addr">
-      <obj_property name="ElementShortName">ra_rs1addr[4:0]</obj_property>
-      <obj_property name="ObjectShortName">ra_rs1addr[4:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/DataPathTB/uut/decode_stage/reg_file/ra_rs2addr">
-      <obj_property name="ElementShortName">ra_rs2addr[4:0]</obj_property>
-      <obj_property name="ObjectShortName">ra_rs2addr[4:0]</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/DataPathTB/uut/decode_stage/reg_file/ra_write_en">
-      <obj_property name="ElementShortName">ra_write_en</obj_property>
-      <obj_property name="ObjectShortName">ra_write_en</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/DataPathTB/uut/decode_stage/reg_file/ra_rdval">
-      <obj_property name="ElementShortName">ra_rdval[31:0]</obj_property>
-      <obj_property name="ObjectShortName">ra_rdval[31:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/DataPathTB/uut/decode_stage/immediate_ext/sign_extended">
-      <obj_property name="ElementShortName">sign_extended[31:0]</obj_property>
-      <obj_property name="ObjectShortName">sign_extended[31:0]</obj_property>
+   <wvobject type="logic" fp_name="/DataPathTB/uut/writeback_stage/pc_mux/pom_branch_cond">
+      <obj_property name="ElementShortName">pom_branch_cond</obj_property>
+      <obj_property name="ObjectShortName">pom_branch_cond</obj_property>
    </wvobject>
 </wave_config>

@@ -5,6 +5,7 @@ library ieee;
 
 entity WriteBackStage is
   port (
+  wb_reset : in std_logic;
     wb_clk                : in  std_logic;
     wb_class              : in  op_class_t;
     wb_branch_cond        : in  std_logic;
@@ -23,7 +24,6 @@ entity WriteBackStage is
     wb_pc_out             : out word;
     wb_rd_val             : out word;
     wb_vga_framebuf_doutb : out word
-
   );
 end entity;
 
@@ -36,6 +36,7 @@ architecture RTL of WriteBackStage is
   signal mem_sign_ext_half  : word;
   signal mem_out            : word;
   signal store              : std_logic;
+  signal pc_out : word;
 begin
   process (wb_mem_op_sz) is
   begin
@@ -103,8 +104,9 @@ begin
     pom_branch_cond => wb_branch_cond,
     pom_next_pc     => wb_next_pc,
     pom_alu_result  => wb_alu_result,
-    pom_pc_out      => wb_pc_out
+    pom_pc_out      => pc_out
   );
+  wb_pc_out <= pc_out when wb_reset = '1' else x"00000000";
   byte_sign_extend: entity work.SignExtension
     generic map (
       se_input_width  => 8,

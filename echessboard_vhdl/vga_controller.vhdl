@@ -33,8 +33,8 @@ begin
     variable v_count : unsigned(9 downto 0); --vertical counter (counts the rows)
   begin
     if (vga_reset_n = '0') then
-      h_count:="0000000000";
-      v_count:="0000000000";
+      h_count := "0000000000";
+      v_count := "0000000000";
       vga_img_x <= "0000000000";
       vga_img_y <= "000000000";
       vga_h_sync <= '1'; --negative polarity so active low sync
@@ -45,11 +45,11 @@ begin
       if (h_count < h_len_tot - 1) then
         h_count := h_count + 1;
       else
-        h_count:="0000000000";
+        h_count := "0000000000";
         if (v_count < v_len_tot - 1) then
           v_count := v_count + 1;
         else
-          v_count:="0000000000";
+          v_count := "0000000000";
         end if;
       end if;
       if (h_count < h_pixels + h_front_porch or h_count >= h_pixels + h_front_porch + h_sync_pulse) then
