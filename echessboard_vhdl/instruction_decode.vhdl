@@ -4,18 +4,18 @@ library IEEE;
 
 entity DecodeUnit is
   port (
-    du_funct3        : in  STD_LOGIC_VECTOR(2 downto 0) := (others => '0');
-    du_funct7        : in  std_logic_vector(6 downto 0) := (others => '0');
-    du_opcode        : in  std_logic_vector(6 downto 0) := (others => '0');
-    du_a_sel         : out std_logic                    := '0';     --RS1 or PC
-    du_b_sel         : out std_logic                    := '0';     --RS2 or IMM
-    du_alu_op        : out alu_op_t                     := alu_add; -- Default operation is addition
-    du_comp_op       : out comp_op_t                    := comp_eq; -- Default comparison operation
-    du_mem_op_sz     : out mem_op_sz_t                  := sz_word; -- Default memory operation size
-    du_mem_op_signed : out std_logic                    := '0';     -- Sign extension for load/store
-    du_opclass       : out op_class_t                   := op_alu;  -- Default operation class
-    du_reg_we        : out STD_LOGIC                    := '0';     -- Register write enable
-    du_error         : out std_logic                    := '0'
+    du_funct3        : in  STD_LOGIC_VECTOR(2 downto 0);
+    du_funct7        : in  std_logic_vector(6 downto 0);
+    du_opcode        : in  std_logic_vector(6 downto 0);
+    du_a_sel         : out std_logic;   --RS1 or PC
+    du_b_sel         : out std_logic;   --RS2 or IMM
+    du_alu_op        : out alu_op_t;    -- Default operation is addition
+    du_comp_op       : out comp_op_t;   -- Default comparison operation
+    du_mem_op_sz     : out mem_op_sz_t; -- Default memory operation size
+    du_mem_op_signed : out std_logic;   -- Sign extension for load/store
+    du_opclass       : out op_class_t;  -- Default operation class
+    du_reg_we        : out STD_LOGIC;   -- Register write enable
+    du_error         : out std_logic
   );
 end entity;
 

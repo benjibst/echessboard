@@ -5,37 +5,37 @@ library ieee;
 
 entity WriteBackStage is
   port (
-    wb_clk                : in  std_logic := '0';
+    wb_clk                : in  std_logic;
     wb_class              : in  op_class_t;
-    wb_branch_cond        : in  std_logic := '0';
+    wb_branch_cond        : in  std_logic;
     wb_mem_op_sz          : in  mem_op_sz_t;
-    wb_next_pc            : in  word:=(others=>'0');
-    wb_alu_result         : in  word:=(others=>'0');
-    wb_alu_result_pre     : in  word:=(others=>'0');
-    wb_rs2_val            : in  word:=(others=>'0');
-    wb_mem_we             : in  std_logic := '0';
-    wb_vga_framebuf_clkb  : in  std_logic := '0';
+    wb_next_pc            : in  word;
+    wb_alu_result         : in  word;
+    wb_alu_result_pre     : in  word;
+    wb_rs2_val            : in  word;
+    wb_mem_we             : in  std_logic;
+    wb_vga_framebuf_clkb  : in  std_logic;
     wb_vga_framebuf_addrb : in  std_logic_vector(14 downto 0);
-    wb_mem_op_signed      : in  std_logic := '0'; -- Sign extension for load/store
-    wb_spi_mem_clk        : in  std_logic := '0';
-    wb_spi_mem_data       : in  word:=(others=>'0');
-    wb_spi_mem_addr       : in  STD_LOGIC_VECTOR(11 downto 0):=(others => '0');
-    wb_pc_out             : out word:=(others=>'0');
-    wb_rd_val             : out word:=(others=>'0');
-    wb_vga_framebuf_doutb : out word:=(others=>'0')
+    wb_mem_op_signed      : in  std_logic; -- Sign extension for load/store
+    wb_spi_mem_clk        : in  std_logic;
+    wb_spi_mem_data       : in  word;
+    wb_spi_mem_addr       : in  STD_LOGIC_VECTOR(11 downto 0);
+    wb_pc_out             : out word;
+    wb_rd_val             : out word;
+    wb_vga_framebuf_doutb : out word
 
   );
 end entity;
 
 architecture RTL of WriteBackStage is
-  signal write_data_mem     : STD_LOGIC_vector(3 downto 0):=(others=>'0');
-  signal write_framebuf_mem : STD_LOGIC_VECTOR(3 downto 0):=(others=>'0');
-  signal we                 : STD_LOGIC_VECTOR(3 downto 0):=(others=>'0');
-  signal mem_data_out_raw   : word:=(others=>'0');
-  signal mem_sign_ext_byte  : word:=(others=>'0');
-  signal mem_sign_ext_half  : word:=(others=>'0');
-  signal mem_out            : word:=(others=>'0');
-  signal store              : std_logic := '0';
+  signal write_data_mem     : STD_LOGIC_vector(3 downto 0);
+  signal write_framebuf_mem : STD_LOGIC_VECTOR(3 downto 0);
+  signal we                 : STD_LOGIC_VECTOR(3 downto 0);
+  signal mem_data_out_raw   : word;
+  signal mem_sign_ext_byte  : word;
+  signal mem_sign_ext_half  : word;
+  signal mem_out            : word;
+  signal store              : std_logic;
 begin
   process (wb_mem_op_sz) is
   begin

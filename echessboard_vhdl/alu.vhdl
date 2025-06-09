@@ -5,17 +5,17 @@ library ieee;
 
 entity ALU is
   port (
-    alu_clk        : in  std_logic                     := '0';
-    alu_a          : in  word := (others => '0');
-    alu_b          : in  word := (others => '0');
-    alu_op         : in  alu_op_t                      := alu_add; -- Default operation is addition
-    alu_result     : out word := (others => '0');
-    alu_result_pre : out word := (others => '0')
+    alu_clk        : in  std_logic;
+    alu_a          : in  word;
+    alu_b          : in  word;
+    alu_op         : in  alu_op_t; -- Default operation is addition
+    alu_result     : out word;
+    alu_result_pre : out word
   );
 end entity;
 
 architecture RTL of ALU is
-  signal result : word := (others => '0');
+  signal result : word;
 begin
   alu_result_pre <= result;
 

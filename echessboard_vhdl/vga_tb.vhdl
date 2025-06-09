@@ -6,22 +6,22 @@ entity VGATestbench is
 end entity;
 
 architecture RTL of VGATestbench is
-  signal clk     : STD_LOGIC              := '0';
-  signal x       : integer range 0 to 640 := 0;
-  signal y       : integer range 0 to 480 := 0;
-  signal h_sync  : STD_LOGIC:= '0';
-  signal v_sync  : STD_LOGIC:= '0';
-  signal disp_en : STD_LOGIC:= '0';
-  signal fb_addr : std_logic_vector(14 downto 0):=(others => '0');
-  signal red     : std_logic_vector(3 downto 0):=(others => '0');
-  signal green   : std_logic_vector(3 downto 0):=(others => '0');
-  signal blue    : std_logic_vector(3 downto 0):=(others => '0');
+  signal clk     : STD_LOGIC;
+  signal x       : unsigned(9 downto 0);
+  signal y       : unsigned(9 downto 0);
+  signal h_sync  : STD_LOGIC;
+  signal v_sync  : STD_LOGIC;
+  signal disp_en : STD_LOGIC;
+  signal fb_addr : std_logic_vector(14 downto 0);
+  signal red     : std_logic_vector(3 downto 0);
+  signal green   : std_logic_vector(3 downto 0);
+  signal blue    : std_logic_vector(3 downto 0);
 begin
   process
   begin
     wait for 10 ns;
     while true loop
-      clk <= not clk after 5 ns; 
+      clk <= not clk after 5 ns;
       wait for 5 ns;
     end loop;
   end process;

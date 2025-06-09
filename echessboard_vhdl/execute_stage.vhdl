@@ -5,24 +5,24 @@ library ieee;
 
 entity ExecuteStage is
   port (
-    ex_clk            : in  std_logic := '0';
-    ex_rs1_val        : in  word:=(others=>'0');
-    ex_rs2_val        : in  word:=(others=>'0');
-    ex_curr_pc        : in  word:=(others=>'0');
-    ex_imm_val        : in  word:=(others=>'0');
+    ex_clk            : in  std_logic;
+    ex_rs1_val        : in  word;
+    ex_rs2_val        : in  word;
+    ex_curr_pc        : in  word;
+    ex_imm_val        : in  word;
     ex_alu_op         : in  alu_op_t;
     ex_comp_op        : in  comp_op_t;
-    ex_a_sel          : in  std_logic := '0';
-    ex_b_sel          : in  std_logic := '0';
-    ex_alu_result     : out word:=(others=>'0');
-    ex_alu_result_pre : out word:=(others=>'0');
+    ex_a_sel          : in  std_logic;
+    ex_b_sel          : in  std_logic;
+    ex_alu_result     : out word;
+    ex_alu_result_pre : out word;
     ex_branch_cond    : out STD_LOGIC
   );
 end entity;
 
 architecture RTL of ExecuteStage is
-  signal alu_a : word:=(others=>'0');
-  signal alu_b : word:=(others=>'0');
+  signal alu_a : word;
+  signal alu_b : word;
 begin
   rs1_pc_mux: entity work.Multiplexer2_1(RTL) generic map (
     WIDTH => 32

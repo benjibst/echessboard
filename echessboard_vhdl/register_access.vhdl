@@ -5,19 +5,19 @@ library IEEE;
 
 entity RegisterAccess is
   port (
-    ra_clk      : in  std_logic := '0';
-    ra_rdaddr   : in  STD_LOGIC_VECTOR(4 downto 0):=(others=>'0');  -- External address input
-    ra_rs1addr  : in  STD_LOGIC_VECTOR(4 downto 0):=(others=>'0');  -- rs1 address
-    ra_rs2addr  : in  STD_LOGIC_VECTOR(4 downto 0):=(others=>'0');  -- rs2 address
-    ra_write_en : in  std_logic := '0';              -- Write enable
-    ra_rdval    : in  word:=(others=>'0'); -- Data to write
-    ra_rs1val   : out word:=(others=>'0'); -- Output for rs1
-    ra_rs2val   : out word:=(others=>'0')  -- Output for rs2
+    ra_clk      : in  std_logic;
+    ra_rdaddr   : in  STD_LOGIC_VECTOR(4 downto 0); -- External address input
+    ra_rs1addr  : in  STD_LOGIC_VECTOR(4 downto 0); -- rs1 address
+    ra_rs2addr  : in  STD_LOGIC_VECTOR(4 downto 0); -- rs2 address
+    ra_write_en : in  std_logic;                    -- Write enable
+    ra_rdval    : in  word;                         -- Data to write
+    ra_rs1val   : out word;                         -- Output for rs1
+    ra_rs2val   : out word                          -- Output for rs2
   );
 end entity;
 
 architecture RTL of RegisterAccess is
-  signal addr_mux_out : STD_LOGIC_VECTOR(4 downto 0):=(others=>'0');
+  signal addr_mux_out : STD_LOGIC_VECTOR(4 downto 0);
 begin
   addr_mux: entity work.Multiplexer2_1
     generic map (
@@ -47,20 +47,21 @@ library IEEE;
   use IEEE.STD_LOGIC_1164.all;
   use IEEE.NUMERIC_STD.all;
   use work.riscv_types_pkg.all;
+
 entity RegisterAccessTB is
 end entity;
 
 architecture RTL of RegisterAccessTB is
   signal clk_period : TIME := 10 ns;
 
-  signal tb_clk     : STD_LOGIC                     := '0';
-  signal tb_rdaddr  : STD_LOGIC_VECTOR(4 downto 0)  := (others => '0');
-  signal tb_rs1addr : STD_LOGIC_VECTOR(4 downto 0)  := (others => '0');
-  signal tb_rs2addr : STD_LOGIC_VECTOR(4 downto 0)  := (others => '0');
-  signal tb_we      : STD_LOGIC                     := '1';
-  signal tb_rdval   : word := (others => '0');
-  signal tb_rs1val  : word := (others => '0');
-  signal tb_rs2val  : word := (others => '0');
+  signal tb_clk     : STD_LOGIC;
+  signal tb_rdaddr  : STD_LOGIC_VECTOR(4 downto 0);
+  signal tb_rs1addr : STD_LOGIC_VECTOR(4 downto 0);
+  signal tb_rs2addr : STD_LOGIC_VECTOR(4 downto 0);
+  signal tb_we      : STD_LOGIC;
+  signal tb_rdval   : word;
+  signal tb_rs1val  : word;
+  signal tb_rs2val  : word;
 begin
   uut: entity work.RegisterAccess
     port map (

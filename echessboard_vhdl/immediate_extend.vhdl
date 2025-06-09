@@ -4,17 +4,17 @@ library IEEE;
 
 entity ImmediateExtension is --Extracts the immediate value from the instruction and sign extends it if necessary
   port (
-    ie_clk     : in  std_logic := '0';
-    ie_instr   : in  word:=(others=>'0');
-    ie_imm_out : out word := (others => '0')
+    ie_clk     : in  std_logic;
+    ie_instr   : in  word;
+    ie_imm_out : out word
   );
 end entity;
 
 architecture RTL of ImmediateExtension is
-  signal sign_extended : word:=(others=>'0');
+  signal sign_extended : word;
 begin
-  process (ie_instr) 
-    variable opcode        : std_logic_vector(6 downto 0):=(others=>'0');
+  process (ie_instr)
+    variable opcode : std_logic_vector(6 downto 0);
   begin
     opcode := ie_instr(6 downto 0);
     case (opcode) is

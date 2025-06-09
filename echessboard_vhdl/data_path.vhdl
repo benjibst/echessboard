@@ -5,52 +5,52 @@ library IEEE;
 
 entity DataPath is
   port (
-    dp_clk         : in  STD_LOGIC                     := '0';    -- clock input
-    dp_spi_clk     : in  std_logic                     := '0';
-    dp_spi_addr    : in  STD_LOGIC_VECTOR(11 downto 0) := (others => '0');
-    dp_spi_data    : in  word                          := (others => '0');
-    dp_vga_clk     : in  STD_LOGIC                     := '0';    -- VGA clock input
-    dp_vga_reset_n : in  STD_LOGIC                     := '0';    -- VGA reset signal
-    dp_vga_h_sync  : out std_logic                     := '0';    -- VGA horizontal sync output
-    dp_vga_v_sync  : out std_logic                     := '0';    -- VGA vertical sync output
-    dp_vga_disp_en : out std_logic                     := '0';    -- VGA display enable output
-    dp_vga_n_blank : out std_logic                     := '0';    -- VGA blanking signal
-    dp_vga_n_sync  : out std_logic                     := '0';    -- VGA sync signal
-    dp_vga_red     : out STD_LOGIC_VECTOR(3 downto 0)  := "0000"; -- VGA red color output
-    dp_vga_green   : out STD_LOGIC_VECTOR(3 downto 0)  := "0000"; -- VGA green color output
-    dp_vga_blue    : out STD_LOGIC_VECTOR(3 downto 0)  := "0000"  -- VGA blue color output
+    dp_clk         : in  STD_LOGIC;                              -- clock input
+    dp_spi_clk     : in  std_logic;
+    dp_spi_addr    : in  STD_LOGIC_VECTOR(11 downto 0);
+    dp_spi_data    : in  word;
+    dp_vga_clk     : in  STD_LOGIC;                              -- VGA clock input
+    dp_vga_reset_n : in  STD_LOGIC;                              -- VGA reset signal
+    dp_vga_h_sync  : out std_logic;                              -- VGA horizontal sync output
+    dp_vga_v_sync  : out std_logic;                              -- VGA vertical sync output
+    dp_vga_disp_en : out std_logic;                              -- VGA display enable output
+    dp_vga_n_blank : out std_logic;                              -- VGA blanking signal
+    dp_vga_n_sync  : out std_logic;                              -- VGA sync signal
+    dp_vga_red     : out STD_LOGIC_VECTOR(3 downto 0) := "0000"; -- VGA red color output
+    dp_vga_green   : out STD_LOGIC_VECTOR(3 downto 0) := "0000"; -- VGA green color output
+    dp_vga_blue    : out STD_LOGIC_VECTOR(3 downto 0) := "0000"  -- VGA blue color output
   );
 end entity;
 
 architecture RTL of DataPath is
-  signal next_pc        : std_logic_vector(11 downto 0) := (others => '0');
-  signal curr_pc        : std_logic_vector(11 downto 0) := (others => '0');
-  signal curr_pc_se     : word                          := (others => '0');
-  signal next_pc_se     : word                          := (others => '0');
-  signal curr_instr     : word                          := (others => '0');
-  signal reg_we         : std_logic                     := '0';
-  signal reg_rs1_val    : word                          := (others => '0');
-  signal reg_rs2_val    : word                          := (others => '0');
-  signal imm_val        : word                          := (others => '0');
-  signal op_class       : op_class_t                    := op_alu;          -- Default operation class
-  signal mem_op_signed  : std_logic                     := '0';
-  signal mem_op_sz      : mem_op_sz_t                   := sz_word;         -- Default memory operation size
-  signal a_sel, b_sel   : std_logic                     := '0';
-  signal alu_op         : alu_op_t                      := alu_add;         -- Default operation is addition
-  signal comp_op        : comp_op_t                     := comp_eq;         -- Default comparison operation
-  signal alu_result     : word                          := (others => '0');
-  signal alu_result_pre : word                          := (others => '0');
-  signal branch_cond    : std_logic                     := '0';
-  signal pc_out         : word                          := (others => '0');
-  signal rd_val         : word                          := (others => '0');
-  signal vga_disp_en    : std_logic                     := '0';
-  signal vga_img_x      : integer                       := 0;               -- x coordinate of image as input to image generator
-  signal vga_img_y      : integer                       := 0;               -- y coordinate of image as input to image generator
-  signal fb_data        : word                          := (others => '0');
-  signal fb_addr        : std_logic_vector(14 downto 0) := (others => '0'); -- framebuffer address
-  signal error          : std_logic                     := '0';
-  signal load_en        : std_logic                     := '0';
-  signal counter        : unsigned(1 downto 0)          := "11";
+  signal next_pc        : std_logic_vector(11 downto 0);
+  signal curr_pc        : std_logic_vector(11 downto 0);
+  signal curr_pc_se     : word;
+  signal next_pc_se     : word;
+  signal curr_instr     : word;
+  signal reg_we         : std_logic;
+  signal reg_rs1_val    : word;
+  signal reg_rs2_val    : word;
+  signal imm_val        : word;
+  signal op_class       : op_class_t;                    -- Default operation class
+  signal mem_op_signed  : std_logic;
+  signal mem_op_sz      : mem_op_sz_t;                   -- Default memory operation size
+  signal a_sel, b_sel   : std_logic;
+  signal alu_op         : alu_op_t;                      -- Default operation is addition
+  signal comp_op        : comp_op_t;                     -- Default comparison operation
+  signal alu_result     : word;
+  signal alu_result_pre : word;
+  signal branch_cond    : std_logic;
+  signal pc_out         : word;
+  signal rd_val         : word;
+  signal vga_disp_en    : std_logic;
+  signal vga_img_x      : unsigned(9 downto 0);                       -- x coordinate of image as input to image generator
+  signal vga_img_y      : unsigned(8 downto 0);                       -- y coordinate of image as input to image generator
+  signal fb_data        : word;
+  signal fb_addr        : std_logic_vector(14 downto 0); -- framebuffer address
+  signal error          : std_logic;
+  signal load_en        : std_logic;
+  signal counter        : unsigned(1 downto 0) := "11";
 begin
   process (dp_clk)
   begin
@@ -164,7 +164,7 @@ entity DataPathTB is
 end entity;
 
 architecture RTL of DataPathTB is
-  signal tb_clk : std_logic := '0'; -- Testbench clock signal
+  signal tb_clk : std_logic; -- Testbench clock signal
 begin
   process
     constant clk_period : time := 10 ns; -- Clock period for the testbench

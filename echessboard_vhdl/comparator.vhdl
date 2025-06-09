@@ -5,19 +5,19 @@ library IEEE;
 
 entity ComparatorUnit is
   port (
-    cu_clk     : in  std_logic := '0';
-    cu_rs1_val : in  word:=(others=>'0');
-    cu_rs2_val : in  word:=(others=>'0');
+    cu_clk     : in  std_logic;
+    cu_rs1_val : in  word;
+    cu_rs2_val : in  word;
     cu_comp_op : in  comp_op_t;
     cu_result  : out STD_LOGIC
   );
 end entity;
 
 architecture RTL of ComparatorUnit is
-  signal result : std_logic := '0';
-  signal lt     : std_logic := '0';
-  signal eq     : std_logic := '0';
-  signal ltu    : std_logic := '0';
+  signal result : std_logic;
+  signal lt     : std_logic;
+  signal eq     : std_logic;
+  signal ltu    : std_logic;
 begin
   process (cu_rs1_val, cu_rs2_val)
   begin
@@ -65,12 +65,11 @@ end entity;
 architecture RTL of ComparatorUnitTB is
   signal clk_period : TIME := 10 ns;
 
-  signal tb_clk        : STD_LOGIC                     := '0';
-  signal tb_rs1_val    : word := (others => '0');
-  signal tb_rs2_val    : word := (others => '0');
-  signal tb_comp_op    : comp_op_t                     := comp_eq;
-  signal tb_result     : STD_LOGIC                     := '0';
-  signal comp_op_logic : integer;
+  signal tb_clk     : STD_LOGIC;
+  signal tb_rs1_val : word;
+  signal tb_rs2_val : word;
+  signal tb_comp_op : comp_op_t;
+  signal tb_result  : STD_LOGIC;
 begin
   uut: entity work.ComparatorUnit(RTL) port map (
     cu_clk     => tb_clk,
@@ -79,7 +78,6 @@ begin
     cu_comp_op => tb_comp_op,
     cu_result  => tb_result
   );
-  comp_op_logic <= comp_op_t'pos(tb_comp_op);
 
   process
   begin
