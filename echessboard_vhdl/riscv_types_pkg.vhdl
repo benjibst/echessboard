@@ -1,5 +1,5 @@
 library IEEE;
-    use ieee.std_logic_1164.all;
+  use ieee.std_logic_1164.all;
 
 package riscv_types_pkg is
   type alu_op_t is (
@@ -29,7 +29,9 @@ package riscv_types_pkg is
       sz_word
     );
   type op_class_t is (op_alu, op_load, op_store, op_branch, op_jump);
+  type ex_stage is (ex_fetch, ex_decode, ex_execute, ex_writeback);
   subtype word is std_logic_vector(31 downto 0);
 end package;
+
 package body riscv_types_pkg is
 end package body;

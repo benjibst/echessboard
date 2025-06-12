@@ -50,22 +50,27 @@ architecture RTL of DataPath is
   signal fb_data        : word;
   signal fb_addr        : std_logic_vector(14 downto 0); -- framebuffer address
   signal error          : std_logic;
-  signal clk_cnt        : unsigned(1 downto 0);
+  signal stage          : ex_stage;                      -- Current stage of the pipeline: 
 begin
   process (dp_clk) is
   begin
     if (rising_edge(dp_clk)) then
       if (dp_reset = '0') then
-        clk_cnt <= "00";
-      elsif (clk_cnt = "11") then
-        clk_cnt <= "00";
-      else
-        clk_cnt <= clk_cnt + 1;
+        stage <= ex_fetch;
+      elsif (stage = ex_fetch) then
+        stage <= ex_decode;
+      elsif (stage = ex_decode) then
+        stage <= ex_execute;
+      elsif (stage = ex_execute) then
+        stage <= ex_writeback;
+      elsif (stage = ex_writeback) then
+        stage <= ex_fetch; -- Loop back to fetch stage
       end if;
     end if;
   end process;
   fetch_stage: entity work.FetchStage
     port map (
+      if_stage       => stage,
       if_reset       => dp_reset,
       if_clk         => dp_clk,
       if_pc_in       => pc_out(11 downto 0),
@@ -75,10 +80,9 @@ begin
     );
   decode_stage: entity work.DecodeStage
     port map (
-      id_clk_cnt       => clk_cnt,
+      id_ex_stage      => stage,
       id_clk           => dp_clk,
       id_instruction   => curr_instr,
-      id_rd_write_en   => reg_we,
       id_rd_val        => rd_val,
       id_pc_curr       => curr_pc,
       id_pc_next       => next_pc,
@@ -99,7 +103,7 @@ begin
     );
   execute_stage: entity work.ExecuteStage
     port map (
-      ex_reset          => dp_reset,
+      ex_ex_stage       => stage,
       ex_clk            => dp_clk,
       ex_rs1_val        => reg_rs1_val,
       ex_rs2_val        => reg_rs1_val,
@@ -125,7 +129,7 @@ begin
       wb_alu_result         => alu_result,
       wb_alu_result_pre     => alu_result_pre,
       wb_rs2_val            => reg_rs2_val,
-      wb_mem_we             => '1',
+      wb_stage              => stage,
       wb_vga_framebuf_clkb  => dp_vga_clk,
       wb_vga_framebuf_addrb => fb_addr,
       wb_spi_mem_clk        => dp_spi_clk,

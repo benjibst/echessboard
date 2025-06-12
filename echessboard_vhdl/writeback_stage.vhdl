@@ -5,7 +5,8 @@ library ieee;
 
 entity WriteBackStage is
   port (
-  wb_reset : in std_logic;
+    wb_reset              : in  std_logic;
+    wb_stage              : in  ex_stage;  -- Current execution stage
     wb_clk                : in  std_logic;
     wb_class              : in  op_class_t;
     wb_branch_cond        : in  std_logic;
@@ -14,7 +15,6 @@ entity WriteBackStage is
     wb_alu_result         : in  word;
     wb_alu_result_pre     : in  word;
     wb_rs2_val            : in  word;
-    wb_mem_we             : in  std_logic;
     wb_vga_framebuf_clkb  : in  std_logic;
     wb_vga_framebuf_addrb : in  std_logic_vector(14 downto 0);
     wb_mem_op_signed      : in  std_logic; -- Sign extension for load/store
@@ -30,41 +30,33 @@ end entity;
 architecture RTL of WriteBackStage is
   signal write_data_mem     : STD_LOGIC_vector(3 downto 0);
   signal write_framebuf_mem : STD_LOGIC_VECTOR(3 downto 0);
-  signal we                 : STD_LOGIC_VECTOR(3 downto 0);
   signal mem_data_out_raw   : word;
   signal mem_sign_ext_byte  : word;
   signal mem_sign_ext_half  : word;
   signal mem_out            : word;
-  signal store              : std_logic;
-  signal pc_out : word;
+  signal pc_out             : word;
 begin
-  process (wb_mem_op_sz) is
+  process (wb_stage) is
+    variable we : STD_LOGIC_VECTOR(3 downto 0);
   begin
     case wb_mem_op_sz is
       when sz_byte =>
-        we <= "0001";
+        we := "0001";
       when sz_half =>
-        we <= "0011";
+        we := "0011";
       when sz_word =>
-        we <= "1111";
+        we := "1111";
       when others =>
-        we <= (others => '0'); -- Default case, no write
+        we := (others => '0'); -- Default case, no write
     end case;
-  end process;
-
-  process (wb_class) is
-  begin
-    if wb_class = op_store then
-      store <= '1';
+    if wb_class = op_store and wb_stage = ex_decode then
+      write_data_mem <= we when not wb_alu_result_pre(31) else "0000"; -- Normal data memory
+      write_framebuf_mem <= we when wb_alu_result_pre(31) else "0000"; -- Framebuffer memory
     else
-      store <= '0';
+      write_data_mem <= (others => '0'); -- No write in other stages
+      write_framebuf_mem <= (others => '0'); -- No write in other stages
     end if;
   end process;
-  -- MSB of alu is used to distinguish between VGA framebuffer and normal data memory.   
-  --In assembly this is like having base adress 0x80000000 for VGA framebuffer
-  write_data_mem    <= we when (wb_mem_we and store and not wb_alu_result_pre(31));
-  write_framebuf_mem <= we when (wb_mem_we and store and wb_alu_result_pre(31)) else
-                        "0000";
   -- port A of the framebuffer memory is written to by CPU and port B is read from by the VGA controller
   framebuf: entity work.vga_framebuf_mem
     port map (

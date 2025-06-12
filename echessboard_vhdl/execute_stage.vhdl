@@ -5,7 +5,7 @@ library ieee;
 
 entity ExecuteStage is
   port (
-    ex_reset      : in std_logic;
+    ex_ex_stage       : in  ex_stage; -- Current execution stage
     ex_clk            : in  std_logic;
     ex_rs1_val        : in  word;
     ex_rs2_val        : in  word;
@@ -42,7 +42,7 @@ begin
     mp_out => alu_b
   );
   alu: entity work.ALU(RTL) port map (
-    alu_reset => ex_reset,
+    alu_ex_stage   => ex_ex_stage, -- Current execution stage
     alu_clk        => ex_clk,
     alu_a          => alu_a,
     alu_b          => alu_b,

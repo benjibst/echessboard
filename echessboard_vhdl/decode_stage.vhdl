@@ -5,7 +5,7 @@ library IEEE;
 
 entity DecodeStage is
   port (
-    id_clk_cnt       : in  unsigned(1 downto 0); -- Clock counter for decode stage
+    id_ex_stage      : in  ex_stage;    -- Current execution stage
     id_clk           : in  std_logic;
     id_instruction   : in  word;
     id_rd_val        : in  word;
@@ -16,15 +16,15 @@ entity DecodeStage is
     id_rs1_val       : out word;
     id_rs2_val       : out word;
     id_imm_val       : out word;
-    id_opclass       : out op_class_t;           -- Default operation class
+    id_opclass       : out op_class_t;  -- Default operation class
     id_mem_op_signed : out std_logic;
-    id_mem_op_sz     : out mem_op_sz_t;          -- Default memory operation size
+    id_mem_op_sz     : out mem_op_sz_t; -- Default memory operation size
     id_a_sel         : out std_logic;
     id_b_sel         : out std_logic;
-    id_alu_op        : out alu_op_t;             -- Default operation is addition
-    id_comp_op       : out comp_op_t;            -- Default comparison operation
-    id_reg_we        : out std_logic;            -- Register write enable
-    id_error         : out STD_LOGIC             -- Error signal
+    id_alu_op        : out alu_op_t;    -- Default operation is addition
+    id_comp_op       : out comp_op_t;   -- Default comparison operation
+    id_reg_we        : out std_logic;   -- Register write enable
+    id_error         : out STD_LOGIC    -- Error signal
   );
 end entity;
 
@@ -49,7 +49,7 @@ begin
   process (id_clk) is
   begin
     if (rising_edge(id_clk)) then
-      if (id_clk_cnt = "11" and (opclass = op_alu or opclass = op_load or opclass = op_jump)) then
+      if (id_ex_stage = ex_execute and (opclass = op_alu or opclass = op_load or opclass = op_jump)) then
         -- Reset the operation class to default
         we <= '1';
       else
