@@ -83,7 +83,7 @@ void I2C_repeated_start()
 }
 void I2C_read_byte(uint8_t *data, _Bool ack)
 {
-    uint8_t d;
+    uint8_t d = 0;
     for (int i = 7; i >= 0; i--)
     {
         I2C_SET_SCL;
@@ -131,6 +131,7 @@ _Bool I2C_read_byte_at(uint8_t dev_addr, uint8_t regaddr, uint8_t *data)
     I2C_stop_condition();
     return 1;
 end:
+    *data = 0xFF;
     return 0;
 }
 

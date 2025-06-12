@@ -50,10 +50,23 @@ architecture RTL of DataPath is
   signal fb_data        : word;
   signal fb_addr        : std_logic_vector(14 downto 0); -- framebuffer address
   signal error          : std_logic;
+  signal clk_cnt        : unsigned(1 downto 0);
 begin
+  process (dp_clk) is
+  begin
+    if (rising_edge(dp_clk)) then
+      if (dp_reset = '0') then
+        clk_cnt <= "00";
+      elsif (clk_cnt = "11") then
+        clk_cnt <= "00";
+      else
+        clk_cnt <= clk_cnt + 1;
+      end if;
+    end if;
+  end process;
   fetch_stage: entity work.FetchStage
     port map (
-      if_reset      => dp_reset,
+      if_reset       => dp_reset,
       if_clk         => dp_clk,
       if_pc_in       => pc_out(11 downto 0),
       if_instruction => curr_instr,
@@ -62,6 +75,7 @@ begin
     );
   decode_stage: entity work.DecodeStage
     port map (
+      id_clk_cnt       => clk_cnt,
       id_clk           => dp_clk,
       id_instruction   => curr_instr,
       id_rd_write_en   => reg_we,
@@ -85,6 +99,7 @@ begin
     );
   execute_stage: entity work.ExecuteStage
     port map (
+      ex_reset          => dp_reset,
       ex_clk            => dp_clk,
       ex_rs1_val        => reg_rs1_val,
       ex_rs2_val        => reg_rs1_val,
@@ -100,7 +115,7 @@ begin
     );
   writeback_stage: entity work.WritebackStage
     port map (
-      wb_reset      => dp_reset,
+      wb_reset              => dp_reset,
       wb_clk                => dp_clk,
       wb_class              => op_class,
       wb_branch_cond        => branch_cond,

@@ -161,26 +161,29 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 
 _Bool ReadGamePosition(game_pos_t *dest)
 {
+  memset(dest->pos, 0, sizeof(dest->pos));
   uint8_t i;
+  _Bool ret = 1;
   for (i = 0; i < 4; i++)
   {
     if (!I2C_read_byte_at(io_handles[i]->i2c_address, 0, dest->pos + i * 2))
     {
-      return 0;
+      ret = 0;
     }
     if (!I2C_read_byte_at(io_handles[i]->i2c_address, 1, dest->pos + i * 2 + 1))
     {
-      return 0;
+      ret = 0;
     }
   }
   for (size_t i = 0; i < 8; i++)
   {
     dest->pos[i] = ~dest->pos[i];
   }
-  return 1;
+  return ret;
 }
 void SendGamePosSPI(game_pos_t *pos)
 {
+  __NOP(); // Wait for previous SPI transfer to finish
 }
 /* USER CODE END PFP */
 
@@ -233,6 +236,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+
     if (interrupt_received)
     {
       interrupt_received = 0;
@@ -255,6 +259,7 @@ int main(void)
           SET_GAMESTATE(WHITE_TO_MOVE);
         }
         ReadGamePosition(&game_pos_confirmed);
+
         __NOP();
       }
       if (interrupt_pin == IRQ_PROMOTION_BIT && GET_GAMESTATE(STARTED))
@@ -284,12 +289,14 @@ int main(void)
     }
     if (GET_GAMESTATE(STARTED))
     {
-      ReadGamePosition(&game_pos_curr);
-      if (!game_pos_equal(&game_pos_curr, &game_pos_old))
+      if (ReadGamePosition(&game_pos_curr))
       {
-        SendGamePosSPI(&game_pos_curr);
+        if (!game_pos_equal(&game_pos_curr, &game_pos_old))
+        {
+          SendGamePosSPI(&game_pos_curr);
+        }
+        memcpy(&game_pos_old, &game_pos_curr, sizeof(game_pos_t));
       }
-      memcpy(&game_pos_old, &game_pos_curr, sizeof(game_pos_t));
     }
     /* USER CODE END 3 */
   }

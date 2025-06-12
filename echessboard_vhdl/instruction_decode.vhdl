@@ -38,11 +38,7 @@ begin
       when "0110011" | "0010011" => -- ALU
         case du_funct3 is
           when "000" => -- ADD/SUB
-            if (du_funct7(5) = '0') then
-              alu_op := alu_add;
-            else
-              alu_op := alu_sub;
-            end if;
+            alu_op :=alu_add when du_opcode = "0010011" else alu_add when du_funct7(5) = '0' else alu_sub;
           when "001" => -- SLL
             alu_op := alu_sll;
           when "010" => -- SLT
