@@ -47,7 +47,7 @@ begin
 
   process (id_ex_stage) is
   begin
-    if (id_ex_stage = ex_execute and (opclass = op_alu or opclass = op_load or opclass = op_jump)) then
+    if (id_ex_stage = ex_writeback and (opclass = op_alu or opclass = op_load or opclass = op_jump)) then
       -- Reset the operation class to default
       we <= '1';
     else

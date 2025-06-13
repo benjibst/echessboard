@@ -10,6 +10,7 @@ entity ImmediateExtension is --Extracts the immediate value from the instruction
 end entity;
 
 architecture RTL of ImmediateExtension is
+  signal typpei : instr_type;
 begin
   process (ie_instr)
     variable opcode : std_logic_vector(6 downto 0);
@@ -23,6 +24,7 @@ begin
               it_utype when opcode = "0110111" or opcode = "0010111" else
               it_jtype when opcode = "1101111" else
               it_err;
+    typpei <= i_type;
     case (i_type) is
       ----------------------------------------------------------------
       when it_rtype => -- R format instructions (ALU with 2 register operands)
@@ -44,9 +46,9 @@ begin
       x"FFFFF" & (ie_instr(31) & ie_instr(7) & ie_instr(30 downto 25) & ie_instr(11 downto 8));
       ----------------------------------------------------------------
       when it_jtype => -- J format instructions (only JAL)
-        ie_imm_out <= x"000" & (ie_instr(31) & ie_instr(19 downto 12) & ie_instr(20) & ie_instr(30 downto 21)) when ie_instr(31) = '0'
+        ie_imm_out <= "00000000000" & (ie_instr(31) & ie_instr(19 downto 12) & ie_instr(20) & ie_instr(30 downto 21)) & "0" when ie_instr(31) = '0'
       else
-      x"FFF" & (ie_instr(31) & ie_instr(19 downto 12) & ie_instr(20) & ie_instr(30 downto 21));
+      "11111111111" & (ie_instr(31) & ie_instr(19 downto 12) & ie_instr(20) & ie_instr(30 downto 21)) & "0";
       ----------------------------------------------------------------
       when it_utype => -- U format instructions (LUI and AUIPC)
         ie_imm_out <= ie_instr(31 downto 12) & x"000";

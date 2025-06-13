@@ -118,16 +118,14 @@ begin
         a_sel := '1';
         b_sel := '1';
       -----------------------------------------------------------------------------
-      when "1101111" | "1100111" => -- JUMP
-        case du_funct3 is
-          when "000" => -- JAL
-            a_sel := '1';
-            b_sel := '1';
-          when "001" => -- JALR
-            a_sel := '0';
-            b_sel := '1';
-          when others => du_error <= '1';
-        end case;
+      when "1101111" => -- JAL
+        a_sel := '1';
+        b_sel := '1';
+        alu_op := alu_add;
+        class := op_jump;
+      when "1100111" => -- JALR
+        a_sel := '0';
+        b_sel := '1';
         alu_op := alu_add;
         class := op_jump;
       -----------------------------------------------------------------------------
