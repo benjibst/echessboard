@@ -5,7 +5,6 @@ library ieee;
 
 entity WriteBackStage is
   port (
-    wb_reset              : in  std_logic;
     wb_stage              : in  ex_stage;  -- Current execution stage
     wb_clk                : in  std_logic;
     wb_class              : in  op_class_t;
@@ -49,7 +48,7 @@ begin
       when others =>
         we := (others => '0'); -- Default case, no write
     end case;
-    if wb_class = op_store and wb_stage = ex_decode then
+    if wb_class = op_store and wb_stage = ex_execute then
       write_data_mem <= we when not wb_alu_result_pre(31) else "0000"; -- Normal data memory
       write_framebuf_mem <= we when wb_alu_result_pre(31) else "0000"; -- Framebuffer memory
     else
@@ -98,7 +97,7 @@ begin
     pom_alu_result  => wb_alu_result,
     pom_pc_out      => pc_out
   );
-  wb_pc_out <= pc_out when wb_reset = '1' else x"00000000";
+  wb_pc_out <= x"00000000" when wb_stage = ex_reset else pc_out;
   byte_sign_extend: entity work.SignExtension
     generic map (
       se_input_width  => 8,

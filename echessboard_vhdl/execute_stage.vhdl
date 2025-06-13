@@ -43,7 +43,6 @@ begin
   );
   alu: entity work.ALU(RTL) port map (
     alu_ex_stage   => ex_ex_stage, -- Current execution stage
-    alu_clk        => ex_clk,
     alu_a          => alu_a,
     alu_b          => alu_b,
     alu_op         => ex_alu_op,

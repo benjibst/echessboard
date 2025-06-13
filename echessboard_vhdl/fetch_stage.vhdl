@@ -6,7 +6,6 @@ library ieee;
 entity FetchStage is
   port (
     if_stage       : in  ex_stage; -- Current execution stage
-    if_reset       : in  std_logic;
     if_clk         : in  STD_LOGIC;
     if_pc_in       : in  STD_LOGIC_VECTOR(11 downto 0);
     if_instruction : out word;
@@ -21,7 +20,6 @@ architecture RTL of FetchStage is
 begin
   pc: entity work.ProgramCounter(RTL) port map (
     pc_stage => if_stage,
-    pc_reset => if_reset,
     pc_clk   => if_clk,
     pc_in    => if_pc_in,
     pc_curr  => if_pc_curr_reg,

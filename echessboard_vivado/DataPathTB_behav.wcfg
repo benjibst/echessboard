@@ -11,15 +11,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
-      <ZoomEndTime time="59.401 ns"></ZoomEndTime>
-      <Cursor1Time time="30.000 ns"></Cursor1Time>
+      <ZoomStartTime time="1,010.500 ns"></ZoomStartTime>
+      <ZoomEndTime time="1,063.301 ns"></ZoomEndTime>
+      <Cursor1Time time="1,087.700 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="147"></NameColumnWidth>
-      <ValueColumnWidth column_width="75"></ValueColumnWidth>
+      <NameColumnWidth column_width="178"></NameColumnWidth>
+      <ValueColumnWidth column_width="110"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="19" />
+   <WVObjectSize size="27" />
    <wvobject type="logic" fp_name="/DataPathTB/uut/dp_clk">
       <obj_property name="ElementShortName">dp_clk</obj_property>
       <obj_property name="ObjectShortName">dp_clk</obj_property>
@@ -35,6 +35,7 @@
    <wvobject type="array" fp_name="/DataPathTB/uut/execute_stage/alu/alu_a">
       <obj_property name="ElementShortName">alu_a[31:0]</obj_property>
       <obj_property name="ObjectShortName">alu_a[31:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/DataPathTB/uut/execute_stage/alu/alu_b">
       <obj_property name="ElementShortName">alu_b[31:0]</obj_property>
@@ -44,10 +45,12 @@
    <wvobject type="array" fp_name="/DataPathTB/uut/execute_stage/ex_alu_result_pre">
       <obj_property name="ElementShortName">ex_alu_result_pre[31:0]</obj_property>
       <obj_property name="ObjectShortName">ex_alu_result_pre[31:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/DataPathTB/uut/execute_stage/alu/alu_result">
       <obj_property name="ElementShortName">alu_result[31:0]</obj_property>
       <obj_property name="ObjectShortName">alu_result[31:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/DataPathTB/uut/decode_stage/id_rs1_val">
       <obj_property name="ElementShortName">id_rs1_val[31:0]</obj_property>
@@ -69,10 +72,6 @@
       <obj_property name="ElementShortName">ra_write_en</obj_property>
       <obj_property name="ObjectShortName">ra_write_en</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/DataPathTB/uut/decode_stage/id_instruction">
-      <obj_property name="ElementShortName">id_instruction[31:0]</obj_property>
-      <obj_property name="ObjectShortName">id_instruction[31:0]</obj_property>
-   </wvobject>
    <wvobject type="array" fp_name="/DataPathTB/uut/decode_stage/id_pc_curr">
       <obj_property name="ElementShortName">id_pc_curr[11:0]</obj_property>
       <obj_property name="ObjectShortName">id_pc_curr[11:0]</obj_property>
@@ -85,10 +84,6 @@
       <obj_property name="ElementShortName">stage</obj_property>
       <obj_property name="ObjectShortName">stage</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/DataPathTB/uut/execute_stage/alu/alu_run">
-      <obj_property name="ElementShortName">alu_run</obj_property>
-      <obj_property name="ObjectShortName">alu_run</obj_property>
-   </wvobject>
    <wvobject type="logic" fp_name="/DataPathTB/uut/dp_reset">
       <obj_property name="ElementShortName">dp_reset</obj_property>
       <obj_property name="ObjectShortName">dp_reset</obj_property>
@@ -96,5 +91,49 @@
    <wvobject type="array" fp_name="/DataPathTB/uut/writeback_stage/write_data_mem">
       <obj_property name="ElementShortName">write_data_mem[3:0]</obj_property>
       <obj_property name="ObjectShortName">write_data_mem[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/DataPathTB/uut/writeback_stage/pc_mux/pom_pc_out">
+      <obj_property name="ElementShortName">pom_pc_out[31:0]</obj_property>
+      <obj_property name="ObjectShortName">pom_pc_out[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/DataPathTB/uut/decode_stage/decode_unit/du_opclass">
+      <obj_property name="ElementShortName">du_opclass</obj_property>
+      <obj_property name="ObjectShortName">du_opclass</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/DataPathTB/uut/writeback_stage/wb_stage">
+      <obj_property name="ElementShortName">wb_stage</obj_property>
+      <obj_property name="ObjectShortName">wb_stage</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/DataPathTB/uut/writeback_stage/wb_class">
+      <obj_property name="ElementShortName">wb_class</obj_property>
+      <obj_property name="ObjectShortName">wb_class</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/DataPathTB/uut/writeback_stage/write_data_mem">
+      <obj_property name="ElementShortName">write_data_mem[3:0]</obj_property>
+      <obj_property name="ObjectShortName">write_data_mem[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/DataPathTB/uut/writeback_stage/write_framebuf_mem">
+      <obj_property name="ElementShortName">write_framebuf_mem[3:0]</obj_property>
+      <obj_property name="ObjectShortName">write_framebuf_mem[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/DataPathTB/uut/decode_stage/reg_file/ra_rs1addr">
+      <obj_property name="ElementShortName">ra_rs1addr[4:0]</obj_property>
+      <obj_property name="ObjectShortName">ra_rs1addr[4:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/DataPathTB/uut/decode_stage/reg_file/ra_rs2addr">
+      <obj_property name="ElementShortName">ra_rs2addr[4:0]</obj_property>
+      <obj_property name="ObjectShortName">ra_rs2addr[4:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/DataPathTB/uut/decode_stage/reg_file/ra_rdaddr">
+      <obj_property name="ElementShortName">ra_rdaddr[4:0]</obj_property>
+      <obj_property name="ObjectShortName">ra_rdaddr[4:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/DataPathTB/uut/decode_stage/immediate_ext/ie_imm_out">
+      <obj_property name="ElementShortName">ie_imm_out[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ie_imm_out[31:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
    </wvobject>
 </wave_config>

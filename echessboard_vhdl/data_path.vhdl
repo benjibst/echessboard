@@ -29,7 +29,6 @@ architecture RTL of DataPath is
   signal curr_pc_se     : word;
   signal next_pc_se     : word;
   signal curr_instr     : word;
-  signal reg_we         : std_logic;
   signal reg_rs1_val    : word;
   signal reg_rs2_val    : word;
   signal imm_val        : word;
@@ -56,7 +55,9 @@ begin
   begin
     if (rising_edge(dp_clk)) then
       if (dp_reset = '0') then
-        stage <= ex_fetch;
+        stage <= ex_reset;
+      elsif (stage = ex_reset) then
+        stage <= ex_fetch; -- Start with fetch stage after reset
       elsif (stage = ex_fetch) then
         stage <= ex_decode;
       elsif (stage = ex_decode) then
@@ -71,7 +72,6 @@ begin
   fetch_stage: entity work.FetchStage
     port map (
       if_stage       => stage,
-      if_reset       => dp_reset,
       if_clk         => dp_clk,
       if_pc_in       => pc_out(11 downto 0),
       if_instruction => curr_instr,
@@ -90,7 +90,6 @@ begin
       id_pc_next_se    => next_pc_se,
       id_rs1_val       => reg_rs1_val,
       id_rs2_val       => reg_rs2_val,
-      id_reg_we        => reg_we,
       id_imm_val       => imm_val,
       id_opclass       => op_class,
       id_mem_op_signed => mem_op_signed,
@@ -119,7 +118,6 @@ begin
     );
   writeback_stage: entity work.WritebackStage
     port map (
-      wb_reset              => dp_reset,
       wb_clk                => dp_clk,
       wb_class              => op_class,
       wb_branch_cond        => branch_cond,

@@ -23,7 +23,6 @@ entity DecodeStage is
     id_b_sel         : out std_logic;
     id_alu_op        : out alu_op_t;    -- Default operation is addition
     id_comp_op       : out comp_op_t;   -- Default comparison operation
-    id_reg_we        : out std_logic;   -- Register write enable
     id_error         : out STD_LOGIC    -- Error signal
   );
 end entity;
@@ -46,15 +45,13 @@ begin
   funct7 <= id_instruction(31 downto 25);
   opcode <= id_instruction(6 downto 0);
 
-  process (id_clk) is
+  process (id_ex_stage) is
   begin
-    if (rising_edge(id_clk)) then
-      if (id_ex_stage = ex_execute and (opclass = op_alu or opclass = op_load or opclass = op_jump)) then
-        -- Reset the operation class to default
-        we <= '1';
-      else
-        we <= '0';
-      end if;
+    if (id_ex_stage = ex_execute and (opclass = op_alu or opclass = op_load or opclass = op_jump)) then
+      -- Reset the operation class to default
+      we <= '1';
+    else
+      we <= '0';
     end if;
   end process;
   current_pc_se: entity work.SignExtension(RTL) generic map (
@@ -82,7 +79,6 @@ begin
     ra_rs2val   => id_rs2_val
   );
   immediate_ext: entity work.ImmediateExtension(RTL) port map (
-    ie_clk     => id_clk,
     ie_instr   => id_instruction,
     ie_imm_out => id_imm_val
   );
@@ -97,7 +93,6 @@ begin
     du_opclass       => opclass,
     du_mem_op_signed => id_mem_op_signed,
     du_mem_op_sz     => id_mem_op_sz,
-    du_reg_we        => id_reg_we,
     du_error         => id_error
   );
   id_opclass <= opclass; -- Assign the decoded operation class

@@ -14,7 +14,6 @@ entity DecodeUnit is
     du_mem_op_sz     : out mem_op_sz_t; -- Default memory operation size
     du_mem_op_signed : out std_logic;   -- Sign extension for load/store
     du_opclass       : out op_class_t;  -- Default operation class
-    du_reg_we        : out STD_LOGIC;   -- Register write enable
     du_error         : out std_logic
   );
 end entity;
@@ -30,7 +29,6 @@ begin
     variable comp_op       : comp_op_t;
     variable mem_op_sz     : mem_op_sz_t;
     variable mem_op_signed : std_logic;
-    variable reg_we        : std_logic;
   begin
     case (du_opcode) is
 
@@ -38,7 +36,11 @@ begin
       when "0110011" | "0010011" => -- ALU
         case du_funct3 is
           when "000" => -- ADD/SUB
-            alu_op :=alu_add when du_opcode = "0010011" else alu_add when du_funct7(5) = '0' else alu_sub;
+            alu_op := alu_add when du_opcode = "0010011"
+          else
+          alu_add when du_funct7(5) = '0'
+          else
+          alu_sub;
           when "001" => -- SLL
             alu_op := alu_sll;
           when "010" => -- SLT
@@ -60,7 +62,6 @@ begin
           when others => du_error <= '1';
         end case;
         class := op_alu;
-        reg_we := '1';
         a_sel := '0';
         b_sel := '0' when du_opcode = "0110011" else '1'; -- RS2 or IMM
       -----------------------------------------------------------------------------
@@ -76,7 +77,6 @@ begin
         end case;
         mem_op_signed := '0'; -- No sign extension for store
         alu_op := alu_add;
-        reg_we := '0';
         class := op_store;
         a_sel := '0';
         b_sel := '1';
@@ -94,7 +94,6 @@ begin
         mem_op_signed := not du_funct3(2); -- Sign extension for load
         alu_op := alu_add;
         class := op_load;
-        reg_we := '1';
         a_sel := '0';
         b_sel := '1';
       -----------------------------------------------------------------------------
@@ -116,7 +115,6 @@ begin
         end case;
         class := op_branch;
         alu_op := alu_add;
-        reg_we := '0';
         a_sel := '1';
         b_sel := '1';
       -----------------------------------------------------------------------------
@@ -131,12 +129,10 @@ begin
           when others => du_error <= '1';
         end case;
         alu_op := alu_add;
-        reg_we := '1';
         class := op_jump;
       -----------------------------------------------------------------------------
       when "0010111" => -- AUIPC
         alu_op := alu_add;
-        reg_we := '1';
         class := op_alu;
         a_sel := '1';
         b_sel := '1';
@@ -144,7 +140,6 @@ begin
       when "0110111" => -- LUI
         alu_op := alu_lui;
         class := op_alu;
-        reg_we := '1';
         a_sel := '0';
         b_sel := '1';
       when others => du_error <= '1';
@@ -156,6 +151,5 @@ begin
     du_comp_op <= comp_op;
     du_mem_op_sz <= mem_op_sz;
     du_mem_op_signed <= mem_op_signed;
-    du_reg_we <= reg_we;
   end process;
 end architecture;
