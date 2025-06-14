@@ -18,8 +18,8 @@ end entity;
 architecture RTL of VGAImageGenerator is
   type color_lut_array is array (0 to 3) of std_logic_vector(11 downto 0);
   constant color_lut : color_lut_array := (
-    x"375", --black square
     x"eee", --white square
+    x"375", --black square
     x"db6", --white piece
     x"431" --black piece
   );

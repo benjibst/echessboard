@@ -15,28 +15,19 @@ entity FetchStage is
 end entity;
 
 architecture RTL of FetchStage is
-  signal if_pc_curr_reg : STD_LOGIC_VECTOR(11 downto 0);
-  signal if_pc_next_reg : STD_LOGIC_VECTOR(11 downto 0);
 begin
   pc: entity work.ProgramCounter(RTL) port map (
     pc_stage => if_stage,
     pc_clk   => if_clk,
     pc_in    => if_pc_in,
-    pc_curr  => if_pc_curr_reg,
-    pc_next  => if_pc_next_reg
+    pc_curr  => if_pc_curr,
+    pc_next  => if_pc_next
   );
   im: entity work.instr_mem
     port map (
       clka  => if_clk,
-      addra => if_pc_curr_reg(11 downto 2),
+      addra => if_pc_curr(11 downto 2),
       douta => if_instruction
     );
 
-  process (if_clk) is
-  begin
-    if (rising_edge(if_clk)) then
-      if_pc_curr <= if_pc_curr_reg;
-      if_pc_next <= if_pc_next_reg;
-    end if;
-  end process;
 end architecture;

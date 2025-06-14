@@ -103,7 +103,6 @@ begin
   execute_stage: entity work.ExecuteStage
     port map (
       ex_ex_stage       => stage,
-      ex_clk            => dp_clk,
       ex_rs1_val        => reg_rs1_val,
       ex_rs2_val        => reg_rs1_val,
       ex_curr_pc        => curr_pc_se,

@@ -6,7 +6,6 @@ library ieee;
 entity ExecuteStage is
   port (
     ex_ex_stage       : in  ex_stage; -- Current execution stage
-    ex_clk            : in  std_logic;
     ex_rs1_val        : in  word;
     ex_rs2_val        : in  word;
     ex_curr_pc        : in  word;
@@ -42,7 +41,7 @@ begin
     mp_out => alu_b
   );
   alu: entity work.ALU(RTL) port map (
-    alu_ex_stage   => ex_ex_stage, -- Current execution stage
+    alu_ex_stage   => ex_ex_stage,
     alu_a          => alu_a,
     alu_b          => alu_b,
     alu_op         => ex_alu_op,
@@ -50,7 +49,7 @@ begin
     alu_result_pre => ex_alu_result_pre
   );
   comparator: entity work.ComparatorUnit(RTL) port map (
-    cu_clk     => ex_clk,
+    cu_stage   => ex_ex_stage,
     cu_rs1_val => ex_rs1_val,
     cu_rs2_val => ex_rs2_val,
     cu_comp_op => ex_comp_op,
