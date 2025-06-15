@@ -56,6 +56,7 @@ if {$::dispatch::connected} {
 }
 
 OPTRACE "instr_mem_synth_1" START { ROLLUP_AUTO }
+set_param general.usePosixSpawnForFork 1
 set_param project.vivado.isBlockSynthRun true
 set_msg_config -msgmgr_mode ooc_run
 OPTRACE "Creating in-memory project" START { }
@@ -70,7 +71,6 @@ set_property parent.project_path /home/benni/dev/echessboard/echessboard_vivado/
 set_property XPM_LIBRARIES XPM_MEMORY [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language VHDL [current_project]
-set_property board_part digilentinc.com:nexys4_ddr:part0:1.1 [current_project]
 set_property ip_output_repo /home/benni/dev/echessboard/echessboard_vivado/echessboar_vivado.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
 set_property vhdl_define vhdl_version=2008 [current_fileset]

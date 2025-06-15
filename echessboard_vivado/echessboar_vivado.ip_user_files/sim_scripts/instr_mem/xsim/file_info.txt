@@ -1,1 +1,1 @@
-instr_mem_sim_netlist.vhdl,vhdl,xil_defaultlib,../../../../echessboar_vivado.gen/sources_1/ip/instr_mem/instr_mem_sim_netlist.vhdl,
+instr_mem_sim_netlist.vhdl,vhdl,xil_defaultlib,../../../../echessboar_vivado.gen/sources_1/ip/instr_mem/instr_mem_sim_netlist.vhdl,incdir="../../../../../../../Xillinx/2025.1/data/rsb/busdef"

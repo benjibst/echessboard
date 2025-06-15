@@ -1,8 +1,8 @@
-Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
-| Tool Version : Vivado v.2024.2 (lin64) Build 5239630 Fri Nov 08 22:34:34 MST 2024
-| Date         : Sat Jun 14 13:45:21 2025
-| Host         : bennipc running 64-bit unknown
+| Tool Version : Vivado v.2025.1 (lin64) Build 6140274 Wed May 21 22:58:25 MDT 2025
+| Date         : Sun Jun 15 20:19:36 2025
+| Host         : bennipc running 64-bit Arch Linux
 | Command      : report_utilization -file instr_mem_utilization_synth.rpt -pb instr_mem_utilization_synth.pb
 | Design       : instr_mem
 | Device       : xc7a100tcsg324-1

@@ -1,24 +1,24 @@
 #-----------------------------------------------------------
-# Vivado v2024.2 (64-bit)
-# SW Build 5239630 on Fri Nov 08 22:34:34 MST 2024
-# IP Build 5239520 on Sun Nov 10 16:12:51 MST 2024
-# SharedData Build 5239561 on Fri Nov 08 14:39:27 MST 2024
-# Start of session at: Sat Jun 14 13:44:58 2025
-# Process ID         : 20427
+# Vivado v2025.1 (64-bit)
+# SW Build 6140274 on Wed May 21 22:58:25 MDT 2025
+# IP Build 6138677 on Thu May 22 03:10:11 MDT 2025
+# SharedData Build 6139179 on Tue May 20 17:58:58 MDT 2025
+# Start of session at: Sun Jun 15 20:19:12 2025
+# Process ID         : 19397
 # Current directory  : /home/benni/dev/echessboard/echessboard_vivado/echessboar_vivado.runs/instr_mem_synth_1
 # Command line       : vivado -log instr_mem.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source instr_mem.tcl
 # Log file           : /home/benni/dev/echessboard/echessboard_vivado/echessboar_vivado.runs/instr_mem_synth_1/instr_mem.vds
 # Journal file       : /home/benni/dev/echessboard/echessboard_vivado/echessboar_vivado.runs/instr_mem_synth_1/vivado.jou
 # Running On         : bennipc
-# Platform           : unknown
-# Operating System   : unknown
+# Platform           : Arch
+# Operating System   : Arch Linux
 # Processor Detail   : 11th Gen Intel(R) Core(TM) i7-11800H @ 2.30GHz
-# CPU Frequency      : 1313.296 MHz
+# CPU Frequency      : 4351.767 MHz
 # CPU Physical cores : 8
 # CPU Logical cores  : 16
 # Host memory        : 16480 MB
 # Swap memory        : 4294 MB
 # Total Virtual      : 20775 MB
-# Available Virtual  : 11762 MB
+# Available Virtual  : 13064 MB
 #-----------------------------------------------------------
 source instr_mem.tcl -notrace
