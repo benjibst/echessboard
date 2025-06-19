@@ -104,7 +104,7 @@ begin
     port map (
       ex_ex_stage       => stage,
       ex_rs1_val        => reg_rs1_val,
-      ex_rs2_val        => reg_rs1_val,
+      ex_rs2_val        => reg_rs2_val,
       ex_curr_pc        => curr_pc_se,
       ex_imm_val        => imm_val,
       ex_alu_op         => alu_op,

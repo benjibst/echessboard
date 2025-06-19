@@ -11,15 +11,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="970.100 ns"></ZoomStartTime>
-      <ZoomEndTime time="1,264.601 ns"></ZoomEndTime>
-      <Cursor1Time time="1,081.600 ns"></Cursor1Time>
+      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
+      <ZoomEndTime time="101.401 ns"></ZoomEndTime>
+      <Cursor1Time time="111.800 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="241"></NameColumnWidth>
-      <ValueColumnWidth column_width="78"></ValueColumnWidth>
+      <NameColumnWidth column_width="234"></NameColumnWidth>
+      <ValueColumnWidth column_width="75"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="28" />
+   <WVObjectSize size="34" />
    <wvobject type="logic" fp_name="/DataPathTB/uut/dp_clk">
       <obj_property name="ElementShortName">dp_clk</obj_property>
       <obj_property name="ObjectShortName">dp_clk</obj_property>
@@ -139,5 +139,29 @@
    <wvobject type="other" fp_name="/DataPathTB/uut/decode_stage/immediate_ext/typpei">
       <obj_property name="ElementShortName">typpei</obj_property>
       <obj_property name="ObjectShortName">typpei</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/DataPathTB/uut/decode_stage/reg_file/registerfile/spo">
+      <obj_property name="ElementShortName">spo[31:0]</obj_property>
+      <obj_property name="ObjectShortName">spo[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/DataPathTB/uut/decode_stage/reg_file/registerfile/dpo">
+      <obj_property name="ElementShortName">dpo[31:0]</obj_property>
+      <obj_property name="ObjectShortName">dpo[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/DataPathTB/uut/decode_stage/id_rs1_val">
+      <obj_property name="ElementShortName">id_rs1_val[31:0]</obj_property>
+      <obj_property name="ObjectShortName">id_rs1_val[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/DataPathTB/uut/decode_stage/id_rs2_val">
+      <obj_property name="ElementShortName">id_rs2_val[31:0]</obj_property>
+      <obj_property name="ObjectShortName">id_rs2_val[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/DataPathTB/uut/execute_stage/ex_rs1_val">
+      <obj_property name="ElementShortName">ex_rs1_val[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ex_rs1_val[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/DataPathTB/uut/execute_stage/ex_rs2_val">
+      <obj_property name="ElementShortName">ex_rs2_val[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ex_rs2_val[31:0]</obj_property>
    </wvobject>
 </wave_config>

@@ -10,17 +10,10 @@
         <spirit:name>xilinx_blockmodel</spirit:name>
         <spirit:displayName>Block Model files</spirit:displayName>
         <spirit:envIdentifier>:vivado.xilinx.com:block_model</spirit:envIdentifier>
-        <spirit:fileSetRef>
-          <spirit:localName>xilinx_blockmodel_view_fileset</spirit:localName>
-        </spirit:fileSetRef>
         <spirit:parameters>
           <spirit:parameter>
-            <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Fri Jun 13 10:53:45 UTC 2025</spirit:value>
-          </spirit:parameter>
-          <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:292e50ec</spirit:value>
+            <spirit:value>9:4c524d29</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -34,11 +27,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Fri Jun 13 10:54:07 UTC 2025</spirit:value>
+            <spirit:value>Tue Jun 17 19:52:43 UTC 2025</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:292e50ec</spirit:value>
+            <spirit:value>9:4c524d29</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -49,7 +42,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:292e50ec</spirit:value>
+            <spirit:value>9:4c524d29</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -58,18 +51,18 @@
         <spirit:displayName>Verilog Simulation</spirit:displayName>
         <spirit:envIdentifier>verilogSource:vivado.xilinx.com:simulation</spirit:envIdentifier>
         <spirit:language>verilog</spirit:language>
-        <spirit:modelName>dist_mem_gen_v8_0_15</spirit:modelName>
+        <spirit:modelName>dist_mem_gen_v8_0_17</spirit:modelName>
         <spirit:fileSetRef>
           <spirit:localName>xilinx_verilogbehavioralsimulation_view_fileset</spirit:localName>
         </spirit:fileSetRef>
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Fri Jun 13 10:53:45 UTC 2025</spirit:value>
+            <spirit:value>Tue Jun 17 19:52:18 UTC 2025</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:b19ec9aa</spirit:value>
+            <spirit:value>9:d4e2d46f</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -85,11 +78,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Fri Jun 13 10:53:45 UTC 2025</spirit:value>
+            <spirit:value>Tue Jun 17 19:52:18 UTC 2025</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:b19ec9aa</spirit:value>
+            <spirit:value>9:d4e2d46f</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -103,11 +96,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Fri Jun 13 10:53:45 UTC 2025</spirit:value>
+            <spirit:value>Tue Jun 17 19:52:18 UTC 2025</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:292e50ec</spirit:value>
+            <spirit:value>9:4c524d29</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -122,11 +115,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Fri Jun 13 10:53:45 UTC 2025</spirit:value>
+            <spirit:value>Tue Jun 17 19:43:56 UTC 2025</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:292e50ec</spirit:value>
+            <spirit:value>9:4c524d29</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -135,18 +128,18 @@
         <spirit:displayName>VHDL Synthesis</spirit:displayName>
         <spirit:envIdentifier>vhdlSource:vivado.xilinx.com:synthesis</spirit:envIdentifier>
         <spirit:language>vhdl</spirit:language>
-        <spirit:modelName>dist_mem_gen_v8_0_15</spirit:modelName>
+        <spirit:modelName>dist_mem_gen_v8_0_17</spirit:modelName>
         <spirit:fileSetRef>
           <spirit:localName>xilinx_vhdlsynthesis_view_fileset</spirit:localName>
         </spirit:fileSetRef>
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Fri Jun 13 10:53:45 UTC 2025</spirit:value>
+            <spirit:value>Tue Jun 17 19:52:18 UTC 2025</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:292e50ec</spirit:value>
+            <spirit:value>9:4c524d29</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -162,11 +155,11 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>GENtimestamp</spirit:name>
-            <spirit:value>Fri Jun 13 10:53:45 UTC 2025</spirit:value>
+            <spirit:value>Tue Jun 17 19:52:18 UTC 2025</spirit:value>
           </spirit:parameter>
           <spirit:parameter>
             <spirit:name>outputProductCRC</spirit:name>
-            <spirit:value>9:292e50ec</spirit:value>
+            <spirit:value>9:4c524d29</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -749,21 +742,6 @@
   </spirit:choices>
   <spirit:fileSets>
     <spirit:fileSet>
-      <spirit:name>xilinx_blockmodel_view_fileset</spirit:name>
-      <spirit:file>
-        <spirit:name>register_file.bmj</spirit:name>
-        <spirit:userFileType>bmj</spirit:userFileType>
-        <spirit:userFileType>USED_IN_simulation_pre</spirit:userFileType>
-        <spirit:userFileType>USED_IN_synthesis_pre</spirit:userFileType>
-      </spirit:file>
-      <spirit:file>
-        <spirit:name>register_file_bmstub.v</spirit:name>
-        <spirit:fileType>verilogSource</spirit:fileType>
-        <spirit:userFileType>USED_IN_simulation_pre</spirit:userFileType>
-        <spirit:userFileType>USED_IN_synthesis_pre</spirit:userFileType>
-      </spirit:file>
-    </spirit:fileSet>
-    <spirit:fileSet>
       <spirit:name>xilinx_externalfiles_view_fileset</spirit:name>
       <spirit:file>
         <spirit:name>register_file.dcp</spirit:name>
@@ -809,8 +787,8 @@
         <spirit:name>simulation/dist_mem_gen_v8_0.v</spirit:name>
         <spirit:fileType>verilogSource</spirit:fileType>
         <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
-        <spirit:logicalName>dist_mem_gen_v8_0_15</spirit:logicalName>
-        <spirit:exportedName>dist_mem_gen_v8_0_15</spirit:exportedName>
+        <spirit:logicalName>dist_mem_gen_v8_0_17</spirit:logicalName>
+        <spirit:exportedName>dist_mem_gen_v8_0_17</spirit:exportedName>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
@@ -855,7 +833,7 @@
       <spirit:file>
         <spirit:name>hdl/dist_mem_gen_v8_0_vhsyn_rfs.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:logicalName>dist_mem_gen_v8_0_15</spirit:logicalName>
+        <spirit:logicalName>dist_mem_gen_v8_0_17</spirit:logicalName>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
@@ -1002,7 +980,7 @@
   <spirit:vendorExtensions>
     <xilinx:coreExtensions>
       <xilinx:displayName>Distributed Memory Generator</xilinx:displayName>
-      <xilinx:coreRevision>15</xilinx:coreRevision>
+      <xilinx:coreRevision>17</xilinx:coreRevision>
       <xilinx:configElementInfos>
         <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.coefficient_file" xilinx:valueSource="user"/>
         <xilinx:configElementInfo xilinx:referenceId="PARAM_VALUE.data_width" xilinx:valueSource="user"/>
@@ -1011,8 +989,8 @@
       </xilinx:configElementInfos>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
-      <xilinx:xilinxVersion>2024.2</xilinx:xilinxVersion>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="fd6e297e"/>
+      <xilinx:xilinxVersion>2025.1</xilinx:xilinxVersion>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="108a4dbf"/>
       <xilinx:checksum xilinx:scope="ports" xilinx:value="2102dedf"/>
       <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="ca0ebda1"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="9ec7ac08"/>

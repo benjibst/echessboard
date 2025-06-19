@@ -47,14 +47,14 @@
 -- DO NOT MODIFY THIS FILE.
 
 -- IP VLNV: xilinx.com:ip:dist_mem_gen:8.0
--- IP Revision: 15
+-- IP Revision: 17
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
-LIBRARY dist_mem_gen_v8_0_15;
-USE dist_mem_gen_v8_0_15.dist_mem_gen_v8_0_15;
+LIBRARY dist_mem_gen_v8_0_17;
+USE dist_mem_gen_v8_0_17.dist_mem_gen_v8_0_17;
 
 ENTITY register_file IS
   PORT (
@@ -71,7 +71,7 @@ END register_file;
 ARCHITECTURE register_file_arch OF register_file IS
   ATTRIBUTE DowngradeIPIdentifiedWarnings : STRING;
   ATTRIBUTE DowngradeIPIdentifiedWarnings OF register_file_arch: ARCHITECTURE IS "yes";
-  COMPONENT dist_mem_gen_v8_0_15 IS
+  COMPONENT dist_mem_gen_v8_0_17 IS
     GENERIC (
       C_FAMILY : STRING;
       C_ADDR_WIDTH : INTEGER;
@@ -125,16 +125,16 @@ ARCHITECTURE register_file_arch OF register_file IS
       qspo : OUT STD_LOGIC_VECTOR(31 DOWNTO 0);
       qdpo : OUT STD_LOGIC_VECTOR(31 DOWNTO 0)
     );
-  END COMPONENT dist_mem_gen_v8_0_15;
+  END COMPONENT dist_mem_gen_v8_0_17;
   ATTRIBUTE X_CORE_INFO : STRING;
-  ATTRIBUTE X_CORE_INFO OF register_file_arch: ARCHITECTURE IS "dist_mem_gen_v8_0_15,Vivado 2024.2";
+  ATTRIBUTE X_CORE_INFO OF register_file_arch: ARCHITECTURE IS "dist_mem_gen_v8_0_17,Vivado 2025.1";
   ATTRIBUTE CHECK_LICENSE_TYPE : STRING;
-  ATTRIBUTE CHECK_LICENSE_TYPE OF register_file_arch : ARCHITECTURE IS "register_file,dist_mem_gen_v8_0_15,{}";
+  ATTRIBUTE CHECK_LICENSE_TYPE OF register_file_arch : ARCHITECTURE IS "register_file,dist_mem_gen_v8_0_17,{}";
   ATTRIBUTE CORE_GENERATION_INFO : STRING;
-  ATTRIBUTE CORE_GENERATION_INFO OF register_file_arch: ARCHITECTURE IS "register_file,dist_mem_gen_v8_0_15,{x_ipProduct=Vivado 2024.2,x_ipVendor=xilinx.com,x_ipLibrary=ip,x_ipName=dist_mem_gen,x_ipVersion=8.0,x_ipCoreRevision=15,x_ipLanguage=VHDL,x_ipSimLanguage=VHDL,C_FAMILY=artix7,C_ADDR_WIDTH=5,C_DEFAULT_DATA=0,C_DEPTH=32,C_HAS_CLK=1,C_HAS_D=1,C_HAS_DPO=1,C_HAS_DPRA=1,C_HAS_I_CE=0,C_HAS_QDPO=0,C_HAS_QDPO_CE=0,C_HAS_QDPO_CLK=0,C_HAS_QDPO_RST=0,C_HAS_QDPO_SRST=0,C_HAS_QSPO=0,C_HAS_QSPO_CE=0,C_HAS_QSPO_RST=0,C_HAS_QSPO_SRST=0,C_HAS_SPO=1,C_HAS_WE=1,C_MEM_INIT_FILE=r" & 
+  ATTRIBUTE CORE_GENERATION_INFO OF register_file_arch: ARCHITECTURE IS "register_file,dist_mem_gen_v8_0_17,{x_ipProduct=Vivado 2025.1,x_ipVendor=xilinx.com,x_ipLibrary=ip,x_ipName=dist_mem_gen,x_ipVersion=8.0,x_ipCoreRevision=17,x_ipLanguage=VHDL,x_ipSimLanguage=VHDL,C_FAMILY=artix7,C_ADDR_WIDTH=5,C_DEFAULT_DATA=0,C_DEPTH=32,C_HAS_CLK=1,C_HAS_D=1,C_HAS_DPO=1,C_HAS_DPRA=1,C_HAS_I_CE=0,C_HAS_QDPO=0,C_HAS_QDPO_CE=0,C_HAS_QDPO_CLK=0,C_HAS_QDPO_RST=0,C_HAS_QDPO_SRST=0,C_HAS_QSPO=0,C_HAS_QSPO_CE=0,C_HAS_QSPO_RST=0,C_HAS_QSPO_SRST=0,C_HAS_SPO=1,C_HAS_WE=1,C_MEM_INIT_FILE=r" & 
 "egister_file.mif,C_ELABORATION_DIR=./,C_MEM_TYPE=2,C_PIPELINE_STAGES=0,C_QCE_JOINED=0,C_QUALIFY_WE=0,C_READ_MIF=1,C_REG_A_D_INPUTS=0,C_REG_DPRA_INPUT=0,C_SYNC_ENABLE=1,C_WIDTH=32,C_PARSER_TYPE=1}";
 BEGIN
-  U0 : dist_mem_gen_v8_0_15
+  U0 : dist_mem_gen_v8_0_17
     GENERIC MAP (
       C_FAMILY => "artix7",
       C_ADDR_WIDTH => 5,

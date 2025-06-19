@@ -46,7 +46,7 @@
 -- 
 -- DO NOT MODIFY THIS FILE.
 -- IP VLNV: xilinx.com:ip:dist_mem_gen:8.0
--- IP Revision: 15
+-- IP Revision: 17
 
 -- The following code must appear in the VHDL architecture header.
 
