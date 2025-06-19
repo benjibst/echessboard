@@ -3,7 +3,7 @@
   "ip_inst": {
     "xci_name": "vga_framebuf_mem",
     "component_reference": "xilinx.com:ip:blk_mem_gen:8.4",
-    "ip_revision": "9",
+    "ip_revision": "11",
     "gen_directory": "../../../../echessboar_vivado.gen/sources_1/ip/vga_framebuf_mem",
     "parameters": {
       "component_parameters": {
@@ -34,11 +34,11 @@
         "Assume_Synchronous_Clk": [ { "value": "false", "value_src": "user", "resolve_type": "user", "format": "bool", "usage": "all" } ],
         "Write_Width_A": [ { "value": "32", "value_src": "user", "resolve_type": "user", "format": "long", "usage": "all" } ],
         "Write_Depth_A": [ { "value": "19200", "value_src": "user", "resolve_type": "user", "format": "long", "usage": "all" } ],
-        "Read_Width_A": [ { "value": "32", "resolve_type": "user", "usage": "all" } ],
+        "Read_Width_A": [ { "value": "32", "value_src": "user", "resolve_type": "user", "usage": "all" } ],
         "Operating_Mode_A": [ { "value": "WRITE_FIRST", "resolve_type": "user", "usage": "all" } ],
         "Enable_A": [ { "value": "Always_Enabled", "value_src": "user", "resolve_type": "user", "usage": "all" } ],
-        "Write_Width_B": [ { "value": "32", "resolve_type": "user", "usage": "all" } ],
-        "Read_Width_B": [ { "value": "32", "resolve_type": "user", "usage": "all" } ],
+        "Write_Width_B": [ { "value": "32", "value_src": "user", "resolve_type": "user", "usage": "all" } ],
+        "Read_Width_B": [ { "value": "32", "value_src": "user", "resolve_type": "user", "usage": "all" } ],
         "Operating_Mode_B": [ { "value": "WRITE_FIRST", "resolve_type": "user", "usage": "all" } ],
         "Enable_B": [ { "value": "Always_Enabled", "value_src": "user", "resolve_type": "user", "usage": "all" } ],
         "Register_PortA_Output_of_Memory_Primitives": [ { "value": "false", "value_src": "user", "resolve_type": "user", "format": "bool", "usage": "all" } ],
@@ -66,10 +66,10 @@
         "Additional_Inputs_for_Power_Estimation": [ { "value": "false", "resolve_type": "user", "format": "bool", "usage": "all" } ],
         "Port_A_Clock": [ { "value": "100", "resolve_type": "user", "format": "long", "usage": "all" } ],
         "Port_A_Write_Rate": [ { "value": "50", "resolve_type": "user", "format": "long", "usage": "all" } ],
-        "Port_B_Clock": [ { "value": "100", "resolve_type": "user", "format": "long", "usage": "all" } ],
-        "Port_B_Write_Rate": [ { "value": "50", "resolve_type": "user", "format": "long", "usage": "all" } ],
+        "Port_B_Clock": [ { "value": "100", "value_src": "user", "resolve_type": "user", "format": "long", "usage": "all" } ],
+        "Port_B_Write_Rate": [ { "value": "50", "value_src": "user", "resolve_type": "user", "format": "long", "usage": "all" } ],
         "Port_A_Enable_Rate": [ { "value": "100", "resolve_type": "user", "format": "long", "usage": "all" } ],
-        "Port_B_Enable_Rate": [ { "value": "100", "resolve_type": "user", "format": "long", "usage": "all" } ],
+        "Port_B_Enable_Rate": [ { "value": "100", "value_src": "user", "resolve_type": "user", "format": "long", "usage": "all" } ],
         "Collision_Warnings": [ { "value": "ALL", "resolve_type": "user", "usage": "all" } ],
         "Disable_Collision_Warnings": [ { "value": "false", "resolve_type": "user", "format": "bool", "usage": "all" } ],
         "Disable_Out_of_Range_Warnings": [ { "value": "false", "resolve_type": "user", "format": "bool", "usage": "all" } ],
@@ -159,7 +159,7 @@
       },
       "project_parameters": {
         "ARCHITECTURE": [ { "value": "artix7" } ],
-        "BASE_BOARD_PART": [ { "value": "digilentinc.com:nexys4_ddr:part0:1.1" } ],
+        "BASE_BOARD_PART": [ { "value": "" } ],
         "BOARD_CONNECTIONS": [ { "value": "" } ],
         "DEVICE": [ { "value": "xc7a100t" } ],
         "PACKAGE": [ { "value": "csg324" } ],
@@ -172,12 +172,12 @@
       },
       "runtime_parameters": {
         "IPCONTEXT": [ { "value": "IP_Flow" } ],
-        "IPREVISION": [ { "value": "9" } ],
+        "IPREVISION": [ { "value": "11" } ],
         "MANAGED": [ { "value": "TRUE" } ],
         "OUTPUTDIR": [ { "value": "../../../../echessboar_vivado.gen/sources_1/ip/vga_framebuf_mem" } ],
         "SELECTEDSIMMODEL": [ { "value": "" } ],
         "SHAREDDIR": [ { "value": "." } ],
-        "SWVERSION": [ { "value": "2024.2" } ],
+        "SWVERSION": [ { "value": "2025.1" } ],
         "SYNTHESISFLOW": [ { "value": "OUT_OF_CONTEXT" } ]
       }
     },
