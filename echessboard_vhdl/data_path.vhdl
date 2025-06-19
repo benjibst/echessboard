@@ -22,7 +22,7 @@ entity DataPath is
     dp_vga_blue    : out STD_LOGIC_VECTOR(3 downto 0) := "0000"  -- VGA blue color output
   );
 end entity;
-
+-- alessia change
 architecture RTL of DataPath is
   signal next_pc        : std_logic_vector(11 downto 0);
   signal curr_pc        : std_logic_vector(11 downto 0);
