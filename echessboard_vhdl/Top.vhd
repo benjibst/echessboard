@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------------------
 -- Company: 
--- Engineer: 
+-- Engineer: Benjamin Schmid Ties
 -- 
 -- Create Date: 03.06.2025 19:59:25
 -- Design Name: 
