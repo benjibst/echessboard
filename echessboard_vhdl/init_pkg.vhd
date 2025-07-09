@@ -36,7 +36,7 @@ begin
   for i in 0 to 63 loop
     if i > 47 then
         pieces_board(i).first_move := '1';
-        pieces_board(i).color := '0';  -- Nero
+        pieces_board(i).color := black;  -- Nero
         case i is
           when 56 | 63 => pieces_board(i).shape := ROOK;
           when 57 | 62 => pieces_board(i).shape := KNIGHT;
@@ -48,7 +48,7 @@ begin
 
     elsif i < 16 then
         pieces_board(i).first_move := '1';
-        pieces_board(i).color := '1';  -- Pedoni bianchi
+        pieces_board(i).color := white;  -- Pedoni bianchi
         
         case i is
           when 0 | 7 => pieces_board(i).shape := ROOK;

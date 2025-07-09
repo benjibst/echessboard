@@ -1,0 +1,30 @@
+library ieee;
+  use ieee.std_logic_1164.all;
+  use ieee.numeric_std.all;
+
+entity SignalMux is
+    Port (
+        -- Selezione sorgente
+        sel_source     : in std_logic;
+        -- Selezione validator
+        sel_validator  : in integer range 0 to 5;
+
+        -- Input da FSM
+        start_fsm      : in std_logic;
+        k_fsm          : in std_logic_vector(7 downto 0);
+        cmd_fsm        : in std_logic;
+
+        -- Input da Check
+        start_check    : in std_logic;
+        k_check        : in std_logic_vector(7 downto 0);
+        cmd_check      : in std_logic;
+
+        -- Uscite verso validator
+        start_to_validators : out std_logic_vector(5 downto 0);
+        k_to_validators     : out k_array_t; -- definito in un package
+        cmd_to_validators   : out std_logic_vector(5 downto 0)
+    );
+end SignalMux;
+
+
+

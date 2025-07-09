@@ -1,22 +1,4 @@
-----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date: 18.06.2025 19:05:18
--- Design Name: 
--- Module Name: spi_chessController_tb - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
--- 
--- Dependencies: 
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
--- 
-----------------------------------------------------------------------------------
+
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
@@ -26,7 +8,7 @@ end spi_chessController_tb;
 
 architecture behavior of spi_chessController_tb is
 
-    -- Componenti DUT
+    -- Component DUT
     component TopLevel
         Port (
             CLK     : in  std_logic;
@@ -34,43 +16,50 @@ architecture behavior of spi_chessController_tb is
             SCLK    : in  std_logic;
             CS_N    : in  std_logic;
             MOSI    : in  std_logic;
-            led     : out std_logic_vector(1 downto 0);
-            winner  : out std_logic
+            MISO    : out std_logic;
+            error     : out std_logic;
+            winner  : out std_logic_vector(1 downto 0)
         );
     end component;
 
-    -- Segnali di test
+    -- Signals
     signal CLK     : std_logic := '0';
     signal RST     : std_logic := '1';
-    signal SCLK    : std_logic := '0';
+    signal SCLK    : std_logic := '1';
     signal CS_N    : std_logic := '1';
     signal MOSI    : std_logic := '0';
-    signal led     : std_logic_vector(1 downto 0);
-    signal winner  : std_logic;
+    signal MISO    : std_logic;
+    signal error     : std_logic := '0';
+    signal winner  : std_logic_vector(1 downto 0) := "01";
 
-    -- Clock
     -- Clock constants
     constant CLK_PERIOD   : time := 10 ns;
     constant SCLK_PERIOD  : time := 100 ns;
 
-    -- Stimulus
-    procedure send_spi_byte(signal CS : out std_logic;
-                            signal SCLK : out std_logic;
-                            signal MOSI : out std_logic;
-                            data : std_logic_vector(7 downto 0)) is
+
+    -- SPI transmit + receive procedure
+    procedure send_and_receive_spi_byte(signal CS : out std_logic;
+                                        signal MOSI : out std_logic;
+                                        signal MISO : in std_logic;
+                                        constant TX_DATA : std_logic_vector(7 downto 0);
+                                        variable   RX_DATA : out std_logic_vector(7 downto 0)) is
     begin
         for i in 7 downto 0 loop
-            MOSI <= data(i);
+            -- Dato pronto PRIMA del fronte di salita
+            MOSI <= TX_DATA(i);
+
+            -- Fase 1: fronte di discesa: cambio del bit
             wait for SCLK_PERIOD / 2;
-            SCLK <= '1';
+
+            -- Fase 2: fronte di salita: campionamento
+            RX_DATA(i) := MISO;
             wait for SCLK_PERIOD / 2;
-            SCLK <= '0';
         end loop;
     end procedure;
 
 begin
 
-    -- Istanza del DUT
+    -- Instantiate DUT
     DUT: TopLevel
         port map (
             CLK     => CLK,
@@ -78,12 +67,12 @@ begin
             SCLK    => SCLK,
             CS_N    => CS_N,
             MOSI    => MOSI,
-            led     => led,
+            MISO    => MISO,
+            error     => error,
             winner  => winner
         );
 
-    -- Clock di sistema
-     -- Clock generation
+    -- Clock generation for CLK (system clock)
     clk_process: process
     begin
         while true loop
@@ -92,9 +81,23 @@ begin
         end loop;
     end process;
 
-    -- Stimulus process
-    stim_proc: process
+    -- SCLK clock generation (SPI clock)
+    sclk_process: process
     begin
+        while true loop
+            -- Generate SCLK clock
+            SCLK <= '0';
+            wait for SCLK_PERIOD / 2;
+            SCLK <= '1';
+            wait for SCLK_PERIOD / 2;
+        end loop;
+    end process;
+
+    -- Stimulus
+    stim_proc: process
+        variable temp_rx : std_logic_vector(7 downto 0);
+    begin
+    
         -- Reset
         wait for 20 ns;
         RST <= '0';
@@ -103,25 +106,37 @@ begin
         -- SPI transfer
         CS_N <= '0';  -- Select slave
 
-        -- Send command: 0x00 (indica che seguono 8 byte posizione)
-        send_spi_byte(CS_N, SCLK, MOSI, "00000000");
+        -- Send a command byte and receive via MISO
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "00000000", temp_rx);
+        -- Send another byte
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "10000011", temp_rx);
+        
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "00000000", temp_rx);
+        
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "10100011", temp_rx);
 
-        -- Send 8 data bytes (es: 0x01 to 0x08)
-        send_spi_byte(CS_N, SCLK, MOSI, "11000101");
-        send_spi_byte(CS_N, SCLK, MOSI, "11000011");
-        send_spi_byte(CS_N, SCLK, MOSI, "11000011");
-        send_spi_byte(CS_N, SCLK, MOSI, "11000011");
-        send_spi_byte(CS_N, SCLK, MOSI, "11000011");
-        send_spi_byte(CS_N, SCLK, MOSI, "11000011");
-        send_spi_byte(CS_N, SCLK, MOSI, "11000101");
-        send_spi_byte(CS_N, SCLK, MOSI, "11000011");
-
-        -- End transfer
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "00000010", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "10000000", temp_rx);
+        -- End SPI transfer
         wait for SCLK_PERIOD;
         CS_N <= '1';
+        
 
-        -- Wait and observe result
-        wait for 500 ns;
+        wait for 200 ns;
 
         -- Stop simulation
         wait;

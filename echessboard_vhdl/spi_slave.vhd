@@ -1,69 +1,105 @@
+-----------------------------------------------------------------------------------------
+--primo dato trasmesso B=0, b=0 --> salvato in pos 7 di shift temp --> va in pos 63
+--secondo dato trasmesso B=0, b=1 --> salvato in pos 6 di shift temp --> va in pos 63-8=55
+--B=5, b=5 --> salvato in shift temp 2 --> va in pos 63-40-5=18 
+--B=7, b=7 --> salvato in shift temp 0 --> va in pos 63-56+7=0  
 
+--cosa cambiare per definire le polarità: 
+--SS: dati trasmessi quando è basso
+--1. CPOL=0, CPHA=0 : clk parte basso, dati trasmessi al rising edge
+--2. CPOL=0, CPHA=1 : clk parte basso, dati trasmessi al falling edge
+--3. CPOL=1, CPHA=0 : clk parte alto, dati trasmessi al falling edge
+--4. CPOL=1, CPHA=1 : clk parte alto, dati trasmessi al rising edge
+
+--sckl_reg è attuale con ckl,sckl_meta è in ritardodi un ciclo, quando quello adess è 0 e quello precedente era 1 c'è stato un fronte di discesa, al contrario di salita
+
+--1. se SCKL parte basso, sclk_fedge <=  not sclk_reg and sclk_meta; 
+--2. se SCKL parte basso, sclk_fedge <=  sclk_reg and not sclk_meta;
+--3. se SCKL parte alto, sclk_fedge <=  sclk_reg and not sclk_meta;
+--4. se SCKL parte alto, sclk_fedge <=  not sclk_reg and sclk_meta; 
+
+-- per ora impostato su modalità 4.
+----------------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 entity spi_slave is
     Port (
-        CLK             : in  std_logic;  -- Clock di sistema
-        RST             : in  std_logic;  -- Reset sincrono
-        SCLK            : in  std_logic;  -- SPI clock
-        CS_N            : in  std_logic;  -- SPI chip select
-        MOSI            : in  std_logic;  -- SPI master-out-slave-in
+        CLK             : in  std_logic;
+        RST             : in  std_logic;
+        SCLK            : in  std_logic;
+        CS_N            : in  std_logic;
+        MOSI            : in  std_logic;
 
-        DATA_BOARD      : out std_logic_vector(63 downto 0);  -- Dati ricevuti
-        DATA_CONFIRM    : out std_logic_vector(7 downto 0);   -- Conferma
-        DATA_PIECE      : out std_logic_vector(7 downto 0);   -- Pezzo
-        DATA_VALID      : out std_logic                       -- Dati validi
+        DATA_BOARD      : out std_logic_vector(63 downto 0);
+        DATA_CONFIRM    : out std_logic;
+        DATA_PIECE      : out std_logic_vector(3 downto 0);
+        DATA_VALID      : out std_logic;
+
+        WIN             : in  std_logic_vector(1 downto 0);
+        WRONG           : in  std_logic;
+        MISO            : out std_logic
     );
 end spi_slave;
 
 architecture Behavioral of spi_slave is
 
-    type state_type is (IDLE, READ_CMD, READ_DATA, PROCESS_DATA);
-    signal state : state_type := IDLE;
-
-    -- Sincronizzazione segnali SPI sul clock di sistema
+    -- Sincronizzazione segnali SPI
     signal sclk_meta, sclk_reg     : std_logic;
     signal cs_n_meta, cs_n_reg     : std_logic;
     signal mosi_meta, mosi_reg     : std_logic;
-
     signal sclk_fedge              : std_logic;
 
-    -- SPI shift register
-    signal shift_reg   : std_logic_vector(7 downto 0) := (others => '0');
-    signal byte_shift  : std_logic_vector(63 downto 0) := (others => '0');
-    signal byte_buffer : std_logic_vector(63 downto 0) := (others => '0');
-    signal bit_counter : integer range 0 to 7 := 0;
-    signal byte_counter: integer range 0 to 8 := 0;
+    -- segnali per MOSI
+    signal shift_reg               : std_logic_vector(7 downto 0) := (others => '0');
+    signal bit_counter             : unsigned (2 downto 0) := (others => '0');
+    signal data_valid_mosi         : std_logic := '0';
 
-    -- Comando ricevuto
-    signal command     : std_logic_vector(7 downto 0) := (others => '0');
-    signal bytes_needed : integer range 0 to 8 := 0;
+    -- segnali per MISO
+    signal miso_bit_counter        : unsigned(2 downto 0) := "111";
+    signal miso_bit                : std_logic := '0';
+    signal miso_shift_reg          : std_logic_vector(7 downto 0) := (others => '0');
 
-    -- Output signals (reg)
-    signal data_valid_reg : std_logic := '0';
-    signal data_board_reg : std_logic_vector(63 downto 0) := (others => '0');
-    signal confirm_reg    : std_logic_vector(7 downto 0) := (others => '0');
-    signal piece_reg      : std_logic_vector(7 downto 0) := (others => '0');
-    
-    function expected_bytes(cmd : std_logic_vector(7 downto 0)) return integer is
+    -- FSM
+    signal byte_shift              : std_logic_vector(63 downto 0) := (others => '0');
+    signal byte_counter            : unsigned (3 downto 0) := (others => '0');
+    signal byte_recived                : unsigned (3 downto 0) := (others => '0');
+    signal command                 : std_logic_vector(7 downto 0) := (others => '0');
+    signal bytes_needed            : unsigned (3 downto 0) := (others => '0');
+    signal data_valid_reg          : std_logic := '0';
+    signal valid_reg               : std_logic := '0';
+    type state_type is (IDLE, TX_DATA);
+    signal state : state_type := IDLE;
+
+    -- Output register
+    signal data_board_reg          : std_logic_vector(63 downto 0) := (others => '0');
+    signal confirm_reg             : std_logic_vector(7 downto 0) := (others => '0');
+    signal confirm                  : std_logic;
+    signal piece                    : std_logic_vector(2 downto 0);
+    signal piece_reg               : std_logic_vector(7 downto 0) := (others => '0');
+
+
+    signal debug: std_logic:='0';
+
+    -- Funzione per determinare quanti byte aspettarsi
+    function expected_bytes(cmd : std_logic_vector(7 downto 0)) return unsigned is
     begin
         case cmd is
-            when "00000000" => return 8; -- posizione completa
-            when "00000001" => return 1; -- conferma
-            when "00000010" => return 1; -- pezzo
-            when others     => return 0;
+            when "00000000" => return "1000"; -- 8 byte
+            when "10000000" => return "0001"; -- 2 byte
+            when "01000000" => return "0001"; -- 2 byte
+            when others     => return "0000";
         end case;
     end function;
-    
-    begin
-    
+
+begin
+
     -- Output assignments
-    DATA_VALID   <= data_valid_reg;
     DATA_BOARD   <= data_board_reg;
-    DATA_CONFIRM <= confirm_reg;
-    DATA_PIECE   <= piece_reg;
+    DATA_CONFIRM <= confirm;
+    DATA_PIECE   <= piece;
+    DATA_VALID   <= data_valid_reg;
 
     -- Sincronizzazione segnali SPI
     process(CLK)
@@ -78,107 +114,131 @@ architecture Behavioral of spi_slave is
         end if;
     end process;
 
-    -- Falling edge detection
-    sclk_fedge <=  not sclk_reg and sclk_meta;
+    -- Rilevamento fronte di discesa (CPOL=1, CPHA=1) -> modalità 4
+    sclk_fedge <= sclk_reg and not sclk_meta;
 
-    -- FSM principale + SPI decoding
+    -- Ricezione MOSI
     process(CLK)
-    variable shift_temp : std_logic_vector(7 downto 0);
+    variable bit_temp : unsigned(2 downto 0) := (others => '0');
     begin
         if rising_edge(CLK) then
-            if RST = '1' then
-                state           <= IDLE;
-                shift_reg       <= (others => '0');
-                byte_buffer     <= (others => '0');
-                byte_shift      <= (others => '0');
-                command         <= (others => '1');
-                bit_counter     <= 0;
-                byte_counter    <= 0;
-                data_board_reg  <= (others => '0');
-                confirm_reg     <= (others => '0');
-                piece_reg       <= (others => '0');
-                data_valid_reg  <= '1';
+            if RST = '1' or cs_n_reg = '1' then
+                shift_reg               <= (others => '0');
+                bit_counter             <= (others => '0');
+                data_valid_mosi         <= '0';
             else
-                data_valid_reg <= '1'; -- default
-                case state is
-
-                    when IDLE =>
-                        if cs_n_reg = '0' then
-                            state <= READ_CMD;
-                            bit_counter <= 0;
-                            byte_counter <= 0;
-                        end if;
-
-                    when READ_CMD =>
-                        if cs_n_reg = '1' then
-                            state <= IDLE;
-                        elsif sclk_fedge = '1' then
-                            shift_reg(bit_counter) <= mosi_reg;
-                            bit_counter <= bit_counter + 1;
-                            
-                            bytes_needed <= expected_bytes(shift_reg(7 downto 1) & mosi_reg);
-
-                            if bit_counter = 7 then
-                                command <= shift_reg(7 downto 1) & mosi_reg; 
-                                bit_counter <= 0;
-                                byte_counter <= 0;
-                                state <= READ_DATA;
-                            end if;
-                        end if;
-
-                    when READ_DATA =>
-                    if cs_n_reg = '1' then
-                        state <= IDLE;
-                    elsif sclk_fedge = '1' then
-                        shift_temp := shift_reg;
-                        shift_temp(7 - bit_counter) := mosi_reg;
-                
-                        if bit_counter = 7 then
-                            shift_reg <= shift_temp;
-                
-                            -- Ora shift_temp contiene il byte completo
-                            byte_buffer(63 - byte_counter * 8 downto 56 - byte_counter * 8) <= shift_temp;
-                
-                            -- Posizionamento dei bit come "matrice colonne"
-                            for i in 0 to 7 loop
-                                byte_shift(63 - (i * 8 + byte_counter)) <= shift_temp(7 - i);
-                            end loop;
-                
-                            bit_counter <= 0;
-                            byte_counter <= byte_counter + 1;
-                
-                            if byte_counter = bytes_needed - 1 then
-                                state <= PROCESS_DATA;
-                            end if;
-                        else
-                            shift_reg <= shift_temp;
-                            bit_counter <= bit_counter + 1;
-                        end if;
+                if sclk_fedge = '1' and cs_n_reg = '0' then
+                    bit_temp := bit_counter;
+                    shift_reg(to_integer(bit_temp)) <= mosi_reg;
+                    if bit_counter = 7 then
+                        bit_counter     <= (others => '0');
+                        data_valid_mosi <= '1';
+                    else
+                        bit_counter     <= bit_temp + 1;
+                        data_valid_mosi <= '0';
                     end if;
-                
+                else
 
-                    when PROCESS_DATA =>
-                        case command is
-                            when "00000000" =>  -- Posizione completa
-                                data_board_reg <= byte_shift;
-                                data_valid_reg <= '0';
-
-                            when "00000001" =>  -- Conferma
-                                confirm_reg <= byte_buffer(7 downto 0);
-                                data_valid_reg <= '0';
-
-                            when "00000010" =>  -- Pezzo
-                                piece_reg <= byte_buffer(7 downto 0);
-                                data_valid_reg <= '0';
-
-                            when others =>
-                                null;
-                        end case;
-                        state <= IDLE;
-
-                end case;
+                end if;
             end if;
         end if;
     end process;
 
+    -- Trasmissione MISO
+    process(CLK)
+    begin
+        if rising_edge(CLK) then
+            if RST = '1' then
+                miso_shift_reg   <= WIN & WRONG & "00000";
+                miso_bit_counter <= "111";
+                miso_bit         <= '0';
+            else
+                if cs_n_reg = '0' then
+                    if sclk_fedge = '1' then
+                        miso_bit <= miso_shift_reg(to_integer(miso_bit_counter));
+                        if miso_bit_counter = 0 then
+                            miso_bit_counter <= "111";
+                            miso_shift_reg   <= WIN & WRONG & "00000";
+                        else
+                            miso_bit_counter <= miso_bit_counter - 1;
+                        end if;
+                    end if;
+                else
+                    miso_bit         <= '0';
+                    miso_bit_counter <= "111";
+                end if;
+            end if;
+        end if;
+    end process;
+
+    MISO <= miso_bit;
+    valid_reg<=data_valid_mosi and sclk_fedge;
+
+
+        -- FSM per gestione comando
+    process(CLK)
+        variable confirm_temp : std_logic;
+        variable piece_temp : std_logic_vector(2 downto 0);
+    begin    
+        if rising_edge(CLK) then
+            if RST = '1' then
+                state          <= IDLE;
+                byte_counter   <= (others => '0');
+                command        <= (others => '0');
+                bytes_needed   <= (others => '0');
+                data_board_reg <= (others => '0');
+                confirm_reg    <= (others => '0');
+                piece_reg      <= (others => '0');
+                data_valid_reg <= '0';
+
+            else
+                case state is
+                    when IDLE =>
+                    if valid_reg='1' then
+                        data_valid_reg <= '0';
+                        confirm_reg<=(others => '0');
+                        piece_reg<=(others => '0');
+                        if byte_counter = 0 then
+                            byte_recived <= "0000";
+                            byte_counter <= "0001";
+                            command <= shift_reg;
+                            bytes_needed <= expected_bytes(shift_reg);
+                        else
+                            if command = "00000000" then
+                                for i in 0 to 7 loop
+                                    byte_shift(63 - (to_integer(byte_recived) + 8 * i)) <= shift_reg(7 - i);
+                                end loop;
+                            elsif command = "10000000" then
+                                piece_reg <= shift_reg;
+                                piece_temp :=piece_reg(7 downto 5);
+                                piece<=piece_temp;
+                            else                                
+                                confirm_reg <= shift_reg;
+                                confirm_temp:=confirm_reg(7);
+                                confirm<=confirm_temp;
+                            end if;
+                        
+                            if byte_counter = bytes_needed then
+                                byte_counter <= "0000";
+                                state <= TX_DATA;
+                            else
+                                byte_recived <= byte_recived + 1;
+                                byte_counter <= byte_counter + 1;
+                            end if;
+                        end if;
+                    end if;
+                    
+
+                    when TX_DATA =>
+                        if command = "00000000" then
+                            data_board_reg <= byte_shift;
+                        end if;
+                        data_valid_reg <= '1';
+                        state          <= IDLE;
+                        byte_counter   <= (others => '0');
+                        byte_recived   <= (others => '0');                        
+                end case;
+            end if;
+        end if;
+    end process;
 end Behavioral;

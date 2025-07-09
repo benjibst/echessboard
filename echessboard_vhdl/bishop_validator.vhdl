@@ -1,11 +1,11 @@
-
 library IEEE;
   use IEEE.STD_LOGIC_1164.all;
   use IEEE.numeric_std.all;
   use work.type_pkg.all;
   use work.constant_pkg.all;
 
-entity rook_validator is
+
+entity bishop_validator is
   port (
     clk        : in  std_logic;
     start      : in  std_logic;
@@ -18,7 +18,7 @@ entity rook_validator is
   );
 end entity;
 
-architecture Behavioral of rook_validator is
+architecture Behavioral of bishop_validator is
   type state_type is (IDLE, CHECK_MOVE, DONE_STATE);
   signal state : state_type := IDLE;
 begin
@@ -42,9 +42,11 @@ begin
             state <= CHECK_MOVE;
           end if;
 
+
         when CHECK_MOVE =>
           valid <= '0';
           state <= DONE_STATE;
+
           empty_reg := (others => '0');
 
           from_row := start_pos / 8;
@@ -55,58 +57,67 @@ begin
 
           start_i := start_pos;
           end_i := end_pos;
+          if abs (to_integer(to_col) - to_integer(from_col)) = abs(to_integer(to_row) - to_integer(from_row)) then
 
-          if to_col = from_col then
-            if start_i > end_i then
-              for i in 0 to 7 loop
-                if (start_i - i * 8) > end_i and (start_i - i * 8)>=0 and (start_i - i * 8)<=63  then               --a livello di sintesi bisgona garantire che non escano dall'indice indipendentemente dall'input
-                  empty_reg(i) := hall_input(to_integer(start_i) - i * 8);
-                else
-                  empty_reg(i) := '0';
-                end if;
-              end loop;
-            else
-              for i in 0 to 7 loop
-                if (end_i - i * 8) > start_i and (end_i - i * 8)>=0 and (end_i - i * 8)<=63  then
-                  empty_reg(i) := hall_input(to_integer(end_i) - i * 8);
-                else
-                  empty_reg(i) := '0';
-                end if;
-              end loop;
-            end if;
+            if from_row > to_row then -- /
 
-          else
-            if to_row = from_row then
-              if start_i > end_i then
+              if from_col < to_col then -- ↗
                 for i in 0 to 7 loop
-                  if (start_i - i) > end_i  and (start_i - i)>=0 and (start_i - i)<=63  then
-                    empty_reg(i) := hall_input(to_integer(start_i) - i);
+                  if (start_i - i + i * 8) >= 0 and (start_i - i + i * 8) <= 63 then
+                    empty_reg(i) := hall_input(to_integer(start_i) - i + i * 8);
                   else
                     empty_reg(i) := '0';
                   end if;
                 end loop;
-              else
+
+              else -- ↙
                 for i in 0 to 7 loop
-                  if (end_i - i) >= start_i  and (end_i - i)>=0 and (end_i - i)<=63 then
-                    empty_reg(i) := hall_input(to_integer(end_i) - i);
+                  if (start_i - i - i * 8) >= 0 and (start_i - i - i * 8) <= 63 then
+                    empty_reg(i) := hall_input(to_integer(start_i) - i - i * 8);
+                  else
+                    empty_reg(i) := '0';
+                  end if;
+                end loop;
+              end if;
+
+            else --\
+
+              if from_col < to_col then -- ↘
+                for i in 0 to 7 loop
+                  if (start_i + i + i * 8) >= 0 and (start_i + i + i * 8) <= 63 then
+                    empty_reg(i) := hall_input(to_integer(start_i) + i + i * 8);
+                  else
+                    empty_reg(i) := '0';
+                  end if;
+                end loop;
+
+              else -- ↖
+                for i in 0 to 7 loop
+                  if (start_i + i - i * 8) >= 0 and (start_i + i - i * 8) <= 63 then
+                    empty_reg(i) := hall_input(to_integer(start_i) + i - i * 8);
                   else
                     empty_reg(i) := '0';
                   end if;
                 end loop;
               end if;
             end if;
-          end if;
 
-          if empty_reg = "00000000" then
-            valid <= '0';
+            if empty_reg = "00000000" then
+              valid <= '1';
+            else
+              valid <= '0';
+            end if;
+
           else
-            valid <= '1';
+            valid <= '0';
           end if;
 
-        when DONE_STATE => done <= '1';
-                           state <= IDLE;
+        when DONE_STATE => 
+          done <= '1';
+          state <= IDLE;
+          
 
       end case;
     end if;
   end process;
-end architecture;
+end Behavioral;
