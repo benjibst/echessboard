@@ -43,9 +43,9 @@ architecture RTL of DataPath is
   signal branch_cond    : std_logic;
   signal pc_out         : word;
   signal rd_val         : word;
-  signal vga_disp_en    : std_logic;
   signal vga_img_x      : unsigned(9 downto 0);          -- x coordinate of image as input to image generator
   signal vga_img_y      : unsigned(8 downto 0);          -- y coordinate of image as input to image generator
+  signal vga_dispen : std_logic;
   signal fb_data        : word;
   signal fb_addr        : std_logic_vector(14 downto 0); -- framebuffer address
   signal error          : std_logic;
@@ -69,6 +69,7 @@ begin
       end if;
     end if;
   end process;
+  
   fetch_stage: entity work.FetchStage
     port map (
       if_stage       => stage,
@@ -142,13 +143,13 @@ begin
       vga_reset_n   => dp_vga_reset_n,
       vga_h_sync    => dp_vga_h_sync,
       vga_v_sync    => dp_vga_v_sync,
-      vga_disp_en   => dp_vga_disp_en,
+      vga_disp_en   => vga_dispen,
       vga_img_x     => vga_img_x,
       vga_img_y     => vga_img_y);
 
   vga_img_gen: entity work.VGAImageGenerator
     port map (
-      ig_disp_ena => dp_vga_disp_en,
+      ig_disp_ena => vga_dispen,
       ig_y        => vga_img_y,
       ig_x        => vga_img_x,
       ig_fb_data  => fb_data,
@@ -156,7 +157,7 @@ begin
       ig_red      => dp_vga_red,
       ig_green    => dp_vga_green,
       ig_blue     => dp_vga_blue);
-
+    dp_vga_disp_en <= vga_dispen;
 end architecture;
 
 library ieee;

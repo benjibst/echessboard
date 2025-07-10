@@ -34,28 +34,20 @@ architecture RTL of WriteBackStage is
   signal mem_sign_ext_half  : word;
   signal mem_out            : word;
   signal pc_out             : word;
+  signal we                 : STD_LOGIC_VECTOR(3 downto 0);
 begin
-  process (wb_stage) is
-    variable we : STD_LOGIC_VECTOR(3 downto 0);
-  begin
-    case wb_mem_op_sz is
-      when sz_byte =>
-        we := "0001";
-      when sz_half =>
-        we := "0011";
-      when sz_word =>
-        we := "1111";
-      when others =>
-        we := (others => '0'); -- Default case, no write
-    end case;
-    if wb_class = op_store and wb_stage = ex_execute then
-      write_data_mem <= we when not wb_alu_result_pre(31) else "0000"; -- Normal data memory
-      write_framebuf_mem <= we when wb_alu_result_pre(31) else "0000"; -- Framebuffer memory
-    else
-      write_data_mem <= (others => '0'); -- No write in other stages
-      write_framebuf_mem <= (others => '0'); -- No write in other stages
-    end if;
-  end process;
+  with wb_mem_op_sz select
+    we <= "0001" when sz_byte,
+          "0011" when sz_half,
+          "1111" when sz_word,
+          "0000" when others;
+
+  write_data_mem <= we when (wb_class = op_store and wb_stage = ex_execute and wb_alu_result_pre(31) = '0') else
+                      (others => '0');
+
+  write_framebuf_mem <= we when (wb_class = op_store and wb_stage = ex_execute and wb_alu_result_pre(31) = '1') else
+                          (others => '0');
+
   -- port A of the framebuffer memory is written to by CPU and port B is read from by the VGA controller
   framebuf: entity work.vga_framebuf_mem
     port map (
@@ -117,22 +109,11 @@ begin
       se_out => mem_sign_ext_half(31 downto 0)
     );
 
-  process (mem_data_out_raw) is
-  begin
-    if wb_mem_op_sz = sz_word then
-      mem_out <= mem_data_out_raw;
-    elsif wb_mem_op_sz = sz_byte then
-      if wb_mem_op_signed then
-        mem_out <= mem_sign_ext_byte;
-      else
-        mem_out <= x"000000" & mem_data_out_raw(7 downto 0);
-      end if;
-    elsif wb_mem_op_sz = sz_half then
-      if wb_mem_op_signed then
-        mem_out <= mem_sign_ext_half;
-      else
-        mem_out <= x"0000" & mem_data_out_raw(15 downto 0);
-      end if;
-    end if;
-  end process;
+  mem_out <= mem_data_out_raw                         when wb_mem_op_sz = sz_word else
+             mem_sign_ext_byte                        when wb_mem_op_sz = sz_byte and wb_mem_op_signed = '1' else
+             x"000000" & mem_data_out_raw(7 downto 0) when wb_mem_op_sz = sz_byte and wb_mem_op_signed = '0' else
+             mem_sign_ext_half                        when wb_mem_op_sz = sz_half and wb_mem_op_signed = '1' else
+             x"0000" & mem_data_out_raw(15 downto 0)  when wb_mem_op_sz = sz_half and wb_mem_op_signed = '0' else
+               (others => '0'); -- Default/fallback
+
 end architecture;

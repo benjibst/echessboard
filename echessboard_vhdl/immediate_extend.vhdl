@@ -41,9 +41,9 @@ begin
       x"FFFFF" & ie_instr(31 downto 25) & ie_instr(11 downto 7);
       ----------------------------------------------------------------
       when it_btype => -- B format instructions (BRANCH)
-        ie_imm_out <= x"00000" & (ie_instr(31) & ie_instr(7) & ie_instr(30 downto 25) & ie_instr(11 downto 8)) when ie_instr(31) = '0'
+        ie_imm_out <= x"0000" & "000" & (ie_instr(31) & ie_instr(7) & ie_instr(30 downto 25) & ie_instr(11 downto 8)) & "0" when ie_instr(31) = '0'
       else
-      x"FFFFF" & (ie_instr(31) & ie_instr(7) & ie_instr(30 downto 25) & ie_instr(11 downto 8));
+      x"FFFF" & "111" & (ie_instr(31) & ie_instr(7) & ie_instr(30 downto 25) & ie_instr(11 downto 8)) & "0";
       ----------------------------------------------------------------
       when it_jtype => -- J format instructions (only JAL)
         ie_imm_out <= "00000000000" & (ie_instr(31) & ie_instr(19 downto 12) & ie_instr(20) & ie_instr(30 downto 21)) & "0" when ie_instr(31) = '0'
