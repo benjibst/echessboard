@@ -48,11 +48,12 @@ begin
 
           empty_reg := (others => '0');
 
-          from_row := start_pos / 8;
-          from_col := start_pos mod 8;
+            from_row := to_unsigned(to_integer(start_pos) / 8, 3);
+            from_col := to_unsigned(to_integer(start_pos) mod 8, 3);
+            
+            to_row := to_unsigned(to_integer(end_pos) / 8, 3);
+            to_col := to_unsigned(to_integer(end_pos) mod 8, 3);
 
-          to_row := end_pos / 8;
-          to_col := end_pos mod 8;
 
           start_i := start_pos;
           end_i := end_pos;

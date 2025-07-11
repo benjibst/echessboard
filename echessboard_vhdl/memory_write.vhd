@@ -34,14 +34,12 @@ entity MemoryWriter is
     board_state: in  pieces;  -- Tipo definito nel tuo progetto (array 0..63)
     from_pos   : in  unsigned(5 downto 0);
     to_pos     : in  unsigned(5 downto 0);
-    start_write: in  std_logic; -- Segnale che avvia la scrittura dopo una mossa
-    init_done  : out std_logic; -- Per segnalare alla FSM che inizializzazione è finita
+    ready: in  std_logic; -- Segnale che avvia la scrittura dopo una mossa
 
     -- Interfaccia con la memoria
     wr_data    : out std_logic_vector(31 downto 0);
     wr_addr    : out unsigned(3 downto 0); -- 64 caselle / 4 = 16 blocchi = 4 bit
-    wr_en      : out std_logic;
-    ready      : in  std_logic
+    wr_en      : out std_logic
   );
 end entity;
 
@@ -50,7 +48,7 @@ architecture Behavioral of MemoryWriter is
   type state_type is (INIT, IDLE, WRITE_BLOCK_1, WRITE_BLOCK_2, WAIT_READY);
   signal state : state_type := INIT;
   signal index : integer range 0 to 15 := 0;
-  signal block_to_write : std_logic_vector(31 downto 0);
+  signal block_to_write : std_logic_vector(31 downto 0):=(others=>'0');
   signal next_addr      : unsigned(3 downto 0);
 
   -- Funzione per impacchettare 4 celle da board_copy in 32 bit
@@ -84,48 +82,42 @@ architecture Behavioral of MemoryWriter is
       state <= INIT;
       index <= 0;
       wr_en <= '0';
-      init_done <= '0';
+      wr_addr<=(others =>'0');
+      wr_data<=(others =>'0');
+      
+      
 
     elsif rising_edge(clk) then
       wr_en <= '0';  -- default
 
       case state is
         when INIT =>
-          if ready = '1' then
-            block_to_write <= make_block(index*4 + 3, board_state);
             wr_addr <= to_unsigned(index, 4);
             wr_data <= make_block(index*4 + 3, board_state);
             wr_en <= '1';
             if index = 15 then
               state <= IDLE;
-              init_done <= '1';
             else
               index <= index + 1;
             end if;
-          end if;
 
         when IDLE =>
-          if start_write = '1' then
+            if ready='1' then
             index <= to_integer(from_pos) / 4;
             state <= WRITE_BLOCK_1;
-          end if;
+            end if;
 
         when WRITE_BLOCK_1 =>
-          if ready = '1' then
             wr_data <= make_block(index*4 + 3, board_state);
             wr_addr <= to_unsigned(index, 4);
-            wr_en <= '1';
             index <= to_integer(to_pos) / 4;
             state <= WRITE_BLOCK_2;
-          end if;
 
         when WRITE_BLOCK_2 =>
-          if ready = '1' then
             wr_data <= make_block(index*4 + 3, board_state);
             wr_addr <= to_unsigned(index, 4);
             wr_en <= '1';
             state <= IDLE;
-          end if;
 
         when others =>
           state <= IDLE;

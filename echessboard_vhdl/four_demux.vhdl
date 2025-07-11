@@ -6,25 +6,26 @@ use work.constant_pkg.all;
 
 
 
-entity s_demux is
+entity four_mux_vector is
     port (
         clk        : in  std_logic;
-        sign: in std_logic;
+        sign: in std_logic_vector(63 downto 0);
         sel: in std_logic_vector(2 downto 0);
-        s_queen, s_bishop, s_rook, s_pawn: out std_logic
+        s_queen, s_bishop, s_rook, s_pawn: out std_logic_vector(63 downto 0)
 
     );
-end s_demux;
+end four_mux_vector;
 
-architecture RTL of s_demux is
+architecture RTL of four_mux_vector is
 begin
     process(clk)
 begin
     if rising_edge(clk) then
-        s_pawn   <= '0';
-        s_rook   <= '0';
-        s_bishop <= '0';
-        s_queen  <= '0';
+        s_pawn   <= (others=>'0');
+        s_rook   <= (others=>'0');
+        s_bishop   <= (others=>'0');
+        s_queen   <= (others=>'0');
+
 
         case sel is
             when PAWN   => s_pawn   <= sign;

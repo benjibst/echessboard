@@ -75,11 +75,12 @@ begin
           valid <= '0';
           subs_required <= '0';
 
-          from_row := start_pos / 8;
-          from_col := start_pos mod 8;
+        from_row := to_unsigned(to_integer(start_pos) / 8, 3);
+        from_col := to_unsigned(to_integer(start_pos) mod 8, 3);
+        
+        to_row := to_unsigned(to_integer(end_pos) / 8, 3);
+        to_col := to_unsigned(to_integer(end_pos) mod 8, 3);
 
-          to_row := end_pos / 8;
-          to_col := end_pos mod 8;
 
           if color = white then
             if hall_input(to_integer(start_pos)) = '0' then

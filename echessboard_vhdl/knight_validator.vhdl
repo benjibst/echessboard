@@ -40,11 +40,12 @@ begin
           end if;
 
         when CHECK_MOVE =>
-          from_row := start_pos / 8;
-          from_col := start_pos mod 8;
+        from_row := to_unsigned(to_integer(start_pos) / 8, 3);
+        from_col := to_unsigned(to_integer(start_pos) mod 8, 3);
 
-          to_row := end_pos / 8;
-          to_col := end_pos mod 8;
+        to_row := to_unsigned(to_integer(end_pos) / 8, 3);
+        to_col := to_unsigned(to_integer(end_pos) mod 8, 3);
+
 
         if (abs(to_integer(from_row)-to_integer(to_row))=1 and abs(to_integer(from_col)-to_integer(to_col))=2) or 
         (abs(to_integer(from_row)-to_integer(to_row))=2 and abs(to_integer(from_col)-to_integer(to_col))=1) then

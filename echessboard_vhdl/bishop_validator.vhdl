@@ -49,11 +49,12 @@ begin
 
           empty_reg := (others => '0');
 
-          from_row := start_pos / 8;
-          from_col := start_pos mod 8;
+            from_row := to_unsigned(to_integer(start_pos) / 8, 3);
+            from_col := to_unsigned(to_integer(start_pos) mod 8, 3);
+            
+            to_row := to_unsigned(to_integer(end_pos) / 8, 3);
+            to_col := to_unsigned(to_integer(end_pos) mod 8, 3);
 
-          to_row := end_pos / 8;
-          to_col := end_pos mod 8;
 
           start_i := start_pos;
           end_i := end_pos;
@@ -63,7 +64,7 @@ begin
 
               if from_col < to_col then -- ↗
                 for i in 0 to 7 loop
-                  if (start_i - i + i * 8) >= 0 and (start_i - i + i * 8) <= 63 then
+                  if (to_integer(start_i) - i + i * 8) >= 0 and (to_integer(start_i) - i + i * 8) <= 63 then
                     empty_reg(i) := hall_input(to_integer(start_i) - i + i * 8);
                   else
                     empty_reg(i) := '0';
@@ -72,7 +73,7 @@ begin
 
               else -- ↙
                 for i in 0 to 7 loop
-                  if (start_i - i - i * 8) >= 0 and (start_i - i - i * 8) <= 63 then
+                  if (to_integer(start_i) - i - i * 8) >= 0 and (to_integer(start_i) - i - i * 8) <= 63 then
                     empty_reg(i) := hall_input(to_integer(start_i) - i - i * 8);
                   else
                     empty_reg(i) := '0';
@@ -84,7 +85,7 @@ begin
 
               if from_col < to_col then -- ↘
                 for i in 0 to 7 loop
-                  if (start_i + i + i * 8) >= 0 and (start_i + i + i * 8) <= 63 then
+                  if (to_integer(start_i) + i + i * 8) >= 0 and (to_integer(start_i) + i + i * 8) <= 63 then
                     empty_reg(i) := hall_input(to_integer(start_i) + i + i * 8);
                   else
                     empty_reg(i) := '0';
@@ -93,7 +94,7 @@ begin
 
               else -- ↖
                 for i in 0 to 7 loop
-                  if (start_i + i - i * 8) >= 0 and (start_i + i - i * 8) <= 63 then
+                  if (to_integer(start_i) + i - i * 8) >= 0 and (to_integer(start_i) + i - i * 8) <= 63 then
                     empty_reg(i) := hall_input(to_integer(start_i) + i - i * 8);
                   else
                     empty_reg(i) := '0';

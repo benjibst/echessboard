@@ -47,11 +47,12 @@ begin
           state <= DONE_STATE;
           empty_reg := (others => '0');
 
-          from_row := start_pos / 8;
-          from_col := start_pos mod 8;
+            from_row := to_unsigned(to_integer(start_pos) / 8, 3);
+            from_col := to_unsigned(to_integer(start_pos) mod 8, 3);
+            
+            to_row := to_unsigned(to_integer(end_pos) / 8, 3);
+            to_col := to_unsigned(to_integer(end_pos) mod 8, 3);
 
-          to_row := end_pos / 8;
-          to_col := end_pos mod 8;
 
           start_i := start_pos;
           end_i := end_pos;
@@ -59,7 +60,7 @@ begin
           if to_col = from_col then
             if start_i > end_i then
               for i in 0 to 7 loop
-                if (start_i - i * 8) > end_i and (start_i - i * 8)>=0 and (start_i - i * 8)<=63  then               --a livello di sintesi bisgona garantire che non escano dall'indice indipendentemente dall'input
+                if (to_integer(start_i) - i * 8) > end_i and (to_integer(start_i) - i * 8)>=0 and (to_integer(start_i) - i * 8)<=63  then               --a livello di sintesi bisgona garantire che non escano dall'indice indipendentemente dall'input
                   empty_reg(i) := hall_input(to_integer(start_i) - i * 8);
                 else
                   empty_reg(i) := '0';
@@ -67,7 +68,7 @@ begin
               end loop;
             else
               for i in 0 to 7 loop
-                if (end_i - i * 8) > start_i and (end_i - i * 8)>=0 and (end_i - i * 8)<=63  then
+                if (to_integer(end_i) - i * 8) > start_i and (to_integer(end_i) - i * 8)>=0 and (to_integer(end_i) - i * 8)<=63  then
                   empty_reg(i) := hall_input(to_integer(end_i) - i * 8);
                 else
                   empty_reg(i) := '0';
@@ -79,7 +80,7 @@ begin
             if to_row = from_row then
               if start_i > end_i then
                 for i in 0 to 7 loop
-                  if (start_i - i) > end_i  and (start_i - i)>=0 and (start_i - i)<=63  then
+                  if (to_integer(start_i) - i) > end_i  and (to_integer(start_i) - i)>=0 and (to_integer(start_i) - i)<=63  then
                     empty_reg(i) := hall_input(to_integer(start_i) - i);
                   else
                     empty_reg(i) := '0';
@@ -87,7 +88,7 @@ begin
                 end loop;
               else
                 for i in 0 to 7 loop
-                  if (end_i - i) >= start_i  and (end_i - i)>=0 and (end_i - i)<=63 then
+                  if (to_integer(end_i) - i) >= start_i  and (to_integer(end_i) - i)>=0 and (to_integer(end_i) - i)<=63 then
                     empty_reg(i) := hall_input(to_integer(end_i) - i);
                   else
                     empty_reg(i) := '0';
