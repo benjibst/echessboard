@@ -44,7 +44,8 @@ entity ChessController is
     winner       : out std_logic_vector(1 downto 0);
     color        : out std_logic := white;
     enable       : out std_logic_vector(2 downto 0);
-    memory_ready : out std_logic
+    memory_ready : out std_logic;
+    eat_move     : out std_logic
   );
 end entity;
 
@@ -66,6 +67,7 @@ architecture Behavioral of ChessController is
   signal winner_d    : std_logic_vector(1 downto 0) := "01";
   signal color_d     : std_logic                    := white;
   signal enable_d    : std_logic_vector(2 downto 0) := (others => '0');
+  signal eat_move_d :  std_logic:='0';
 
 begin
   -- Output assignments
@@ -77,6 +79,7 @@ begin
   winner      <= winner_d;
   color       <= color_d;
   enable      <= enable_d;
+  eat_move      <=eat_move_d;
 
   process (clk,reset)
     variable detect    : std_logic                     := '0';
@@ -128,12 +131,15 @@ begin
           if detect = '1' then
             if hall_input(to_integer(idx)) = '1' then --if the change is that a piece was set
               if flag = 0 then -- but no pieces were lifted
+                eat_move_d<='0';
                 state <= ERROR_STATE; --error
               elsif flag = 1 then --if one piece was lifted
+                eat_move_d<='0';
                 end_pos_d <= idx; --final position is the detected change
                 flag <= to_unsigned(0, 2); --set flag to 0
                 state <= WAIT_SPI;
               elsif flag = 2 then --if two pieces were lifted (eat move)
+                eat_move_d<='1';
                 flag <= to_unsigned(1, 2); --set the flag to 1
                 state <= WAIT_SPI;
               end if;

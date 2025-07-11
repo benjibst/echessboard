@@ -64,7 +64,7 @@ architecture Structural of TopLevel is
   signal S_POS_KNIGHT, S_POS_QUEEN, S_POS_BISHOP, S_POS_KING, S_POS_ROOK, S_POS_PAWN : unsigned(5 downto 0);
   signal E_POS_KNIGHT, E_POS_QUEEN, E_POS_BISHOP, E_POS_KING, E_POS_ROOK, E_POS_PAWN : unsigned(5 downto 0);
   signal HALL_QUEEN, HALL_BISHOP, HALL_ROOK, HALL_PAWN                               : std_logic_vector(63 downto 0);
-  signal START_GAME                                                                  : std_logic;
+  signal START_GAME, EAT_MOVE                                                        : std_logic;
 
 begin
 
@@ -89,7 +89,8 @@ begin
       error        => ERROR_INT,
       winner       => WINNER_INT,
       color        => COLOR,
-      enable       => ENABLE
+      enable       => ENABLE,
+      eat_move     =>EAT_MOVE
     );
 
   -- Istanziazione spi_slave (legge winner e wrong)
@@ -121,6 +122,7 @@ begin
       start_pos     => S_POS_PAWN,
       end_pos       => E_POS_PAWN,
       color         => COLOR,
+      eat_move      =>EAT_MOVE,
 
       subs_required => SUBS_REQ,
       done          => DONE_PAWN,

@@ -40,10 +40,12 @@ entity pawn_validator is
     start_pos     : in  unsigned(5 downto 0);
     end_pos       : in  unsigned(5 downto 0);
     color         : in  std_logic;
+    eat_move      : in std_logic;
 
     subs_required : out std_logic;
     done          : out std_logic;
     valid         : out std_logic
+    
   );
 end entity;
 
@@ -81,7 +83,6 @@ begin
         to_row := to_unsigned(to_integer(end_pos) / 8, 3);
         to_col := to_unsigned(to_integer(end_pos) mod 8, 3);
 
-
           if color = white then
             if hall_input(to_integer(start_pos)) = '0' then
               if to_col = from_col and to_row = from_row + 1 then
@@ -93,6 +94,10 @@ begin
               if to_row = from_row + 1 and (to_col = from_col + 1 or to_col = from_col - 1) then
                 valid <= '1';
               end if;
+            end if;
+            --capture move
+            if (start_pos=end_pos-7 and eat_move='1') or (start_pos=end_pos-9 and eat_move='1') then
+                valid <= '1';
             end if;
             if to_row = "111" then
               subs_required <= '1';
@@ -111,11 +116,20 @@ begin
                 valid <= '1';
               end if;
             end if;
+            --capture move
+                if (start_pos=end_pos+7 and eat_move='1') or (start_pos=end_pos+9 and eat_move='1') then
+                    valid <= '1';
+                end if;
 
             if to_row = "000" then
               subs_required <= '1';
             end if;
           end if;
+
+        --capture move
+        
+
+
 
           state <= DONE_STATE;
 

@@ -36,7 +36,7 @@ entity spi_slave is
         DATA_CONFIRM    : out std_logic;
         DATA_PIECE      : out std_logic_vector(2 downto 0);
         DATA_VALID      : out std_logic;
-        START_GAME      : out std_logic;
+        START_GAME: out std_logic;
 
         WIN             : in  std_logic_vector(1 downto 0);
         WRONG           : in  std_logic;
@@ -76,10 +76,11 @@ architecture Behavioral of spi_slave is
     -- Output register
     signal data_board_reg          : std_logic_vector(63 downto 0) := (others => '0');
     signal confirm_reg             : std_logic_vector(7 downto 0) := (others => '0');
-    signal start_game_reg                  : std_logic;
     signal piece_reg               : std_logic_vector(7 downto 0) := (others => '0');
+    signal start_game_reg           : std_logic:='0';
 
 
+    signal debug: std_logic:='0';
 
     -- Funzione per determinare quanti byte aspettarsi
     function expected_bytes(cmd : std_logic_vector(7 downto 0)) return unsigned is
@@ -99,7 +100,7 @@ begin
     DATA_CONFIRM <= confirm_reg(7);
     DATA_PIECE   <= piece_reg(7 downto 5);
     DATA_VALID   <= data_valid_reg;
-    START_GAME   <= start_game_reg;
+    START_GAME  <=start_game_reg;
 
     -- Sincronizzazione segnali SPI
     process(CLK)
@@ -172,12 +173,13 @@ begin
     end process;
 
     MISO <= miso_bit;
-    --synchronise valid_reg with the clk
     valid_reg<=data_valid_mosi and sclk_fedge;
 
 
         -- FSM per gestione comando
     process(CLK)
+        variable confirm_temp : std_logic;
+        variable piece_temp : std_logic_vector(2 downto 0);
     begin    
         if rising_edge(CLK) then
             if RST = '1' then
@@ -187,16 +189,16 @@ begin
                 bytes_needed   <= (others => '0');
                 data_board_reg <= (others => '0');
                 confirm_reg    <= (others => '0');
-                start_game_reg <= '0';
                 piece_reg      <= (others => '0');
                 data_valid_reg <= '0';
+                start_game_reg <= '0';
 
             else
                 case state is
                     when IDLE =>
                     data_valid_reg <= '0';
+                    start_game_reg<='0';
                     if valid_reg='1' then
-                        start_game_reg<='0';
                         confirm_reg<=(others => '0');
                         piece_reg<=(others => '0');
                         if byte_counter = 0 then
@@ -204,19 +206,19 @@ begin
                             byte_counter <= "0001";
                             command <= shift_reg;
                             bytes_needed <= expected_bytes(shift_reg);
-                           if shift_reg = "11111111" then
+                            if shift_reg="11111111" then
                                 start_game_reg<='1';
-                                state<=IDLE;
                                 byte_counter   <= (others => '0');
-                           end if;
+                                state<=IDLE;
+                            end if;
                         else
                             if command = "00000000" then
                                 for i in 0 to 7 loop
                                     byte_shift(63 - (to_integer(byte_recived) + 8 * i)) <= shift_reg(7 - i);
                                 end loop;
-                            elsif command = "1000000" then
+                            elsif command = "10000000" then
                                 piece_reg <= shift_reg;
-                            elsif command = "01000000" then                                
+                            else                                
                                 confirm_reg <= shift_reg;
                             end if;
                         
@@ -238,8 +240,7 @@ begin
                         data_valid_reg <= '1';
                         state          <= IDLE;
                         byte_counter   <= (others => '0');
-                        byte_recived   <= (others => '0');   
-              
+                        byte_recived   <= (others => '0');                        
                 end case;
             end if;
         end if;
