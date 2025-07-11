@@ -2,10 +2,10 @@
 // Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2025.1 (lin64) Build 6140274 Wed May 21 22:58:25 MDT 2025
-// Date        : Tue Jun 17 21:52:42 2025
+// Date        : Wed Jul  9 18:22:51 2025
 // Host        : bennipc running 64-bit Arch Linux
-// Command     : write_verilog -force -mode synth_stub
-//               /home/benni/dev/echessboard/echessboard_vivado/echessboar_vivado.gen/sources_1/ip/register_file/register_file_stub.v
+// Command     : write_verilog -force -mode synth_stub -rename_top register_file -prefix
+//               register_file_ register_file_stub.v
 // Design      : register_file
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7a100tcsg324-1

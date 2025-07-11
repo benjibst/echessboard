@@ -38,6 +38,7 @@ begin
     );
   vga_img: entity work.VGAImageGenerator
     port map (
+      ig_reset  => '0',
       ig_disp_ena => disp_en,
       ig_x        => x,
       ig_y        => y,

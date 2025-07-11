@@ -56,7 +56,7 @@ begin
       addra => wb_alu_result_pre(16 downto 2),
       dina  => wb_rs2_val,
       douta => open,
-      clkb  => wb_clk,
+      clkb  => wb_vga_framebuf_clkb,
       web   => "0000", --0 because vga controller never writes to framebuf
       addrb => wb_vga_framebuf_addrb,
       dinb  => x"00000000",
@@ -74,7 +74,7 @@ begin
       web   => "1111", --0 because vga controller never writes to framebuf
       addrb => wb_spi_mem_addr,
       dinb  => wb_spi_mem_data,
-      doutb => wb_vga_framebuf_doutb);
+      doutb => open);
   dest_reg_mux: entity work.DestRegMux(RTL) port map (
     drm_class      => wb_class,
     drm_next_pc    => wb_next_pc,
