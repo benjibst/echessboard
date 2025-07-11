@@ -427,12 +427,7 @@ int main(void)
         if(!(i % IMG_WIDTH_INT)){
             //printf("\n");
         }
-        //printf("%08x ", framebuffer[i]); // print the framebuffer in hex format
-        if(i&(1<<9)){
-            printf("%08x ", 0); // print the framebuffer in hex format
-        }
-        else{
-            printf("%08x ", 0xFFFFFFFF); // print the framebuffer in hex format
-        }
+        printf("%08x ", framebuffer[i]); // print the framebuffer in hex format
     }
+    
 }
