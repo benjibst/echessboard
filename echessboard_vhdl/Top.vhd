@@ -42,14 +42,14 @@ architecture Structural of TopLevel is
 
   -- Segnali interni
   signal DATA_BOARD     : std_logic_vector(63 downto 0);
-  signal PIECE          : std_logic_vector(7 downto 0);
+  signal PIECE          : std_logic_vector(2 downto 0);
   signal DATA_VALID_SPI : std_logic;
   signal SUBS_REQ       : std_logic;
 
   signal CONFIRM_MOVE       : std_logic;
   signal COLOR              : std_logic;
   signal DONE, VALID        : std_logic;
-  signal ENABLE             : std_logic_vector(7 downto 0);
+  signal ENABLE             : std_logic_vector(2 downto 0);
   signal START              : std_logic;
   signal BOARD_STATE        : pieces;
   signal START_POS, END_POS : unsigned(5 downto 0);
