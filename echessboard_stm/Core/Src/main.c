@@ -74,6 +74,16 @@ static game_pos_t game_pos_confirmed = {0};
 static game_pos_t game_pos_old = {0};
 static game_pos_t game_pos_curr = {0};
 
+typedef enum
+{
+  PAWN = 1,
+  ROOK,
+  BISHOP,
+  KNIGHT,
+  QUEEN,
+  KING
+} PieceType;
+
 _Bool game_pos_equal(game_pos_t *pos1, game_pos_t *pos2)
 {
   return memcmp(pos1->pos, pos2->pos, sizeof(pos1->pos)) == 0;
@@ -181,9 +191,34 @@ _Bool ReadGamePosition(game_pos_t *dest)
   }
   return ret;
 }
+typedef enum
+{
+  GAME_POS = 0,
+  PROMOTION = 1,
+  CONFIRM_MOVE = 2,
+  GAME_START = 0xFF,
+} MessageType;
 void SendGamePosSPI(game_pos_t *pos)
 {
-  __NOP(); // Wait for previous SPI transfer to finish
+  uint8_t tx_buf[9];
+  tx_buf[0] = GAME_POS; // Command byte for game position
+  memcpy(&tx_buf[1], pos->pos, sizeof(pos->pos));
+  HAL_SPI_Transmit(&hspi1, tx_buf, sizeof(tx_buf), HAL_MAX_DELAY);
+}
+void SendGameStartSPI()
+{
+  uint8_t tx_buf[1] = {GAME_START}; // Command byte for start game
+  HAL_SPI_Transmit(&hspi1, tx_buf, sizeof(tx_buf), HAL_MAX_DELAY);
+}
+void SendConfirmMoveSPI()
+{
+  uint8_t tx_buf[2] = {CONFIRM_MOVE, 0b00000001}; // Command byte for confirm move
+  HAL_SPI_Transmit(&hspi1, tx_buf, sizeof(tx_buf), HAL_MAX_DELAY);
+}
+void SendPromotionSPI(PieceType piece)
+{
+  uint8_t tx_buf[2] = {PROMOTION, (uint8_t)piece}; // Command byte for promotion
+  HAL_SPI_Transmit(&hspi1, tx_buf, sizeof(tx_buf), HAL_MAX_DELAY);
 }
 /* USER CODE END PFP */
 
@@ -242,9 +277,20 @@ int main(void)
       interrupt_received = 0;
       if (interrupt_pin == IRQ_START_GAME_BIT && !GET_GAMESTATE(STARTED))
       {
+        ReadGamePosition(&game_pos_old);
+        int i;
+        for (i=0;i<8;i++){
+          if(game_pos_old.pos[i] != 0b11000011){
+              break;
+          }
+        }
+        if(i != 8){
+          continue;
+        }
         SET_GAMESTATE(STARTED);
         SET_GAMESTATE(WHITE_TO_MOVE);
         SET_GAMESTATE(PROM_QUEEN);
+        SendGameStartSPI();
       }
       if (interrupt_pin == IRQ_CONFIRM_MOVE_BIT && GET_GAMESTATE(STARTED))
       {
@@ -258,9 +304,7 @@ int main(void)
           RESET_GAMESTATE(BLACK_TO_MOVE);
           SET_GAMESTATE(WHITE_TO_MOVE);
         }
-        ReadGamePosition(&game_pos_confirmed);
-
-        __NOP();
+        SendConfirmMoveSPI();
       }
       if (interrupt_pin == IRQ_PROMOTION_BIT && GET_GAMESTATE(STARTED))
       {
@@ -284,6 +328,10 @@ int main(void)
           RESET_GAMESTATE(PROM_BISHOP);
           SET_GAMESTATE(PROM_QUEEN);
         }
+        SendPromotionSPI(GET_GAMESTATE(PROM_QUEEN) ? QUEEN : GET_GAMESTATE(PROM_KNIGHT) ? KNIGHT
+                                                         : GET_GAMESTATE(PROM_ROOK)     ? ROOK
+                                                         : GET_GAMESTATE(PROM_BISHOP)   ? BISHOP
+                                                                                        : PAWN);
       }
       SetLedsToGamestate();
     }
@@ -367,7 +415,7 @@ static void MX_SPI1_Init(void)
   hspi1.Init.Direction = SPI_DIRECTION_2LINES;
   hspi1.Init.DataSize = SPI_DATASIZE_8BIT;
   hspi1.Init.CLKPolarity = SPI_POLARITY_HIGH;
-  hspi1.Init.CLKPhase = SPI_PHASE_2EDGE;
+  hspi1.Init.CLKPhase = SPI_PHASE_1EDGE;
   hspi1.Init.NSS = SPI_NSS_HARD_OUTPUT;
   hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_256;
   hspi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
@@ -375,7 +423,7 @@ static void MX_SPI1_Init(void)
   hspi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
   hspi1.Init.CRCPolynomial = 7;
   hspi1.Init.CRCLength = SPI_CRC_LENGTH_DATASIZE;
-  hspi1.Init.NSSPMode = SPI_NSS_PULSE_ENABLE;
+  hspi1.Init.NSSPMode = SPI_NSS_PULSE_DISABLE;
   if (HAL_SPI_Init(&hspi1) != HAL_OK)
   {
     Error_Handler();
