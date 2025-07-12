@@ -43,8 +43,8 @@ begin
           end if;
 
         when CHECK_MOVE =>
-          valid <= '0';
-          state <= DONE_STATE;
+                  state <= DONE_STATE;
+
           empty_reg := (others => '0');
 
             from_row := to_unsigned(to_integer(start_pos) / 8, 3);
@@ -56,48 +56,41 @@ begin
 
           start_i := start_pos;
           end_i := end_pos;
-
-          if to_col = from_col then
-            if start_i > end_i then
-              for i in 0 to 7 loop
-                if (to_integer(start_i) - i * 8) > end_i and (to_integer(start_i) - i * 8)>=0 and (to_integer(start_i) - i * 8)<=63  then               --a livello di sintesi bisgona garantire che non escano dall'indice indipendentemente dall'input
-                  empty_reg(i) := hall_input(to_integer(start_i) - i * 8);
+          --diagonal move
+          -- straight move
+            --vertical
+            if to_col = from_col then
+                if start_i > end_i then
+                  for i in 0 to 7 loop
+                    if (start_i - i * 8) > end_i and (start_i - i * 8)>=0  then               --a livello di sintesi bisgona garantire che non escano dall'indice indipendentemente dall'input
+                      empty_reg(i) := hall_input(to_integer(start_i) - i * 8);
+                    end if;
+                  end loop;
                 else
-                  empty_reg(i) := '0';
+                  for i in 0 to 7 loop
+                    if (start_i + i * 8) < end_i and (start_i + i * 8)<=63  then               --a livello di sintesi bisgona garantire che non escano dall'indice indipendentemente dall'input
+                      empty_reg(i) := hall_input(to_integer(start_i) + i * 8);
+                    end if;
+                  end loop;
                 end if;
-              end loop;
-            else
-              for i in 0 to 7 loop
-                if (to_integer(end_i) - i * 8) > start_i and (to_integer(end_i) - i * 8)>=0 and (to_integer(end_i) - i * 8)<=63  then
-                  empty_reg(i) := hall_input(to_integer(end_i) - i * 8);
-                else
-                  empty_reg(i) := '0';
-                end if;
-              end loop;
             end if;
-
-          else
+          --horizzontal
             if to_row = from_row then
               if start_i > end_i then
                 for i in 0 to 7 loop
-                  if (to_integer(start_i) - i) > end_i  and (to_integer(start_i) - i)>=0 and (to_integer(start_i) - i)<=63  then
+                  if (start_i - i) > end_i  and (start_i - i)>=0 then
                     empty_reg(i) := hall_input(to_integer(start_i) - i);
-                  else
-                    empty_reg(i) := '0';
                   end if;
                 end loop;
               else
                 for i in 0 to 7 loop
-                  if (to_integer(end_i) - i) >= start_i  and (to_integer(end_i) - i)>=0 and (to_integer(end_i) - i)<=63 then
-                    empty_reg(i) := hall_input(to_integer(end_i) - i);
-                  else
-                    empty_reg(i) := '0';
+                  if (start_i + i) < end_i  and (start_i + i)<=63 then
+                    empty_reg(i) := hall_input(to_integer(start_i) + i);
                   end if;
                 end loop;
               end if;
             end if;
-          end if;
-
+            
           if empty_reg = "00000000" then
             valid <= '0';
           else

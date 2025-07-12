@@ -115,8 +115,8 @@ begin
         end if;
     end process;
 
-    -- Rilevamento fronte di discesa (CPOL=1, CPHA=1) -> modalità 4
-    sclk_fedge <= sclk_reg and not sclk_meta;
+    -- Rilevamento fronte di discesa (CPOL=1, CPHA=0) -> modalità 4
+    sclk_fedge <= not sclk_reg and sclk_meta;
 
     -- Ricezione MOSI
     process(CLK)

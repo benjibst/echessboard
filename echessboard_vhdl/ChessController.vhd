@@ -68,6 +68,8 @@ architecture Behavioral of ChessController is
   signal color_d     : std_logic                    := white;
   signal enable_d    : std_logic_vector(2 downto 0) := (others => '0');
   signal eat_move_d :  std_logic:='0';
+  signal captured :  std_logic:='0';
+
 
 begin
   -- Output assignments
@@ -79,7 +81,7 @@ begin
   winner      <= winner_d;
   color       <= color_d;
   enable      <= enable_d;
-  eat_move      <=eat_move_d;
+  eat_move    <=eat_move_d;
 
   process (clk,reset)
     variable detect    : std_logic                     := '0';
@@ -112,7 +114,9 @@ begin
 
         when WAIT_SPI =>
         memory_ready<='0';
+        eat_move_d<=captured;
           if valid_spi = '1' then
+            captured<='0';
             state <= INPUT_DETECTION;
           else
             state <= WAIT_SPI;
@@ -131,16 +135,14 @@ begin
           if detect = '1' then
             if hall_input(to_integer(idx)) = '1' then --if the change is that a piece was set
               if flag = 0 then -- but no pieces were lifted
-                eat_move_d<='0';
                 state <= ERROR_STATE; --error
               elsif flag = 1 then --if one piece was lifted
-                eat_move_d<='0';
                 end_pos_d <= idx; --final position is the detected change
                 flag <= to_unsigned(0, 2); --set flag to 0
                 state <= WAIT_SPI;
               elsif flag = 2 then --if two pieces were lifted (eat move)
-                eat_move_d<='1';
-                flag <= to_unsigned(1, 2); --set the flag to 1
+                captured<='1';
+                flag <= to_unsigned(0, 2); --set the flag to 1
                 state <= WAIT_SPI;
               end if;
             else --if the change is that a piece was lift
@@ -150,7 +152,7 @@ begin
               else
                 start_pos_d <= idx; --starting position is the detected change
                 state <= WAIT_SPI; --start position doesn't change (first lifted)
-                flag <= to_unsigned(1, 2); --set flag to 1 and wait for the piece to be set       
+                flag <= to_unsigned(1, 2); --set flag to 1 and wait for the piece to be set  
               end if;
             end if;
       

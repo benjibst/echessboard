@@ -52,6 +52,10 @@ end entity;
 architecture Behavioral of pawn_validator is
   type state_type is (IDLE, CHECK_MOVE, DONE_STATE);
   signal state              : state_type := IDLE;
+  signal debug :unsigned(2 downto 0):="000";
+    signal debug1 :unsigned(2 downto 0):="000";
+      signal debug2 :unsigned(2 downto 0):="000";
+        signal debug3:unsigned(2 downto 0):="000";
 
 begin
   process (clk)
@@ -84,42 +88,31 @@ begin
         to_col := to_unsigned(to_integer(end_pos) mod 8, 3);
 
           if color = white then
-            if hall_input(to_integer(start_pos)) = '0' then
               if to_col = from_col and to_row = from_row + 1 then
                 valid <= '1';
               elsif from_row = "001" and to_col = from_col and to_row = from_row + 2 then
                 valid <= '1';
               end if;
-            else
-              if to_row = from_row + 1 and (to_col = from_col + 1 or to_col = from_col - 1) then
-                valid <= '1';
-              end if;
-            end if;
             --capture move
-            if (start_pos=end_pos-7 and eat_move='1') or (start_pos=end_pos-9 and eat_move='1') then
-                valid <= '1';
-            end if;
+                if (start_pos=end_pos-7 and eat_move='1') or (start_pos=end_pos-9 and eat_move='1') then
+                    valid <= '1';
+                end if;
+
             if to_row = "111" then
               subs_required <= '1';
             end if;
 
           else -- black
-            if hall_input(to_integer(start_pos)) = '0' then
               if to_col = from_col and to_row = from_row - 1 then
                 valid <= '1';
               elsif from_row = "110" and to_col = from_col and to_row = from_row - 2 then
                 valid <= '1';
               end if;
-            else
-              if to_row = from_row - 1 and
-                 (to_col = from_col + 1 or to_col = from_col - 1) then
-                valid <= '1';
-              end if;
-            end if;
             --capture move
                 if (start_pos=end_pos+7 and eat_move='1') or (start_pos=end_pos+9 and eat_move='1') then
                     valid <= '1';
                 end if;
+
 
             if to_row = "000" then
               subs_required <= '1';
@@ -127,10 +120,6 @@ begin
           end if;
 
         --capture move
-        
-
-
-
           state <= DONE_STATE;
 
         when DONE_STATE =>

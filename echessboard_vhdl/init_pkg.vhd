@@ -41,8 +41,8 @@ begin
           when 56 | 63 => pieces_board(i).shape := ROOK;
           when 57 | 62 => pieces_board(i).shape := KNIGHT;
           when 58 | 61 => pieces_board(i).shape := BISHOP;
-          when 59      => pieces_board(i).shape := QUEEN;
-          when 60      => pieces_board(i).shape := KING;
+          when 59      => pieces_board(i).shape := KING;
+          when 60      => pieces_board(i).shape := QUEEN;
           when others  => pieces_board(i).shape := PAWN;
         end case;
 
@@ -54,8 +54,8 @@ begin
           when 0 | 7 => pieces_board(i).shape := ROOK;
           when 1 | 6 => pieces_board(i).shape := KNIGHT;
           when 2 | 5 => pieces_board(i).shape := BISHOP;
-          when 3     => pieces_board(i).shape := QUEEN;
-          when 4     => pieces_board(i).shape := KING;
+          when 3     => pieces_board(i).shape := KING;
+          when 4     => pieces_board(i).shape := QUEEN;
           when others => pieces_board(i).shape := PAWN;
         end case;
     

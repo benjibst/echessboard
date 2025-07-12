@@ -20,6 +20,7 @@ end entity;
 architecture Behavioral of queen_validator is
   type state_type is (IDLE, CHECK_MOVE, DONE_STATE);
   signal state : state_type := IDLE;
+  signal debug: std_logic_vector(7 downto 0):="11111111";
 
 begin
   process (clk)
@@ -43,7 +44,6 @@ begin
           end if;
 
         when CHECK_MOVE =>
-          valid <= '0';
           state <= DONE_STATE;
 
           empty_reg := (others => '0');
@@ -57,101 +57,86 @@ begin
 
           start_i := start_pos;
           end_i := end_pos;
+          --diagonal move
           if abs( to_integer(to_col) -  to_integer(from_col)) = abs(to_integer(to_row) - to_integer(from_row)) then
 
-            if from_row > to_row then -- /
+            if from_row > to_row then 
 
-              if from_col < to_col then -- ↗
+              if from_col > to_col then -- ↗
                 for i in 0 to 7 loop
-                  if (start_i - i + i * 8) >= 0 and (start_i - i + i * 8) <= 63 then
-                    empty_reg(i) := hall_input(to_integer(start_i) - i + i * 8);
-                  else
-                    empty_reg(i) := '0';
-                  end if;
-                end loop;
-
-              else -- ↙
-                for i in 0 to 7 loop
-                  if (start_i - i - i * 8) >= 0 and (start_i - i - i * 8) <= 63 then
-                    empty_reg(i) := hall_input(to_integer(start_i) - i - i * 8);
-                  else
-                    empty_reg(i) := '0';
-                  end if;
-                end loop;
-              end if;
-
-            else --\
-
-              if from_col < to_col then -- ↘
-                for i in 0 to 7 loop
-                  if (start_i + i + i * 8) >= 0 and (start_i + i + i * 8) <= 63 then
-                    empty_reg(i) := hall_input(to_integer(start_i) + i + i * 8);
-                  else
-                    empty_reg(i) := '0';
+                  if (to_integer(start_i) - 9*i) >=0 and (start_i - 9*i) > end_i  then
+                    empty_reg(i) := hall_input(to_integer(start_i) - 9*i);
                   end if;
                 end loop;
 
               else -- ↖
                 for i in 0 to 7 loop
-                  if (start_i + i - i * 8) >= 0 and (start_i + i - i * 8) <= 63 then
-                    empty_reg(i) := hall_input(to_integer(start_i) + i - i * 8);
-                  else
-                    empty_reg(i) := '0';
+                  if (to_integer(start_i) - 7*i) >=0 and (start_i - 7*i) > end_i  then
+                    empty_reg(i) := hall_input(to_integer(start_i) - 7*i);
+                  end if;
+                end loop;
+              end if;
+
+            else 
+            
+              if from_col > to_col then -- ↙
+                for i in 0 to 7 loop
+                  if (to_integer(start_i)+ 7*i) <= 63 and (start_i + 7*i)<end_pos then
+                    empty_reg(i) := hall_input(to_integer(start_i) + 7*i);
+                  end if;
+                end loop;
+
+              else -- ↘
+               for i in 0 to 7 loop
+                  if (to_integer(start_i)+ 9*i) <= 63 and (start_i + 9*i)<end_pos then
+                    empty_reg(i) := hall_input(to_integer(start_i) + 9*i);
                   end if;
                 end loop;
               end if;
             end if;
+         end if;
 
+            -- straight move
+            --vertical
             if to_col = from_col then
-            if start_i > end_i then
-              for i in 0 to 7 loop
-                if (start_i - i * 8) > end_i and (start_i - i * 8)>=0 and (start_i - i * 8)<=63  then               --a livello di sintesi bisgona garantire che non escano dall'indice indipendentemente dall'input
-                  empty_reg(i) := hall_input(to_integer(start_i) - i * 8);
+                if start_i > end_i then
+                  for i in 0 to 7 loop
+                    if (start_i - i * 8) > end_i and (to_integer(start_i) - i * 8)>=0  then               --a livello di sintesi bisgona garantire che non escano dall'indice indipendentemente dall'input
+                      empty_reg(i) := hall_input(to_integer(start_i) - i * 8);
+                    end if;
+                  end loop;
                 else
-                  empty_reg(i) := '0';
+                  for i in 0 to 7 loop
+                    if (start_i + i * 8) < end_i and (to_integer(start_i) + i * 8)<=63  then               --a livello di sintesi bisgona garantire che non escano dall'indice indipendentemente dall'input
+                      empty_reg(i) := hall_input(to_integer(start_i) + i * 8);
+                    end if;
+                  end loop;
                 end if;
-              end loop;
-            else
-              for i in 0 to 7 loop
-                if (end_i - i * 8) > start_i and (end_i - i * 8)>=0 and (end_i - i * 8)<=63  then
-                  empty_reg(i) := hall_input(to_integer(end_i) - i * 8);
-                else
-                  empty_reg(i) := '0';
-                end if;
-              end loop;
             end if;
-
-          else
+          --horizzontal
             if to_row = from_row then
               if start_i > end_i then
                 for i in 0 to 7 loop
-                  if (start_i - i) > end_i  and (start_i - i)>=0 and (start_i - i)<=63  then
+                  if (start_i - i) > end_i  and (to_integer(start_i) - i)>=0 then
                     empty_reg(i) := hall_input(to_integer(start_i) - i);
-                  else
-                    empty_reg(i) := '0';
                   end if;
                 end loop;
               else
                 for i in 0 to 7 loop
-                  if (end_i - i) >= start_i  and (end_i - i)>=0 and (end_i - i)<=63 then
-                    empty_reg(i) := hall_input(to_integer(end_i) - i);
-                  else
-                    empty_reg(i) := '0';
+                  if (start_i + i) < end_i  and (to_integer(start_i) + i)<=63 then
+                    empty_reg(i) := hall_input(to_integer(start_i) + i);
                   end if;
                 end loop;
               end if;
             end if;
-          end if;
 
+          debug<=empty_reg;
           if empty_reg = "00000000" then
-            valid <= '0';
-          else
             valid <= '1';
+          else
+            valid <= '0';
           end if;
 
-          else
-            valid <= '0';
-          end if;
 
         when DONE_STATE => 
           done <= '1';
