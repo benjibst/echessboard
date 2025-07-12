@@ -66,7 +66,32 @@ architecture Structural of TopLevel is
   signal HALL_QUEEN, HALL_BISHOP, HALL_ROOK, HALL_PAWN                               : std_logic_vector(63 downto 0);
   signal START_GAME, EAT_MOVE                                                        : std_logic;
 
+  signal WR_DATA: std_logic_vector (31 downto 0);
+  signal WR_ADDRESS: unsigned(3 downto 0);
+  signal WR_ENABLE:std_logic;
+  signal START_WRITE: std_logic;
+
+
 begin
+
+--Memory writer
+MEM_WRITE: entity work.MemoryWriter
+  port map(
+    clk       => CLK,
+    reset    =>  START_GAME,
+
+    -- Segnali dalla FSM
+    board_state=> BOARD_STATE,
+    from_pos  => START_POS,
+    to_pos     => END_POS,
+    ready=> START_WRITE,
+
+    -- Interfaccia con la memoria
+    wr_data    => WR_DATA,
+    wr_addr    => WR_ADDRESS,
+    wr_en     => WR_ENABLE
+);
+
 
   -- Istanziazione ChessController (produce winner e wrong)
   CTRL: entity work.ChessController
@@ -90,7 +115,9 @@ begin
       winner       => WINNER_INT,
       color        => COLOR,
       enable       => ENABLE,
-      eat_move     =>EAT_MOVE
+      eat_move     =>EAT_MOVE,
+      memory_ready => START_WRITE
+
     );
 
   -- Istanziazione spi_slave (legge winner e wrong)

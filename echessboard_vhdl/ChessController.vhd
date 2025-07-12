@@ -69,6 +69,7 @@ architecture Behavioral of ChessController is
   signal enable_d    : std_logic_vector(2 downto 0) := (others => '0');
   signal eat_move_d :  std_logic:='0';
   signal captured :  std_logic:='0';
+  signal memory_ready_d: std_logic:='0';
 
 
 begin
@@ -82,6 +83,8 @@ begin
   color       <= color_d;
   enable      <= enable_d;
   eat_move    <=eat_move_d;
+  memory_ready <= memory_ready_d;
+
 
   process (clk,reset)
     variable detect    : std_logic                     := '0';
@@ -102,18 +105,19 @@ begin
       error_d <= '0';
       flag <= (others => '0');
       enable_d <= (others => '0');
-      memory_ready <= '0';
+      memory_ready_d <= '0';
 
     elsif rising_edge(clk) then
       detect := '0';
       shape := shape_sign;
       winner_d <= winner_d;
       error_d <= error_d;
+     
 
       case state is
 
         when WAIT_SPI =>
-        memory_ready<='0';
+        memory_ready_d<='0';
         eat_move_d<=captured;
           if valid_spi = '1' then
             captured<='0';
@@ -208,7 +212,7 @@ begin
           if board_copy(to_integer(end_pos_d)).shape = KING then --if on the end position there is the King, it means win                                     
             state <= WIN;
           else
-            memory_ready <= '1';
+            memory_ready_d <= '1';
             state <= WAIT_SPI; --otherwise go back to wait for next move
           end if;
           board_copy(to_integer(start_pos_d)).shape <= EMPTY;

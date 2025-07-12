@@ -1,4 +1,5 @@
 
+
 ----------------------------------------------------------------------------------
 -- Company: 
 -- Engineer: 
@@ -126,4 +127,3 @@ architecture Behavioral of MemoryWriter is
   end process;
 
 end architecture;
-

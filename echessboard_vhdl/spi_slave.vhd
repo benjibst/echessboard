@@ -47,7 +47,8 @@ end spi_slave;
 architecture Behavioral of spi_slave is
 
     -- Sincronizzazione segnali SPI
-    signal sclk_meta, sclk_reg     : std_logic;
+    signal sclk_meta: std_logic:='0';
+    signal sclk_reg     : std_logic;
     signal cs_n_meta, cs_n_reg     : std_logic;
     signal mosi_meta, mosi_reg     : std_logic;
     signal sclk_fedge              : std_logic;
@@ -231,7 +232,7 @@ begin
                             end if;
                         end if;
                     end if;
-                    
+                                      
 
                     when TX_DATA =>
                         if command = "00000000" then
