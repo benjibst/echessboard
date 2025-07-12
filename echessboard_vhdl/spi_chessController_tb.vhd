@@ -45,14 +45,14 @@ architecture behavior of spi_chessController_tb is
     begin
         for i in 7 downto 0 loop
             -- Dato pronto PRIMA del fronte di salita
+            wait until FALLING_edge(SCLK);
             MOSI <= TX_DATA(i);
 
             -- Fase 1: fronte di discesa: cambio del bit
-            wait for SCLK_PERIOD / 2;
+            wait  until RISING_edge(SCLK);
 
             -- Fase 2: fronte di salita: campionamento
             RX_DATA(i) := MISO;
-            wait for SCLK_PERIOD / 2;
         end loop;
     end procedure;
 
@@ -309,5 +309,4 @@ begin
         -- Stop simulation
         wait;
     end process;
-end architecture;
-
+    end architecture;

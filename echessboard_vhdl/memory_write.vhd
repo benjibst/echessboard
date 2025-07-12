@@ -49,8 +49,6 @@ architecture Behavioral of MemoryWriter is
   type state_type is (INIT, IDLE, WRITE_BLOCK_1, WRITE_BLOCK_2, WAIT_READY);
   signal state : state_type := INIT;
   signal index : integer range 0 to 15 := 0;
-  signal block_to_write : std_logic_vector(31 downto 0):=(others=>'0');
-  signal next_addr      : unsigned(3 downto 0);
 
   -- Funzione per impacchettare 4 celle da board_copy in 32 bit
   function make_block(start: integer; board: pieces) return std_logic_vector is

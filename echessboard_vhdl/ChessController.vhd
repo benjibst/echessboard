@@ -1,4 +1,3 @@
-
 ----------------------------------------------------------------------------------
 -- Company: 
 -- Engineer: 
@@ -51,7 +50,7 @@ end entity;
 
 architecture Behavioral of ChessController is
 
-  type state_type is (INPUT_DETECTION, PIECE_DEDUCTION, CONFIRMED_MOVE, VALIDATOR_LOGIC, WAIT_VALIDATOR, WAIT_SPI, ERROR_STATE, WIN);
+  type state_type is (INPUT_DETECTION, PIECE_DEDUCTION, VALIDATOR_LOGIC, WAIT_VALIDATOR, WAIT_SPI, ERROR_STATE, WIN);
   signal state      : state_type                    := INPUT_DETECTION;
   signal hall_copy  : std_logic_vector(63 downto 0) := (63 downto 48 => '1',
                                                        47 downto 16 => '0',
@@ -161,19 +160,8 @@ begin
             end if;
       
           elsif (confirm_move = '1') or (subs_piece /= "000") then
-            state <= CONFIRMED_MOVE; --wait for a change (if there is no move, I donìt care about confirmation moves or piece substitution)
+            state <= PIECE_DEDUCTION; --wait for a change (if there is no move, I donìt care about confirmation moves or piece substitution)
           end if;
-
-        when CONFIRMED_MOVE =>
-        if confirm_move='1' then
-            if flag = 0 or flag = 1 then --the flag was zero (number of ipeces lifted=number of pieces set) or if one piece is still lifted (eat move)
-              state <= PIECE_DEDUCTION;
-            else
-              state <= ERROR_STATE; --move is not allowed, error
-            end if;
-        else 
-            state<=CONFIRMED_MOVE;
-        end if;
 
 
         when PIECE_DEDUCTION =>
@@ -233,10 +221,11 @@ begin
 
         when WIN =>
           winner_d <= (not color_d) & (not color_d); --if the check was made by the withe on the black king, show the led n black king, otherwise on white
-          state <= WAIT_SPI;
+          state <= WIN;
 
         when ERROR_STATE => --the configuration of the board dosen't change so you can move agin and redo the move
           error_d <= '1'; --led acceso
+          flag<="00";
           state <= WAIT_SPI;
 
       end case;

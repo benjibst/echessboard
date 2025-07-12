@@ -47,10 +47,8 @@ end spi_slave;
 architecture Behavioral of spi_slave is
 
     -- Sincronizzazione segnali SPI
-    signal sclk_meta: std_logic:='0';
-    signal sclk_reg     : std_logic;
-    signal cs_n_meta, cs_n_reg     : std_logic;
-    signal mosi_meta, mosi_reg     : std_logic;
+    signal sclk_meta, cs_n_meta, mosi_meta: std_logic:='1';
+    signal sclk_reg, cs_n_reg, mosi_reg     : std_logic;
     signal sclk_fedge              : std_logic;
 
     -- segnali per MOSI
@@ -117,7 +115,7 @@ begin
     end process;
 
     -- Rilevamento fronte di discesa (CPOL=1, CPHA=0) -> modalità 4
-    sclk_fedge <= not sclk_reg and sclk_meta;
+    sclk_fedge <= NOT sclk_reg and sclk_meta;
 
     -- Ricezione MOSI
     process(CLK)
@@ -217,18 +215,15 @@ begin
                                 for i in 0 to 7 loop
                                     byte_shift(63 - (to_integer(byte_recived) + 8 * i)) <= shift_reg(7 - i);
                                 end loop;
-                            elsif command = "10000000" then
-                                piece_reg <= shift_reg;
-                            else                                
-                                confirm_reg <= shift_reg;
-                            end if;
-                        
-                            if byte_counter = bytes_needed then
-                                byte_counter <= "0000";
-                                state <= TX_DATA;
+                                if byte_counter = bytes_needed then
+                                    byte_counter <= "0000";
+                                    state <= TX_DATA;
+                                else
+                                    byte_recived <= byte_recived + 1;
+                                    byte_counter <= byte_counter + 1;
+                                end if;
                             else
-                                byte_recived <= byte_recived + 1;
-                                byte_counter <= byte_counter + 1;
+                                state<=TX_DATA;
                             end if;
                         end if;
                     end if;
@@ -237,6 +232,10 @@ begin
                     when TX_DATA =>
                         if command = "00000000" then
                             data_board_reg <= byte_shift;
+                        elsif command = "10000000" then
+                            piece_reg <= shift_reg;
+                        else                                
+                            confirm_reg <= shift_reg;
                         end if;
                         data_valid_reg <= '1';
                         state          <= IDLE;
