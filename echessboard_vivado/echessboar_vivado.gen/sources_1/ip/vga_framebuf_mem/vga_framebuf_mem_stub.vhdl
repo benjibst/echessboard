@@ -2,10 +2,10 @@
 -- Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2025.1 (lin64) Build 6140274 Wed May 21 22:58:25 MDT 2025
--- Date        : Fri Jul 11 16:46:19 2025
+-- Date        : Thu Jul 10 21:11:55 2025
 -- Host        : bennipc running 64-bit Arch Linux
--- Command     : write_vhdl -force -mode synth_stub
---               /home/benni/dev/echessboard/echessboard_vivado/echessboar_vivado.gen/sources_1/ip/vga_framebuf_mem/vga_framebuf_mem_stub.vhdl
+-- Command     : write_vhdl -force -mode synth_stub -rename_top vga_framebuf_mem -prefix
+--               vga_framebuf_mem_ vga_framebuf_mem_stub.vhdl
 -- Design      : vga_framebuf_mem
 -- Purpose     : Stub declaration of top-level module interface
 -- Device      : xc7a100tcsg324-1

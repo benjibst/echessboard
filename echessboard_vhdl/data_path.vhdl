@@ -181,6 +181,7 @@ begin
 
   vga_img_gen: entity work.VGAImageGenerator
     port map (
+      ig_pxl_clk  => dp_clk25,
       ig_reset    => dp_reset,
       ig_disp_ena => vga_dispen,
       ig_y        => vga_img_y,
