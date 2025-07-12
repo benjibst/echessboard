@@ -2,7 +2,7 @@
 -- Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2025.1 (lin64) Build 6140274 Wed May 21 22:58:25 MDT 2025
--- Date        : Thu Jul 10 21:11:55 2025
+-- Date        : Sat Jul 12 14:32:08 2025
 -- Host        : bennipc running 64-bit Arch Linux
 -- Command     : write_vhdl -force -mode synth_stub -rename_top vga_framebuf_mem -prefix
 --               vga_framebuf_mem_ vga_framebuf_mem_stub.vhdl

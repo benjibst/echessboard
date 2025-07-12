@@ -16,7 +16,7 @@ def collapse_pixels(bwimage,out_color):
                 image_collapsed[i,pix_in_row] |= (out_color << x_in_pix)
     return image_collapsed
 
-images = os.listdir('images')
+images = ["empty.png","wp.png","wr.png","wb.png","wn.png","wq.png","wk.png",]
 for p in images:
     img = cv2.imread(os.path.join('images', p),cv2.IMREAD_UNCHANGED)
     img = cv2.resize(img, (48,48))
