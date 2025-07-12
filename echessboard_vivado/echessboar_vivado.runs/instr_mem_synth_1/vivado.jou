@@ -3,8 +3,8 @@
 # SW Build 6140274 on Wed May 21 22:58:25 MDT 2025
 # IP Build 6138677 on Thu May 22 03:10:11 MDT 2025
 # SharedData Build 6139179 on Tue May 20 17:58:58 MDT 2025
-# Start of session at: Thu Jul 10 16:14:16 2025
-# Process ID         : 38314
+# Start of session at: Sat Jul 12 15:49:21 2025
+# Process ID         : 46899
 # Current directory  : /home/benni/dev/echessboard/echessboard_vivado/echessboar_vivado.runs/instr_mem_synth_1
 # Command line       : vivado -log instr_mem.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source instr_mem.tcl
 # Log file           : /home/benni/dev/echessboard/echessboard_vivado/echessboar_vivado.runs/instr_mem_synth_1/instr_mem.vds
@@ -19,6 +19,6 @@
 # Host memory        : 16480 MB
 # Swap memory        : 4294 MB
 # Total Virtual      : 20775 MB
-# Available Virtual  : 13032 MB
+# Available Virtual  : 11612 MB
 #-----------------------------------------------------------
 source instr_mem.tcl -notrace

@@ -27,6 +27,6 @@ begin
     end if;
   end process;
 
-  pc_curr <= STD_LOGIC_VECTOR(pc_num);     -- forward current value
-  pc_next <= STD_LOGIC_VECTOR(pc_num + 4); -- append trailing zeros
+  pc_curr <= x"000" when (pc_stage = ex_reset) else STD_LOGIC_VECTOR(pc_num);     -- forward current value
+  pc_next <= x"004" when (pc_stage = ex_reset) else STD_LOGIC_VECTOR(pc_num + 4); -- append trailing zeros
 end architecture;

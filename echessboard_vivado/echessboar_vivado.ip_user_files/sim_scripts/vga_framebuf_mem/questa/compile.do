@@ -7,13 +7,13 @@ vlib questa_lib/msim/xil_defaultlib
 vmap xpm questa_lib/msim/xpm
 vmap xil_defaultlib questa_lib/msim/xil_defaultlib
 
-vlog -work xpm  -incr -mfcu  -sv "+incdir+../../../../../../../../Xilinx/2025.1/Vivado/data/rsb/busdef" \
-"C:/Xilinx/2025.1/Vivado/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv" \
+vlog -work xpm -64 -incr -mfcu  -sv "+incdir+../../../../../../../Xillinx/2025.1/data/rsb/busdef" \
+"/home/benni/Xillinx/2025.1/Vivado/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv" \
 
-vcom -work xpm  -93  \
-"C:/Xilinx/2025.1/Vivado/data/ip/xpm/xpm_VCOMP.vhd" \
+vcom -work xpm -64 -93  \
+"/home/benni/Xillinx/2025.1/data/ip/xpm/xpm_VCOMP.vhd" \
 
-vcom -work xil_defaultlib  -93  \
+vcom -work xil_defaultlib -64 -93  \
 "../../../../echessboar_vivado.gen/sources_1/ip/vga_framebuf_mem/vga_framebuf_mem_sim_netlist.vhdl" \
 
 

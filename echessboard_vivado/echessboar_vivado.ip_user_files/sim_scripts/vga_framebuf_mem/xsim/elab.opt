@@ -1,1 +1,0 @@
---incr --debug typical --relax --mt 2  -L xil_defaultlib -L secureip -L xpm --snapshot vga_framebuf_mem xil_defaultlib.vga_framebuf_mem -log elaborate.log

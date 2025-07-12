@@ -11,15 +11,58 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
-      <ZoomEndTime time="1,242.001 ns"></ZoomEndTime>
-      <Cursor1Time time="310.000 ns"></Cursor1Time>
+      <ZoomStartTime time="10,712.000 ns"></ZoomStartTime>
+      <ZoomEndTime time="11,536.001 ns"></ZoomEndTime>
+      <Cursor1Time time="12,350.000 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="212"></NameColumnWidth>
-      <ValueColumnWidth column_width="75"></ValueColumnWidth>
+      <NameColumnWidth column_width="283"></NameColumnWidth>
+      <ValueColumnWidth column_width="121"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="27" />
+   <WVObjectSize size="31" />
+   <wvobject type="logic" fp_name="/DataPathTB/uut/dp_clkcpu">
+      <obj_property name="ElementShortName">dp_clkcpu</obj_property>
+      <obj_property name="ObjectShortName">dp_clkcpu</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/DataPathTB/uut/curr_pc">
+      <obj_property name="ElementShortName">curr_pc[11:0]</obj_property>
+      <obj_property name="ObjectShortName">curr_pc[11:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/DataPathTB/uut/next_pc">
+      <obj_property name="ElementShortName">next_pc[11:0]</obj_property>
+      <obj_property name="ObjectShortName">next_pc[11:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/DataPathTB/uut/curr_instr">
+      <obj_property name="ElementShortName">curr_instr[31:0]</obj_property>
+      <obj_property name="ObjectShortName">curr_instr[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/DataPathTB/uut/execute_stage/alu/alu_a">
+      <obj_property name="ElementShortName">alu_a[31:0]</obj_property>
+      <obj_property name="ObjectShortName">alu_a[31:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/DataPathTB/uut/execute_stage/alu/alu_b">
+      <obj_property name="ElementShortName">alu_b[31:0]</obj_property>
+      <obj_property name="ObjectShortName">alu_b[31:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/DataPathTB/uut/execute_stage/ex_alu_result_pre">
+      <obj_property name="ElementShortName">ex_alu_result_pre[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ex_alu_result_pre[31:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/DataPathTB/uut/execute_stage/alu/alu_result">
+      <obj_property name="ElementShortName">alu_result[31:0]</obj_property>
+      <obj_property name="ObjectShortName">alu_result[31:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/DataPathTB/uut/writeback_stage/wb_vga_framebuf_addrb">
+      <obj_property name="ElementShortName">wb_vga_framebuf_addrb[14:0]</obj_property>
+      <obj_property name="ObjectShortName">wb_vga_framebuf_addrb[14:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/DataPathTB/uut/dp_reset">
+      <obj_property name="ElementShortName">dp_reset</obj_property>
+      <obj_property name="ObjectShortName">dp_reset</obj_property>
+   </wvobject>
    <wvobject type="array" fp_name="/DataPathTB/uut/vga_controller/vga_img_x">
       <obj_property name="ElementShortName">vga_img_x[9:0]</obj_property>
       <obj_property name="ObjectShortName">vga_img_x[9:0]</obj_property>
@@ -28,109 +71,82 @@
    <wvobject type="array" fp_name="/DataPathTB/uut/vga_controller/vga_img_y">
       <obj_property name="ElementShortName">vga_img_y[8:0]</obj_property>
       <obj_property name="ObjectShortName">vga_img_y[8:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/DataPathTB/uut/vga_controller/vga_h_sync">
-      <obj_property name="ElementShortName">vga_h_sync</obj_property>
-      <obj_property name="ObjectShortName">vga_h_sync</obj_property>
+   <wvobject type="array" fp_name="/DataPathTB/uut/vga_img_gen/ig_fb_data">
+      <obj_property name="ElementShortName">ig_fb_data[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ig_fb_data[31:0]</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/DataPathTB/uut/vga_controller/vga_v_sync">
-      <obj_property name="ElementShortName">vga_v_sync</obj_property>
-      <obj_property name="ObjectShortName">vga_v_sync</obj_property>
+   <wvobject type="logic" fp_name="/DataPathTB/uut/vga_img_gen/ig_pxl_clk">
+      <obj_property name="ElementShortName">ig_pxl_clk</obj_property>
+      <obj_property name="ObjectShortName">ig_pxl_clk</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/DataPathTB/tb_clk">
+      <obj_property name="ElementShortName">tb_clk</obj_property>
+      <obj_property name="ObjectShortName">tb_clk</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/DataPathTB/uut/stage">
+      <obj_property name="ElementShortName">stage</obj_property>
+      <obj_property name="ObjectShortName">stage</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/DataPathTB/uut/writeback_stage/wb_pc_out">
+      <obj_property name="ElementShortName">wb_pc_out[31:0]</obj_property>
+      <obj_property name="ObjectShortName">wb_pc_out[31:0]</obj_property>
    </wvobject>
    <wvobject type="array" fp_name="/DataPathTB/uut/vga_img_gen/ig_red">
       <obj_property name="ElementShortName">ig_red[3:0]</obj_property>
       <obj_property name="ObjectShortName">ig_red[3:0]</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/DataPathTB/uut/vga_img_gen/ig_green">
-      <obj_property name="ElementShortName">ig_green[3:0]</obj_property>
-      <obj_property name="ObjectShortName">ig_green[3:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/DataPathTB/uut/vga_img_gen/ig_blue">
-      <obj_property name="ElementShortName">ig_blue[3:0]</obj_property>
-      <obj_property name="ObjectShortName">ig_blue[3:0]</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/DataPathTB/uut/vga_img_gen/ig_fb_addr">
-      <obj_property name="ElementShortName">ig_fb_addr[14:0]</obj_property>
-      <obj_property name="ObjectShortName">ig_fb_addr[14:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/DataPathTB/uut/vga_img_gen/ig_fb_data">
-      <obj_property name="ElementShortName">ig_fb_data[31:0]</obj_property>
-      <obj_property name="ObjectShortName">ig_fb_data[31:0]</obj_property>
-      <obj_property name="Radix">BINARYRADIX</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/DataPathTB/uut/dp_clk100">
-      <obj_property name="ElementShortName">dp_clk100</obj_property>
-      <obj_property name="ObjectShortName">dp_clk100</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/DataPathTB/uut/dp_clk25">
-      <obj_property name="ElementShortName">dp_clk25</obj_property>
-      <obj_property name="ObjectShortName">dp_clk25</obj_property>
-   </wvobject>
-   <wvobject type="array" fp_name="/DataPathTB/uut/clkcnt">
-      <obj_property name="ElementShortName">clkcnt[1:0]</obj_property>
-      <obj_property name="ObjectShortName">clkcnt[1:0]</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/DataPathTB/tb_reset">
-      <obj_property name="ElementShortName">tb_reset</obj_property>
-      <obj_property name="ObjectShortName">tb_reset</obj_property>
+   <wvobject type="logic" fp_name="/DataPathTB/uut/vga_img_gen/ig_reset">
+      <obj_property name="ElementShortName">ig_reset</obj_property>
+      <obj_property name="ObjectShortName">ig_reset</obj_property>
    </wvobject>
    <wvobject type="logic" fp_name="/DataPathTB/uut/vga_img_gen/ig_disp_ena">
       <obj_property name="ElementShortName">ig_disp_ena</obj_property>
       <obj_property name="ObjectShortName">ig_disp_ena</obj_property>
    </wvobject>
-   <wvobject type="array" fp_name="/DataPathTB/uut/vga_img_gen/ig_y">
-      <obj_property name="ElementShortName">ig_y[8:0]</obj_property>
-      <obj_property name="ObjectShortName">ig_y[8:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   <wvobject type="array" fp_name="/DataPathTB/uut/fetch_stage/pc/pc_curr">
+      <obj_property name="ElementShortName">pc_curr[11:0]</obj_property>
+      <obj_property name="ObjectShortName">pc_curr[11:0]</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/DataPathTB/uut/dp_vga_red0">
-      <obj_property name="ElementShortName">dp_vga_red0</obj_property>
-      <obj_property name="ObjectShortName">dp_vga_red0</obj_property>
+   <wvobject type="array" fp_name="/DataPathTB/uut/fetch_stage/pc/pc_num">
+      <obj_property name="ElementShortName">pc_num[11:0]</obj_property>
+      <obj_property name="ObjectShortName">pc_num[11:0]</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/DataPathTB/uut/dp_vga_red1">
-      <obj_property name="ElementShortName">dp_vga_red1</obj_property>
-      <obj_property name="ObjectShortName">dp_vga_red1</obj_property>
+   <wvobject type="logic" fp_name="/DataPathTB/uut/vga_controller/vga_reset_n">
+      <obj_property name="ElementShortName">vga_reset_n</obj_property>
+      <obj_property name="ObjectShortName">vga_reset_n</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/DataPathTB/uut/dp_vga_red2">
-      <obj_property name="ElementShortName">dp_vga_red2</obj_property>
-      <obj_property name="ObjectShortName">dp_vga_red2</obj_property>
+   <wvobject type="logic" fp_name="/DataPathTB/uut/vga_controller/vga_disp_en">
+      <obj_property name="ElementShortName">vga_disp_en</obj_property>
+      <obj_property name="ObjectShortName">vga_disp_en</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/DataPathTB/uut/dp_vga_red3">
-      <obj_property name="ElementShortName">dp_vga_red3</obj_property>
-      <obj_property name="ObjectShortName">dp_vga_red3</obj_property>
+   <wvobject type="array" fp_name="/DataPathTB/uut/decode_stage/reg_file/ra_rs1addr">
+      <obj_property name="ElementShortName">ra_rs1addr[4:0]</obj_property>
+      <obj_property name="ObjectShortName">ra_rs1addr[4:0]</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/DataPathTB/uut/dp_vga_green0">
-      <obj_property name="ElementShortName">dp_vga_green0</obj_property>
-      <obj_property name="ObjectShortName">dp_vga_green0</obj_property>
+   <wvobject type="array" fp_name="/DataPathTB/uut/decode_stage/reg_file/ra_rs2addr">
+      <obj_property name="ElementShortName">ra_rs2addr[4:0]</obj_property>
+      <obj_property name="ObjectShortName">ra_rs2addr[4:0]</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/DataPathTB/uut/dp_vga_green1">
-      <obj_property name="ElementShortName">dp_vga_green1</obj_property>
-      <obj_property name="ObjectShortName">dp_vga_green1</obj_property>
+   <wvobject type="array" fp_name="/DataPathTB/uut/writeback_stage/framebuf/wea">
+      <obj_property name="ElementShortName">wea[3:0]</obj_property>
+      <obj_property name="ObjectShortName">wea[3:0]</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/DataPathTB/uut/dp_vga_green2">
-      <obj_property name="ElementShortName">dp_vga_green2</obj_property>
-      <obj_property name="ObjectShortName">dp_vga_green2</obj_property>
+   <wvobject type="logic" fp_name="/DataPathTB/uut/decode_stage/reg_file/ra_write_en">
+      <obj_property name="ElementShortName">ra_write_en</obj_property>
+      <obj_property name="ObjectShortName">ra_write_en</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/DataPathTB/uut/dp_vga_green3">
-      <obj_property name="ElementShortName">dp_vga_green3</obj_property>
-      <obj_property name="ObjectShortName">dp_vga_green3</obj_property>
+   <wvobject type="array" fp_name="/DataPathTB/uut/writeback_stage/dest_reg_mux/drm_rd_val">
+      <obj_property name="ElementShortName">drm_rd_val[31:0]</obj_property>
+      <obj_property name="ObjectShortName">drm_rd_val[31:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/DataPathTB/uut/dp_vga_blue0">
-      <obj_property name="ElementShortName">dp_vga_blue0</obj_property>
-      <obj_property name="ObjectShortName">dp_vga_blue0</obj_property>
+   <wvobject type="array" fp_name="/DataPathTB/uut/decode_stage/reg_file/ra_rdaddr">
+      <obj_property name="ElementShortName">ra_rdaddr[4:0]</obj_property>
+      <obj_property name="ObjectShortName">ra_rdaddr[4:0]</obj_property>
    </wvobject>
-   <wvobject type="logic" fp_name="/DataPathTB/uut/dp_vga_blue1">
-      <obj_property name="ElementShortName">dp_vga_blue1</obj_property>
-      <obj_property name="ObjectShortName">dp_vga_blue1</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/DataPathTB/uut/dp_vga_blue2">
-      <obj_property name="ElementShortName">dp_vga_blue2</obj_property>
-      <obj_property name="ObjectShortName">dp_vga_blue2</obj_property>
-   </wvobject>
-   <wvobject type="logic" fp_name="/DataPathTB/uut/dp_vga_blue3">
-      <obj_property name="ElementShortName">dp_vga_blue3</obj_property>
-      <obj_property name="ObjectShortName">dp_vga_blue3</obj_property>
+   <wvobject type="array" fp_name="/DataPathTB/uut/decode_stage/reg_file/ra_rs2val">
+      <obj_property name="ElementShortName">ra_rs2val[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ra_rs2val[31:0]</obj_property>
    </wvobject>
 </wave_config>

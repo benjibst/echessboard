@@ -10,11 +10,11 @@ vlib riviera/xil_defaultlib
 vmap xpm riviera/xpm
 vmap xil_defaultlib riviera/xil_defaultlib
 
-vlog -work xpm  -incr "+incdir+../../../../../../../../Xilinx/2025.1/Vivado/data/rsb/busdef" -l xpm -l xil_defaultlib \
-"C:/Xilinx/2025.1/Vivado/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv" \
+vlog -work xpm  -incr "+incdir+../../../../../../../Xillinx/2025.1/data/rsb/busdef" -l xpm -l xil_defaultlib \
+"/home/benni/Xillinx/2025.1/Vivado/data/ip/xpm/xpm_memory/hdl/xpm_memory.sv" \
 
 vcom -work xpm -93  -incr \
-"C:/Xilinx/2025.1/Vivado/data/ip/xpm/xpm_VCOMP.vhd" \
+"/home/benni/Xillinx/2025.1/data/ip/xpm/xpm_VCOMP.vhd" \
 
 vcom -work xil_defaultlib -93  -incr \
 "../../../../echessboar_vivado.gen/sources_1/ip/vga_framebuf_mem/vga_framebuf_mem_sim_netlist.vhdl" \

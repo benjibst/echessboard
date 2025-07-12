@@ -28,50 +28,51 @@ architecture RTL of VGAController is
   constant v_len_tot     : unsigned(9 downto 0) := to_unsigned(480 + 10 + 2 + 33, 10);  -- 525
 begin
 
-  process (vga_pixel_clk, vga_reset_n)
+  process (vga_pixel_clk)
     variable h_count : unsigned(9 downto 0); --horizontal counter (counts the columns)
     variable v_count : unsigned(9 downto 0); --vertical counter (counts the rows)
   begin
-    if (vga_reset_n = '0') then
-      h_count := "0000000000";
-      v_count := "0000000000";
-      vga_img_x <= "0000000000";
-      vga_img_y <= "000000000";
-      vga_h_sync <= '1'; --negative polarity so active low sync
-      vga_v_sync <= '1';
-      vga_disp_en <= '0'; --disable display
-
-    elsif (rising_edge(vga_pixel_clk)) then
-      if (h_count < h_len_tot - 1) then
-        h_count := h_count + 1;
-      else
+    if (rising_edge(vga_pixel_clk)) then
+      if (vga_reset_n = '0') then
         h_count := "0000000000";
-        if (v_count < v_len_tot - 1) then
-          v_count := v_count + 1;
-        else
-          v_count := "0000000000";
-        end if;
-      end if;
-      if (h_count < h_pixels + h_front_porch or h_count >= h_pixels + h_front_porch + h_sync_pulse) then
-        vga_h_sync <= '1';
-      else
-        vga_h_sync <= '0';
-      end if;
-      if (v_count < v_pixels + v_front_porch or v_count >= v_pixels + v_front_porch + v_sync_pulse) then
+        v_count := "0000000000";
+        vga_img_x <= "0000000000";
+        vga_img_y <= "000000000";
+        vga_h_sync <= '1'; --negative polarity so active low sync
         vga_v_sync <= '1';
+        vga_disp_en <= '0'; --disable display
       else
-        vga_v_sync <= '0';
-      end if;
-      if (h_count < h_pixels) then
-        vga_img_x <= h_count;
-      end if;
-      if (v_count < v_pixels) then
-        vga_img_y <= v_count(8 downto 0);
-      end if;
-      if (h_count < h_pixels and v_count < v_pixels) then
-        vga_disp_en <= '1';
-      else
-        vga_disp_en <= '0';
+        if (h_count < h_len_tot - 1) then
+          h_count := h_count + 1;
+        else
+          h_count := "0000000000";
+          if (v_count < v_len_tot - 1) then
+            v_count := v_count + 1;
+          else
+            v_count := "0000000000";
+          end if;
+        end if;
+        if (h_count < h_pixels + h_front_porch or h_count >= h_pixels + h_front_porch + h_sync_pulse) then
+          vga_h_sync <= '1';
+        else
+          vga_h_sync <= '0';
+        end if;
+        if (v_count < v_pixels + v_front_porch or v_count >= v_pixels + v_front_porch + v_sync_pulse) then
+          vga_v_sync <= '1';
+        else
+          vga_v_sync <= '0';
+        end if;
+        if (h_count < h_pixels) then
+          vga_img_x <= h_count;
+        end if;
+        if (v_count < v_pixels) then
+          vga_img_y <= v_count(8 downto 0);
+        end if;
+        if (h_count < h_pixels and v_count < v_pixels) then
+          vga_disp_en <= '1';
+        else
+          vga_disp_en <= '0';
+        end if;
       end if;
     end if;
   end process;

@@ -31,13 +31,13 @@ begin
     variable pixel_in_word  : unsigned(3 downto 0); --pixel index in word (32 bits
     variable fb_pixel_color : std_logic_vector(1 downto 0);
   begin
-    if (ig_reset = '0') then
-      fb_addr <= (others => '0'); --reset framebuffer address on reset
-      ig_red <= (others => '0'); --reset red output
-      ig_green <= (others => '0'); --reset green output
-      ig_blue <= (others => '0'); --reset blue output
-    else
-      if (rising_edge(ig_pxl_clk)) then
+    if (rising_edge(ig_pxl_clk)) then
+      if (ig_reset = '0') then
+        fb_addr <= (others => '0'); --reset framebuffer address on reset
+        ig_red <= (others => '0'); --reset red output
+        ig_green <= (others => '0'); --reset green output
+        ig_blue <= (others => '0'); --reset blue output
+      else
         if ((ig_x = 0 and ig_y = 0) or (fb_addr = 19200)) then
           fb_addr <= (others => '0'); --reset framebuffer address at the end of the frame
         elsif (ig_x(3 downto 0) = "1101") then --update a few clock cycles later(doesnt matter exactly when)
