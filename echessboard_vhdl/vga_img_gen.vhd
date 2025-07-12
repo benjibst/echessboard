@@ -40,7 +40,7 @@ begin
       if (rising_edge(ig_pxl_clk)) then
         if ((ig_x = 0 and ig_y = 0) or (fb_addr = 19200)) then
           fb_addr <= (others => '0'); --reset framebuffer address at the end of the frame
-        elsif (ig_x(3 downto 0) = "1110") then --update a few clock cycles later(doesnt matter exactly when)
+        elsif (ig_x(3 downto 0) = "1101") then --update a few clock cycles later(doesnt matter exactly when)
           fb_addr <= fb_addr + 1;
         end if;
         ig_fb_addr <= std_logic_vector(fb_addr); --output framebuffer address
