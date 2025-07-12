@@ -18,6 +18,7 @@ end entity;
 
 architecture RTL of RegisterAccess is
   signal addr_mux_out : STD_LOGIC_VECTOR(4 downto 0);
+  signal rs1_out,rs2_out : word;
 begin
   addr_mux: entity work.Multiplexer2_1
     generic map (
@@ -36,9 +37,11 @@ begin
       dpra => ra_rs2addr,   -- External address input
       we   => ra_write_en,
       d    => ra_rdval,
-      spo  => ra_rs1val,    -- Output rs1 value
-      dpo  => ra_rs2val -- Output rs2 value
+      spo  => rs1_out,    -- Output rs1 value
+      dpo  => rs2_out -- Output rs2 value
     );
+  ra_rs1val <= x"00000000" when addr_mux_out =  "00000" else rs1_out; -- Assign rs1 output
+  ra_rs2val <= x"00000000" when ra_rs2addr =  "00000" else rs2_out; -- Assign rs2 output  
 end architecture;
 library IEEE;
   use IEEE.STD_LOGIC_1164.all;
