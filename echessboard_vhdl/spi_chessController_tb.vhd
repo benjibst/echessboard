@@ -1,4 +1,3 @@
-
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
@@ -86,9 +85,9 @@ begin
     begin
         while true loop
             -- Generate SCLK clock
-            SCLK <= '0';
-            wait for SCLK_PERIOD / 2;
             SCLK <= '1';
+            wait for SCLK_PERIOD / 2;
+            SCLK <= '0';
             wait for SCLK_PERIOD / 2;
         end loop;
     end process;
@@ -107,14 +106,182 @@ begin
         CS_N <= '0';  -- Select slave
 
         -- Send a command byte and receive via MISO
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11111111", temp_rx);
+        
         send_and_receive_spi_byte(CS_N, MOSI, MISO, "00000000", temp_rx);
         -- Send another byte
         send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
         send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
         send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
         send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "10000011", temp_rx);
         send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
         send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "00000000", temp_rx);
+        
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "10010011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "00000010", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "00000001", temp_rx);
+---------------------------------------------------------------------------------------------------------        
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "00000000", temp_rx);
+        -- Send another byte
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000001", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "10010011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "00000000", temp_rx);
+        
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11001001", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "10010011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "00000010", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "00000001", temp_rx);
+        
+ ---------------------------------------------------------------------------------------------------------        
+       
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "00000000", temp_rx);
+        -- Send another byte
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11001001", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "10000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "00000000", temp_rx);
+        
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000001", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "10000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "00000000", temp_rx);
+        
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11001001", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "10000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        
+        
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "00000010", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "00000001", temp_rx);
+        
+ ---------------------------------------------------------------------------------------------------------        
+       
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "00000000", temp_rx);
+        -- Send another byte
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11001000", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "10000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "00000000", temp_rx);
+        
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000000", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "10000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "00000000", temp_rx);
+        
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11001000", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "10000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        
+        
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "00000010", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "00000001", temp_rx);
+         ---------------------------------------------------------------------------------------------------------        
+
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "00000000", temp_rx);
+        -- Send another byte
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11001000", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "10000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "01000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "00000000", temp_rx);
+        
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11001000", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "10100011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "01000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "00000010", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "00000001", temp_rx);
+        
+         ---------------------------------------------------------------------------------------------------------        
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "00000000", temp_rx);
+        -- Send another byte
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000000", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "10000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "01000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "00000000", temp_rx);
+        
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11001000", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "10100011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "01000011", temp_rx);
         send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
         send_and_receive_spi_byte(CS_N, MOSI, MISO, "10000011", temp_rx);
         
@@ -123,14 +290,15 @@ begin
         send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
         send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
         send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
-        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
-        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
-        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
-        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11001000", temp_rx);
         send_and_receive_spi_byte(CS_N, MOSI, MISO, "10100011", temp_rx);
-
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "01000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "11000011", temp_rx);
+        
         send_and_receive_spi_byte(CS_N, MOSI, MISO, "00000010", temp_rx);
-        send_and_receive_spi_byte(CS_N, MOSI, MISO, "10000000", temp_rx);
+        send_and_receive_spi_byte(CS_N, MOSI, MISO, "00000001", temp_rx);
+
         -- End SPI transfer
         wait for SCLK_PERIOD;
         CS_N <= '1';
@@ -141,6 +309,5 @@ begin
         -- Stop simulation
         wait;
     end process;
-
-end behavior;
+end architecture;
 

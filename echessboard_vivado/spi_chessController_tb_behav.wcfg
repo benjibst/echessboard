@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="spi_chessController_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="constant_pkg" />
+            <top_module name="init_pkg" />
+            <top_module name="spi_chessController_tb" />
+            <top_module name="type_pkg" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="149,664.867 ns"></ZoomStartTime>
+      <ZoomEndTime time="149,935.668 ns"></ZoomEndTime>
+      <Cursor1Time time="149,700.000 ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="189"></NameColumnWidth>
+      <ValueColumnWidth column_width="58"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="69" />
+   <wvobject fp_name="/spi_chessController_tb/CLK" type="logic">
+      <obj_property name="ElementShortName">CLK</obj_property>
+      <obj_property name="ObjectShortName">CLK</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/RST" type="logic">
+      <obj_property name="ElementShortName">RST</obj_property>
+      <obj_property name="ObjectShortName">RST</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/SCLK" type="logic">
+      <obj_property name="ElementShortName">SCLK</obj_property>
+      <obj_property name="ObjectShortName">SCLK</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/CS_N" type="logic">
+      <obj_property name="ElementShortName">CS_N</obj_property>
+      <obj_property name="ObjectShortName">CS_N</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/MOSI" type="logic">
+      <obj_property name="ElementShortName">MOSI</obj_property>
+      <obj_property name="ObjectShortName">MOSI</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/SPI_IF/sclk_fedge" type="logic">
+      <obj_property name="ElementShortName">sclk_fedge</obj_property>
+      <obj_property name="ObjectShortName">sclk_fedge</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/MISO" type="logic">
+      <obj_property name="ElementShortName">MISO</obj_property>
+      <obj_property name="ObjectShortName">MISO</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/error" type="logic">
+      <obj_property name="ElementShortName">error</obj_property>
+      <obj_property name="ObjectShortName">error</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/winner" type="array">
+      <obj_property name="ElementShortName">winner[1:0]</obj_property>
+      <obj_property name="ObjectShortName">winner[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/CLK_PERIOD" type="other">
+      <obj_property name="ElementShortName">CLK_PERIOD</obj_property>
+      <obj_property name="ObjectShortName">CLK_PERIOD</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/SCLK_PERIOD" type="other">
+      <obj_property name="ElementShortName">SCLK_PERIOD</obj_property>
+      <obj_property name="ObjectShortName">SCLK_PERIOD</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/CTRL/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/CTRL/reset" type="logic">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/CTRL/valid_spi" type="logic">
+      <obj_property name="ElementShortName">valid_spi</obj_property>
+      <obj_property name="ObjectShortName">valid_spi</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/CTRL/done" type="logic">
+      <obj_property name="ElementShortName">done</obj_property>
+      <obj_property name="ObjectShortName">done</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/CTRL/valid" type="logic">
+      <obj_property name="ElementShortName">valid</obj_property>
+      <obj_property name="ObjectShortName">valid</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/CTRL/confirm_move" type="logic">
+      <obj_property name="ElementShortName">confirm_move</obj_property>
+      <obj_property name="ObjectShortName">confirm_move</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/CTRL/subs_piece" type="array">
+      <obj_property name="ElementShortName">subs_piece[2:0]</obj_property>
+      <obj_property name="ObjectShortName">subs_piece[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/CTRL/subs_needed" type="logic">
+      <obj_property name="ElementShortName">subs_needed</obj_property>
+      <obj_property name="ObjectShortName">subs_needed</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/CTRL/start" type="logic">
+      <obj_property name="ElementShortName">start</obj_property>
+      <obj_property name="ObjectShortName">start</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/CTRL/board_state" type="array">
+      <obj_property name="ElementShortName">board_state[0:63]</obj_property>
+      <obj_property name="ObjectShortName">board_state[0:63]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/CTRL/start_pos" type="array">
+      <obj_property name="ElementShortName">start_pos[5:0]</obj_property>
+      <obj_property name="ObjectShortName">start_pos[5:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/CTRL/end_pos" type="array">
+      <obj_property name="ElementShortName">end_pos[5:0]</obj_property>
+      <obj_property name="ObjectShortName">end_pos[5:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/CTRL/error" type="logic">
+      <obj_property name="ElementShortName">error</obj_property>
+      <obj_property name="ObjectShortName">error</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/CTRL/winner" type="array">
+      <obj_property name="ElementShortName">winner[1:0]</obj_property>
+      <obj_property name="ObjectShortName">winner[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/CTRL/color" type="logic">
+      <obj_property name="ElementShortName">color</obj_property>
+      <obj_property name="ObjectShortName">color</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/CTRL/enable" type="array">
+      <obj_property name="ElementShortName">enable[2:0]</obj_property>
+      <obj_property name="ObjectShortName">enable[2:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/CTRL/memory_ready" type="logic">
+      <obj_property name="ElementShortName">memory_ready</obj_property>
+      <obj_property name="ObjectShortName">memory_ready</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/SPI_IF/START_GAME" type="logic">
+      <obj_property name="ElementShortName">START_GAME</obj_property>
+      <obj_property name="ObjectShortName">START_GAME</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/CTRL/state" type="other">
+      <obj_property name="ElementShortName">state</obj_property>
+      <obj_property name="ObjectShortName">state</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/CTRL/hall_copy" type="array">
+      <obj_property name="ElementShortName">hall_copy[63:0]</obj_property>
+      <obj_property name="ObjectShortName">hall_copy[63:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/CTRL/hall_input" type="array">
+      <obj_property name="ElementShortName">hall_input[63:0]</obj_property>
+      <obj_property name="ObjectShortName">hall_input[63:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/CTRL/board_copy" type="array">
+      <obj_property name="ElementShortName">board_copy[0:63]</obj_property>
+      <obj_property name="ObjectShortName">board_copy[0:63]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/CTRL/eat_move" type="logic">
+      <obj_property name="ElementShortName">eat_move</obj_property>
+      <obj_property name="ObjectShortName">eat_move</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/CTRL/flag" type="array">
+      <obj_property name="ElementShortName">flag[1:0]</obj_property>
+      <obj_property name="ObjectShortName">flag[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/CTRL/shape_sign" type="array">
+      <obj_property name="ElementShortName">shape_sign[2:0]</obj_property>
+      <obj_property name="ObjectShortName">shape_sign[2:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/CTRL/start_d" type="logic">
+      <obj_property name="ElementShortName">start_d</obj_property>
+      <obj_property name="ObjectShortName">start_d</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/CTRL/start_pos_d" type="array">
+      <obj_property name="ElementShortName">start_pos_d[5:0]</obj_property>
+      <obj_property name="ObjectShortName">start_pos_d[5:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/CTRL/end_pos_d" type="array">
+      <obj_property name="ElementShortName">end_pos_d[5:0]</obj_property>
+      <obj_property name="ObjectShortName">end_pos_d[5:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/CTRL/error_d" type="logic">
+      <obj_property name="ElementShortName">error_d</obj_property>
+      <obj_property name="ObjectShortName">error_d</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/CTRL/winner_d" type="array">
+      <obj_property name="ElementShortName">winner_d[1:0]</obj_property>
+      <obj_property name="ObjectShortName">winner_d[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/CTRL/color_d" type="logic">
+      <obj_property name="ElementShortName">color_d</obj_property>
+      <obj_property name="ObjectShortName">color_d</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/CTRL/enable_d" type="array">
+      <obj_property name="ElementShortName">enable_d[2:0]</obj_property>
+      <obj_property name="ObjectShortName">enable_d[2:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/PAWN_VALIDATOR/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/PAWN_VALIDATOR/start" type="logic">
+      <obj_property name="ElementShortName">start</obj_property>
+      <obj_property name="ObjectShortName">start</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/PAWN_VALIDATOR/hall_input" type="array">
+      <obj_property name="ElementShortName">hall_input[63:0]</obj_property>
+      <obj_property name="ObjectShortName">hall_input[63:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/PAWN_VALIDATOR/start_pos" type="array">
+      <obj_property name="ElementShortName">start_pos[5:0]</obj_property>
+      <obj_property name="ObjectShortName">start_pos[5:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/PAWN_VALIDATOR/end_pos" type="array">
+      <obj_property name="ElementShortName">end_pos[5:0]</obj_property>
+      <obj_property name="ObjectShortName">end_pos[5:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/PAWN_VALIDATOR/color" type="logic">
+      <obj_property name="ElementShortName">color</obj_property>
+      <obj_property name="ObjectShortName">color</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/PAWN_VALIDATOR/subs_required" type="logic">
+      <obj_property name="ElementShortName">subs_required</obj_property>
+      <obj_property name="ObjectShortName">subs_required</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/PAWN_VALIDATOR/done" type="logic">
+      <obj_property name="ElementShortName">done</obj_property>
+      <obj_property name="ObjectShortName">done</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/PAWN_VALIDATOR/valid" type="logic">
+      <obj_property name="ElementShortName">valid</obj_property>
+      <obj_property name="ObjectShortName">valid</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/PAWN_VALIDATOR/state" type="other">
+      <obj_property name="ElementShortName">state</obj_property>
+      <obj_property name="ObjectShortName">state</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/PAWN_VALIDATOR/debug" type="array">
+      <obj_property name="ElementShortName">debug[2:0]</obj_property>
+      <obj_property name="ObjectShortName">debug[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/PAWN_VALIDATOR/debug1" type="array">
+      <obj_property name="ElementShortName">debug1[2:0]</obj_property>
+      <obj_property name="ObjectShortName">debug1[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/PAWN_VALIDATOR/debug2" type="array">
+      <obj_property name="ElementShortName">debug2[2:0]</obj_property>
+      <obj_property name="ObjectShortName">debug2[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/PAWN_VALIDATOR/debug3" type="array">
+      <obj_property name="ElementShortName">debug3[2:0]</obj_property>
+      <obj_property name="ObjectShortName">debug3[2:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/PAWN_VALIDATOR/eat_move" type="logic">
+      <obj_property name="ElementShortName">eat_move</obj_property>
+      <obj_property name="ObjectShortName">eat_move</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/CTRL/captured" type="logic">
+      <obj_property name="ElementShortName">captured</obj_property>
+      <obj_property name="ObjectShortName">captured</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/CTRL/eat_move_d" type="logic">
+      <obj_property name="ElementShortName">eat_move_d</obj_property>
+      <obj_property name="ObjectShortName">eat_move_d</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/QUEEN_VALIDATOR/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/QUEEN_VALIDATOR/start" type="logic">
+      <obj_property name="ElementShortName">start</obj_property>
+      <obj_property name="ObjectShortName">start</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/QUEEN_VALIDATOR/hall_input" type="array">
+      <obj_property name="ElementShortName">hall_input[63:0]</obj_property>
+      <obj_property name="ObjectShortName">hall_input[63:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/QUEEN_VALIDATOR/start_pos" type="array">
+      <obj_property name="ElementShortName">start_pos[5:0]</obj_property>
+      <obj_property name="ObjectShortName">start_pos[5:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/QUEEN_VALIDATOR/end_pos" type="array">
+      <obj_property name="ElementShortName">end_pos[5:0]</obj_property>
+      <obj_property name="ObjectShortName">end_pos[5:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/QUEEN_VALIDATOR/done" type="logic">
+      <obj_property name="ElementShortName">done</obj_property>
+      <obj_property name="ObjectShortName">done</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/QUEEN_VALIDATOR/valid" type="logic">
+      <obj_property name="ElementShortName">valid</obj_property>
+      <obj_property name="ObjectShortName">valid</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/QUEEN_VALIDATOR/state" type="other">
+      <obj_property name="ElementShortName">state</obj_property>
+      <obj_property name="ObjectShortName">state</obj_property>
+   </wvobject>
+   <wvobject fp_name="/spi_chessController_tb/DUT/QUEEN_VALIDATOR/debug" type="array">
+      <obj_property name="ElementShortName">debug[7:0]</obj_property>
+      <obj_property name="ObjectShortName">debug[7:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+</wave_config>
