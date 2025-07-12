@@ -11,15 +11,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="5,657.312 ns"></ZoomStartTime>
-      <ZoomEndTime time="6,989.184 ns"></ZoomEndTime>
-      <Cursor1Time time="9,470.000 ns"></Cursor1Time>
+      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
+      <ZoomEndTime time="2,210.001 ns"></ZoomEndTime>
+      <Cursor1Time time="1,790.000 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="283"></NameColumnWidth>
-      <ValueColumnWidth column_width="101"></ValueColumnWidth>
+      <ValueColumnWidth column_width="91"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="32" />
+   <WVObjectSize size="34" />
    <wvobject type="logic" fp_name="/DataPathTB/uut/dp_clkcpu">
       <obj_property name="ElementShortName">dp_clkcpu</obj_property>
       <obj_property name="ObjectShortName">dp_clkcpu</obj_property>
@@ -153,5 +153,15 @@
       <obj_property name="ElementShortName">dina[31:0]</obj_property>
       <obj_property name="ObjectShortName">dina[31:0]</obj_property>
       <obj_property name="Radix">HEXRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/DataPathTB/uut/writeback_stage/framebuf/addra">
+      <obj_property name="ElementShortName">addra[14:0]</obj_property>
+      <obj_property name="ObjectShortName">addra[14:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/DataPathTB/uut/writeback_stage/data_mem/addra">
+      <obj_property name="ElementShortName">addra[11:0]</obj_property>
+      <obj_property name="ObjectShortName">addra[11:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
 </wave_config>

@@ -1,4 +1,4 @@
-static volatile unsigned int chess_pos[16] = {
+static volatile const unsigned int chess_pos[16] = {
     0x00000000,0x84858081,
     0x00000000,0x04050001,
     0x00000000,0x04050001,
@@ -8,7 +8,8 @@ static volatile unsigned int chess_pos[16] = {
     0x00000000,0x04050001,
     0x00000000,0x84858081,
 };
-static unsigned int framebuffer[19200]; //= (unsigned int*)0x080000000;
+
+static unsigned int* framebuffer = (unsigned int*)0x080000000;
 static const unsigned int pieces_buf[1008] = {
 0b00000000000000000000000000000000, 0b00000000000000000000000000000000, 0b00000000000000000000000000000000, 
 0b00000000000000000000000000000000, 0b00000000000000000000000000000000, 0b00000000000000000000000000000000, 
@@ -373,8 +374,7 @@ static const unsigned int* const pieces_img [7]= {
 #define RIGHT_BORDER_INT 8
 
 #define PIECE_COLOR_BIT (1 << 7) // 0 for white, 1 for black
-#include <stdio.h>
-int main(void)
+int _start(void)
 {
     int background = 0xFFFFFFFF; // 0b11 for every pixel -> same color as black pieces
     // draw top portion of background
@@ -388,7 +388,7 @@ int main(void)
     int square_color = 0;
     int piece_color = 0;
 
-    for (int z=0;z<1;z++)
+    for (;;)
     {
         // TOP BORDER 48 PX
         for (int i = 0; i < IMG_WIDTH_INT * TOP_BORDER_PX; i++)
@@ -447,10 +447,5 @@ int main(void)
             framebuffer[curr_pixel++] = background;
         }
         curr_pixel = 0;
-    }
-    for (unsigned int i = 0; i < IMG_WIDTH_INT*IMG_HEIGHT_PX; i++)
-    {
-        if(!(i%IMG_WIDTH_INT)) printf("\n");
-        printf("%08x ", framebuffer[i]);
     }
 }
