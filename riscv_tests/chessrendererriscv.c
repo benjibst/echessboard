@@ -1,16 +1,17 @@
-static volatile const unsigned int chess_pos[16] = {
-    0x00000000,0x84858081,
-    0x00000000,0x04050001,
-    0x00000000,0x04050001,
-    0x00000000,0x84858081,
-    0x00000000,0x80818283,
-    0x00000000,0x04050001,
-    0x00000000,0x04050001,
-    0x00000000,0x84858081,
-};
 
-static unsigned int* framebuffer = (unsigned int*)0x080000000;
-static const unsigned int pieces_buf[1008] = {
+static volatile const unsigned int chess_pos[16] = {
+    0x02040305,0x06030402,
+    0x01010101,0x01010101,
+    0x00000000,0x00000000,
+    0x00000000,0x00000000,
+    0x00000000,0x00000000,
+    0x00000000,0x00000000,
+    0x81818181,0x81818181,
+    0x82848385,0x86838482
+};
+static unsigned int* const framebuffer = (unsigned int*)0x080000000;
+
+static const unsigned int pieces_buf[] = {
 0b00000000000000000000000000000000, 0b00000000000000000000000000000000, 0b00000000000000000000000000000000, 
 0b00000000000000000000000000000000, 0b00000000000000000000000000000000, 0b00000000000000000000000000000000, 
 0b00000000000000000000000000000000, 0b00000000000000000000000000000000, 0b00000000000000000000000000000000, 
@@ -420,7 +421,7 @@ int _start(void)
                     piece_data = chess_pos[chess_pos_idx];
                     piece = (piece_data >> piece_shift) & 0xFF; // get the piece for the current column
                     piece_shift-=8;
-                    piece_color = (piece & PIECE_COLOR_BIT) ? 0xFFFFFFFF : 0xAAAAAAAA; // determine piece color
+                    piece_color = (piece & PIECE_COLOR_BIT) ? 0xAAAAAAAA : 0xFFFFFFFF; // determine piece color
 
                     for(int intincol = 0; intincol < SQUARE_SIDE_INT; intincol++)
                     {

@@ -5,7 +5,7 @@ riscv64-linux-gnu-objcopy -O binary --only-section .text hex.elf hex --set-start
 od -v -An -tx4 hex > instr_dump
 cat instr_dump
 
-riscv64-linux-gnu-objcopy -O binary --only-section .rodata hex.elf hex --set-start 0
+riscv64-linux-gnu-objcopy -O binary -j .rodata -j .srodata hex.elf hex --set-start 0
 od -v -An -tx4 hex > data_dump
 cat data_dump
 
