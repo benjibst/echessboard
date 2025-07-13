@@ -198,11 +198,20 @@ typedef enum
   CONFIRM_MOVE = 2,
   GAME_START = 0xFF,
 } MessageType;
+uint8_t reverse_bits(uint8_t byte) {
+    uint8_t reversed = 0;
+    for (int i = 0; i < 8; i++) {
+        reversed |= ((byte >> i) & 1) << (7 - i);
+    }
+    return reversed;
+}
 void SendGamePosSPI(game_pos_t *pos)
 {
   uint8_t tx_buf[9];
   tx_buf[0] = GAME_POS; // Command byte for game position
-  memcpy(&tx_buf[1], pos->pos, sizeof(pos->pos));
+  for (int i=1;i<9;i++){
+    tx_buf[i] = reverse_bits(pos->pos[i-1]);
+  }
   HAL_SPI_Transmit(&hspi1, tx_buf, sizeof(tx_buf), HAL_MAX_DELAY);
 }
 void SendGameStartSPI()

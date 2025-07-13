@@ -183,7 +183,7 @@ begin
         when WAIT_VALIDATOR =>
           start_d <= '0'; --if the validator has finished
           if done = '1' then
-            if subs_needed = '1' and subs_piece = "000" then -- if sobstituting piece is needed (only for pawn validator), wait for it
+            if subs_needed = '1' and subs_piece /= "000" then -- if sobstituting piece is needed (only for pawn validator), wait for it
               state <= WAIT_SPI; --wait for the piece
             else
               if valid='1' then

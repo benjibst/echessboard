@@ -40,6 +40,7 @@ begin
           end if;
 
         when CHECK_MOVE =>
+        --state <= DONE_STATE;
         from_row := to_unsigned(to_integer(start_pos) / 8, 3);
         from_col := to_unsigned(to_integer(start_pos) mod 8, 3);
 

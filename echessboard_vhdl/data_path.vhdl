@@ -9,7 +9,7 @@ entity DataPath is
         dp_clkcpu     : in  STD_LOGIC; -- clock input
         dp_clk25      : in  STD_LOGIC; -- clock for VGA and other peripherals
 
-        dp_spi_addr    : in  unsigned(4 downto 0);
+        dp_spi_addr    : in  unsigned(7 downto 0);
         dp_spi_data    : in  word;
         dp_spi_we      : in  std_logic_vector(3 downto 0); -- SPI write enable
 

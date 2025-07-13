@@ -81,7 +81,7 @@ architecture Structural of TopLevel is
   signal START_GAME, EAT_MOVE                                                        : std_logic;
 
   signal WR_DATA     : std_logic_vector(31 downto 0);
-  signal WR_ADDRESS  : unsigned(4 downto 0);
+  signal WR_ADDRESS  : unsigned(7 downto 0);
   signal WR_ENABLE   : std_logic_vector(3 downto 0);
   signal START_WRITE : std_logic;
 

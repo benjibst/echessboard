@@ -1,5 +1,4 @@
 
-
 ----------------------------------------------------------------------------------
 -- Company: 
 -- Engineer: 
@@ -20,98 +19,73 @@
 -- 
 ----------------------------------------------------------------------------------
 library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.NUMERIC_STD.ALL;
-use work.constant_pkg.all;
-use work.type_pkg.all;
-use work.init_pkg.all;
+  use IEEE.STD_LOGIC_1164.all;
+  use IEEE.NUMERIC_STD.all;
+  use work.constant_pkg.all;
+  use work.type_pkg.all;
+  use work.init_pkg.all;
 
 entity MemoryWriter is
   port (
-    clk        : in  std_logic;
-    reset      : in  std_logic;
+    clk         : in  std_logic;
+    reset       : in  std_logic;
 
     -- Segnali dalla FSM
-    board_state: in  pieces;  -- Tipo definito nel tuo progetto (array 0..63)
-    from_pos   : in  unsigned(5 downto 0);
-    to_pos     : in  unsigned(5 downto 0);
-    ready: in  std_logic; -- Segnale che avvia la scrittura dopo una mossa
+    board_state : in  pieces;               -- Tipo definito nel tuo progetto (array 0..63)
+    from_pos    : in  unsigned(5 downto 0);
+    to_pos      : in  unsigned(5 downto 0);
+    ready       : in  std_logic;            -- Segnale che avvia la scrittura dopo una mossa
 
     -- Interfaccia con la memoria
-    wr_data    : out std_logic_vector(31 downto 0);
-    wr_addr    : out unsigned(4 downto 0); -- 64 caselle / 4 = 16 blocchi = 4 bit
-    wr_en      : out std_logic_vector(3 downto 0)
+    wr_data     : out std_logic_vector(31 downto 0);
+    wr_addr     : out unsigned(7 downto 0); -- 64 caselle / 4 = 16 blocchi = 4 bit
+    wr_en       : out std_logic_vector(3 downto 0)
   );
 end entity;
 
-
 architecture Behavioral of MemoryWriter is
-  type state_type is (INIT, IDLE, WRITE_BLOCK_1, WRITE_BLOCK_2, WAIT_READY);
-  signal state : state_type := INIT;
-  signal index : integer range 0 to 1023 := 0;
+  signal index : unsigned(7 downto 0);
 
   -- Funzione per impacchettare 4 celle da board_copy in 32 bit
-  function make_block(start: integer; board: pieces) return std_logic_vector is
-    variable res: std_logic_vector(31 downto 0);
+  function make_block(start : unsigned(7 downto 0); board : pieces) return std_logic_vector is
+    variable res : std_logic_vector(31 downto 0);
   begin
-    res(31)          := board(start).color;
-    res(30 downto 27):= (others => '0');   
-    res(26 downto 24):= board(start).shape;
+    res(31) := board(to_integer(start) + 3).color;
+    res(30 downto 27) := (others => '0');
+    res(26 downto 24) := board(to_integer(start) + 3).shape;
 
-    res(23)            := board(start-1).color;
-    res(22 downto 19)  := (others => '0');     
-    res(18 downto 16)  := board(start-1).shape;
+    res(23) := board(to_integer(start) + 2).color;
+    res(22 downto 19) := (others => '0');
+    res(18 downto 16) := board(to_integer(start) + 2).shape;
 
-    res(15)          := board(start-2).color;
-    res(14 downto 11):= (others => '0');
-    res(10 downto 8) := board(start-2).shape;
+    res(15) := board(to_integer(start) + 1).color;
+    res(14 downto 11) := (others => '0');
+    res(10 downto 8) := board(to_integer(start) + 1).shape;
 
-    res(7)           := board(start-3).color; 
-    res(6 downto 3)  := (others => '0');      
-    res(2 downto 0)  := board(start-3).shape; 
+    res(7) := board(to_integer(start)).color;
+    res(6 downto 3) := (others => '0');
+    res(2 downto 0) := board(to_integer(start)).shape;
 
     return res;
   end function;
 
-  begin 
-  
-  process(clk, reset)
+begin
+  process (clk, reset)
   begin
     if reset = '1' then
-      state <= INIT;
-      index <= 0;
+      index <= x"00";
       wr_en <= x"0";
-      wr_addr<=(others =>'0');
-      wr_data<=(others =>'0');
-  
+      wr_addr <= (others => '0');
+      wr_data <= (others => '0');
     elsif rising_edge(clk) then
-      wr_en <= x"0";  -- default
-
-      case state is
-        when INIT =>
-            wr_addr <= to_unsigned(index+1, 5);
-            wr_data <= make_block(index*4 + 3, board_state);
-            wr_en <= x"F";
-            if index = 15 then
-              state <= IDLE;
-              index <= 0;
-            else
-              index <= index + 1;
-            end if;
-
-        when IDLE =>
-            wr_addr <= to_unsigned(index+1, 5);
-            wr_data <= make_block(index*4 + 3, board_state);
-            wr_en <= x"F";
-            if index = 15 then
-              index <= 0;
-            else
-              index <= index + 1;
-            end if;
-
-        when others =>
-          state <= IDLE;
-      end case;
+      wr_addr <= (index + x"01");
+      wr_data <= make_block("00111100" - index * 4, board_state);
+      wr_en <= x"F";
+      if index = 15 then
+        index <= x"00";
+      else
+        index <= index + x"01";
+      end if;
     end if;
   end process;
 
