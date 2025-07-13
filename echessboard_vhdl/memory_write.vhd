@@ -91,7 +91,7 @@ architecture Behavioral of MemoryWriter is
 
       case state is
         when INIT =>
-            wr_addr <= to_unsigned(index, 4);
+            wr_addr <= to_unsigned(index+1, 4);
             wr_data <= make_block(index*4 + 3, board_state);
             wr_en <= '1';
             if index = 15 then
@@ -108,13 +108,13 @@ architecture Behavioral of MemoryWriter is
 
         when WRITE_BLOCK_1 =>
             wr_data <= make_block(index*4 + 3, board_state);
-            wr_addr <= to_unsigned(index, 4);
+            wr_addr <= to_unsigned(index+1, 4);
             index <= to_integer(to_pos) / 4;
             state <= WRITE_BLOCK_2;
 
         when WRITE_BLOCK_2 =>
             wr_data <= make_block(index*4 + 3, board_state);
-            wr_addr <= to_unsigned(index, 4);
+            wr_addr <= to_unsigned(index+1, 4);
             wr_en <= '1';
             state <= IDLE;
 
