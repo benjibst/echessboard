@@ -17,9 +17,9 @@ entity WriteBackStage is
     wb_vga_framebuf_clkb  : in  std_logic;
     wb_vga_framebuf_addrb : in  std_logic_vector(14 downto 0);
     wb_mem_op_signed      : in  std_logic; -- Sign extension for load/store
-    wb_spi_mem_clk        : in  std_logic;
     wb_spi_mem_data       : in  word;
-    wb_spi_mem_addr       : in  STD_LOGIC_VECTOR(11 downto 0);
+    wb_spi_mem_addr       : in  unsigned(4 downto 0);
+    wb_spi_mem_we         : in  std_logic_vector(3 downto 0);
     wb_pc_out             : out word;
     wb_rd_val             : out word;
     wb_vga_framebuf_doutb : out word
@@ -70,9 +70,9 @@ begin
       addra => wb_alu_result_pre(13 downto 2),
       dina  => wb_rs2_val,
       douta => mem_data_out_raw,
-      clkb  => wb_spi_mem_clk,
-      web   => "1111", --0 because vga controller never writes to framebuf
-      addrb => wb_spi_mem_addr,
+      clkb  => wb_clk,
+      web   => wb_spi_mem_we, --0 because vga controller never writes to framebuf
+      addrb => "0000000"&std_logic_vector(wb_spi_mem_addr),
       dinb  => wb_spi_mem_data,
       doutb => open);
   dest_reg_mux: entity work.DestRegMux(RTL) port map (

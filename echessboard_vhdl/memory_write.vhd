@@ -39,8 +39,8 @@ entity MemoryWriter is
 
     -- Interfaccia con la memoria
     wr_data    : out std_logic_vector(31 downto 0);
-    wr_addr    : out unsigned(3 downto 0); -- 64 caselle / 4 = 16 blocchi = 4 bit
-    wr_en      : out std_logic
+    wr_addr    : out unsigned(4 downto 0); -- 64 caselle / 4 = 16 blocchi = 4 bit
+    wr_en      : out std_logic_vector(3 downto 0)
   );
 end entity;
 
@@ -48,27 +48,27 @@ end entity;
 architecture Behavioral of MemoryWriter is
   type state_type is (INIT, IDLE, WRITE_BLOCK_1, WRITE_BLOCK_2, WAIT_READY);
   signal state : state_type := INIT;
-  signal index : integer range 0 to 15 := 0;
+  signal index : integer range 0 to 1023 := 0;
 
   -- Funzione per impacchettare 4 celle da board_copy in 32 bit
   function make_block(start: integer; board: pieces) return std_logic_vector is
     variable res: std_logic_vector(31 downto 0);
   begin
-    res(31) := board(start).color;
-    res(30 downto 27) := (others => '0');
-    res(26 downto 24) := board(start).shape;
+    res(31)          := board(start).color;
+    res(30 downto 27):= (others => '0');   
+    res(26 downto 24):= board(start).shape;
 
-    res(23) := board(start-1).color;
-    res(22 downto 19) := (others => '0');
-    res(18 downto 16) := board(start-1).shape;
+    res(23)            := board(start-1).color;
+    res(22 downto 19)  := (others => '0');     
+    res(18 downto 16)  := board(start-1).shape;
 
-    res(15) := board(start-2).color;
-    res(14 downto 11) := (others => '0');
+    res(15)          := board(start-2).color;
+    res(14 downto 11):= (others => '0');
     res(10 downto 8) := board(start-2).shape;
 
-    res(7) := board(start-3).color;
-    res(6 downto 3) := (others => '0');
-    res(2 downto 0) := board(start-3).shape;
+    res(7)           := board(start-3).color; 
+    res(6 downto 3)  := (others => '0');      
+    res(2 downto 0)  := board(start-3).shape; 
 
     return res;
   end function;
@@ -80,43 +80,34 @@ architecture Behavioral of MemoryWriter is
     if reset = '1' then
       state <= INIT;
       index <= 0;
-      wr_en <= '0';
+      wr_en <= x"0";
       wr_addr<=(others =>'0');
       wr_data<=(others =>'0');
-      
-      
-
+  
     elsif rising_edge(clk) then
-      wr_en <= '0';  -- default
+      wr_en <= x"0";  -- default
 
       case state is
         when INIT =>
-            wr_addr <= to_unsigned(index+1, 4);
+            wr_addr <= to_unsigned(index+1, 5);
             wr_data <= make_block(index*4 + 3, board_state);
-            wr_en <= '1';
+            wr_en <= x"F";
             if index = 15 then
               state <= IDLE;
+              index <= 0;
             else
               index <= index + 1;
             end if;
 
         when IDLE =>
-            if ready='1' then
-            index <= to_integer(from_pos) / 4;
-            state <= WRITE_BLOCK_1;
+            wr_addr <= to_unsigned(index+1, 5);
+            wr_data <= make_block(index*4 + 3, board_state);
+            wr_en <= x"F";
+            if index = 15 then
+              index <= 0;
+            else
+              index <= index + 1;
             end if;
-
-        when WRITE_BLOCK_1 =>
-            wr_data <= make_block(index*4 + 3, board_state);
-            wr_addr <= to_unsigned(index+1, 4);
-            index <= to_integer(to_pos) / 4;
-            state <= WRITE_BLOCK_2;
-
-        when WRITE_BLOCK_2 =>
-            wr_data <= make_block(index*4 + 3, board_state);
-            wr_addr <= to_unsigned(index+1, 4);
-            wr_en <= '1';
-            state <= IDLE;
 
         when others =>
           state <= IDLE;

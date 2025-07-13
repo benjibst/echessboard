@@ -6,15 +6,15 @@ use ieee.numeric_std.all;
 entity DataPath is
     port (
         dp_reset      : in  STD_LOGIC;
-        dp_clk100     : in  STD_LOGIC; -- clock input
-        --dp_spi_clk     : in  std_logic;
-        --dp_spi_addr    : in  STD_LOGIC_VECTOR(11 downto 0);
-        --dp_spi_data    : in  word;
-        --dp_vga_clk     : in  STD_LOGIC;                              -- VGA clock input
-        --dp_vga_reset_n : in  STD_LOGIC;                              -- VGA reset signal
+        dp_clkcpu     : in  STD_LOGIC; -- clock input
+        dp_clk25      : in  STD_LOGIC; -- clock for VGA and other peripherals
+
+        dp_spi_addr    : in  unsigned(4 downto 0);
+        dp_spi_data    : in  word;
+        dp_spi_we      : in  std_logic_vector(3 downto 0); -- SPI write enable
+
         dp_vga_h_sync : out std_logic; -- VGA horizontal sync output
         dp_vga_v_sync : out std_logic; -- VGA vertical sync output
-        --dp_vga_disp_en : out std_logic;                              -- VGA display enable output
         dp_vga_red0   : out STD_LOGIC; -- VGA red color output
         dp_vga_red1   : out STD_LOGIC;
         dp_vga_red2   : out STD_LOGIC;
@@ -58,9 +58,7 @@ architecture RTL of DataPath is
     signal fb_addr    : std_logic_vector(14 downto 0); -- framebuffer address
     signal error          : std_logic;
     signal stage          : ex_stage;                      -- Current stage of the pipeline: 
-    signal clkcnt     : unsigned(3 downto 0);
-    signal dp_clk25   : std_logic;
-    signal dp_clkcpu : std_logic;
+    
     signal vga_red    : STD_LOGIC_VECTOR(3 downto 0);  -- VGA red color output
     signal vga_green  : STD_LOGIC_VECTOR(3 downto 0);  -- VGA green color output
     signal vga_blue   : STD_LOGIC_VECTOR(3 downto 0);
@@ -77,20 +75,7 @@ begin
     dp_vga_blue1  <= vga_blue(1);
     dp_vga_blue2  <= vga_blue(2);
     dp_vga_blue3  <= vga_blue(3);
-    process (dp_clk100) is
-    begin
-        if (rising_edge(dp_clk100)) then
-          if (dp_reset = '0') then
-              clkcnt <= "1010";
-              dp_clkcpu <= '0';
-              dp_clk25 <= '0';
-          else
-            clkcnt <= clkcnt + 1;
-            dp_clkcpu <= clkcnt(3); -- Divide clock by 16
-            dp_clk25 <= clkcnt(1); -- Divide clock by 4
-          end if;
-          end if;
-    end process;
+    
     process (dp_clkcpu) is
     begin
         if (rising_edge(dp_clkcpu)) then
@@ -170,9 +155,9 @@ begin
             wb_stage              => stage, 
             wb_vga_framebuf_clkb  => dp_clk25,
             wb_vga_framebuf_addrb => fb_addr,
-            wb_spi_mem_clk        => '0',         --dp_spi_clk,
-            wb_spi_mem_data       => x"00000000", --dp_spi_data,
-            wb_spi_mem_addr       => x"000",      --dp_spi_addr,
+            wb_spi_mem_data       => dp_spi_data,
+            wb_spi_mem_addr       => dp_spi_addr,
+            wb_spi_mem_we         => dp_spi_we, -- SPI controller never writes to framebuf
             wb_pc_out             => pc_out,
             wb_rd_val             => rd_val,
             wb_vga_framebuf_doutb => fb_data
@@ -236,11 +221,11 @@ begin
     uut: entity work.DataPath
         port map (
             dp_reset      => tb_reset, -- Reset signal, can be controlled in the testbench
-            dp_clk100     => tb_clk,   -- Clock will be generated in the testbench
-            --dp_spi_clk     => '0',             -- SPI clock input
-            --dp_spi_addr    => (others => '0'), -- SPI address input
-            --dp_spi_data    => (others => '0'), -- SPI data input
-            --dp_vga_clk     => tb_clk,          -- VGA clock input
+            dp_clk25     => tb_clk,   -- Clock will be generated in the testbench
+            dp_clkcpu    => tb_clk,   -- Clock for CPU operations
+            dp_spi_addr    => (others => '0'), -- SPI address input
+            dp_spi_data    => (others => '0'), -- SPI data input
+            dp_spi_we      => (others => '0'), -- SPI write enable, can be controlled in the testbench
             dp_vga_h_sync => open,     -- VGA horizontal sync output
             dp_vga_v_sync => open,     -- VGA vertical sync output
             dp_vga_red0=> open, -- VGA red color output

@@ -7,20 +7,6 @@ end spi_chessController_tb;
 
 architecture behavior of spi_chessController_tb is
 
-    -- Component DUT
-    component TopLevel
-        Port (
-            CLK     : in  std_logic;
-            RST     : in  std_logic;
-            SCLK    : in  std_logic;
-            CS_N    : in  std_logic;
-            MOSI    : in  std_logic;
-            MISO    : out std_logic;
-            error     : out std_logic;
-            winner  : out std_logic_vector(1 downto 0)
-        );
-    end component;
-
     -- Signals
     signal CLK     : std_logic := '0';
     signal RST     : std_logic := '1';
@@ -59,16 +45,14 @@ architecture behavior of spi_chessController_tb is
 begin
 
     -- Instantiate DUT
-    DUT: TopLevel
+    DUT: entity work.TopLevel
         port map (
-            CLK     => CLK,
+            TOP_CLK100     => CLK,
             RST     => RST,
             SCLK    => SCLK,
             CS_N    => CS_N,
             MOSI    => MOSI,
-            MISO    => MISO,
-            error     => error,
-            winner  => winner
+            MISO    => MISO
         );
 
     -- Clock generation for CLK (system clock)

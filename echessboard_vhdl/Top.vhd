@@ -26,15 +26,29 @@ library IEEE;
 
 entity TopLevel is
   port (
-    CLK    : in  std_logic;
-    RST    : in  std_logic;
-    SCLK   : in  std_logic;
-    CS_N   : in  std_logic;
-    MOSI   : in  std_logic;
+    TOP_CLK100     : in  std_logic;
+    RST            : in  std_logic;
 
-    MISO   : out std_logic;
-    WINNER : out std_logic_vector(1 downto 0);
-    ERROR  : out std_logic
+    CS_N           : in  std_logic;
+    SCLK           : in  std_logic;
+    MISO           : out std_logic;
+    MOSI           : in  std_logic;
+
+    top_vga_h_sync : out std_logic;
+    top_vga_v_sync : out std_logic;
+    top_vga_red0   : out std_logic;
+    top_vga_red1   : out std_logic;
+    top_vga_red2   : out std_logic;
+    top_vga_red3   : out std_logic;
+    top_vga_green0 : out std_logic;
+    top_vga_green1 : out std_logic;
+    top_vga_green2 : out std_logic;
+    top_vga_green3 : out std_logic;
+    top_vga_blue0  : out std_logic;
+    top_vga_blue1  : out std_logic;
+    top_vga_blue2  : out std_logic;
+    top_vga_blue3  : out std_logic;
+    top_error  : out std_logic
   );
 end entity;
 
@@ -66,38 +80,80 @@ architecture Structural of TopLevel is
   signal HALL_QUEEN, HALL_BISHOP, HALL_ROOK, HALL_PAWN                               : std_logic_vector(63 downto 0);
   signal START_GAME, EAT_MOVE                                                        : std_logic;
 
-  signal WR_DATA: std_logic_vector (31 downto 0);
-  signal WR_ADDRESS: unsigned(3 downto 0);
-  signal WR_ENABLE:std_logic;
-  signal START_WRITE: std_logic;
+  signal WR_DATA     : std_logic_vector(31 downto 0);
+  signal WR_ADDRESS  : unsigned(4 downto 0);
+  signal WR_ENABLE   : std_logic_vector(3 downto 0);
+  signal START_WRITE : std_logic;
 
-
+  signal clkcnt    : unsigned(3 downto 0);
+  signal clk25  : std_logic;
+  signal clkcpu : std_logic;
 begin
+  top_error <= ERROR_INT;
+  process (TOP_CLK100) is
+  begin
+    if (rising_edge(TOP_CLK100)) then
+      if (RST = '0') then
+        clkcnt <= "1010";
+        clkcpu <= '0';
+        clk25 <= '0';
+      else
+        clkcnt <= clkcnt + 1;
+        clkcpu <= clkcnt(3); -- Divide clock by 16
+        clk25 <= clkcnt(1); -- Divide clock by 4
+      end if;
+    end if;
+  end process;
 
---Memory writer
-MEM_WRITE: entity work.MemoryWriter
-  port map(
-    clk       => CLK,
-    reset    =>  START_GAME,
+  DATA_PATH: entity work.DataPath
+    port map (
+      dp_reset      => RST,
+      dp_clkcpu     => clkcpu,
+      dp_clk25      => clk25,
 
-    -- Segnali dalla FSM
-    board_state=> BOARD_STATE,
-    from_pos  => START_POS,
-    to_pos     => END_POS,
-    ready=> START_WRITE,
+      dp_spi_addr   => WR_ADDRESS,
+      dp_spi_data   => WR_DATA,
+      dp_spi_we     => WR_ENABLE,
 
-    -- Interfaccia con la memoria
-    wr_data    => WR_DATA,
-    wr_addr    => WR_ADDRESS,
-    wr_en     => WR_ENABLE
-);
+      dp_vga_h_sync => top_vga_h_sync,
+      dp_vga_v_sync => top_vga_v_sync,
+      dp_vga_red0   => top_vga_red0,
+      dp_vga_red1   => top_vga_red1,
+      dp_vga_red2   => top_vga_red2,
+      dp_vga_red3   => top_vga_red3,
+      dp_vga_green0 => top_vga_green0,
+      dp_vga_green1 => top_vga_green1,
+      dp_vga_green2 => top_vga_green2,
+      dp_vga_green3 => top_vga_green3,
+      dp_vga_blue0  => top_vga_blue0,
+      dp_vga_blue1  => top_vga_blue1,
+      dp_vga_blue2  => top_vga_blue2,
+      dp_vga_blue3  => top_vga_blue3
+    );
 
+  --Memory writer
+  MEM_WRITE: entity work.MemoryWriter
+    port map (
+      clk         => clkcpu,
+      reset       => START_GAME,
+
+      -- Segnali dalla FSM
+      board_state => BOARD_STATE,
+      from_pos    => START_POS,
+      to_pos      => END_POS,
+      ready       => START_WRITE,
+
+      -- Interfaccia con la memoria
+      wr_data     => WR_DATA,
+      wr_addr     => WR_ADDRESS,
+      wr_en       => WR_ENABLE
+    );
 
   -- Istanziazione ChessController (produce winner e wrong)
   CTRL: entity work.ChessController
     port map (
       --input
-      clk          => CLK,
+      clk          => clkcpu,
       reset        => START_GAME,
       valid_spi    => DATA_VALID_SPI,
       hall_input   => DATA_BOARD,
@@ -115,7 +171,7 @@ MEM_WRITE: entity work.MemoryWriter
       winner       => WINNER_INT,
       color        => COLOR,
       enable       => ENABLE,
-      eat_move     =>EAT_MOVE,
+      eat_move     => EAT_MOVE,
       memory_ready => START_WRITE
 
     );
@@ -124,7 +180,7 @@ MEM_WRITE: entity work.MemoryWriter
   SPI_IF: entity work.spi_slave
     port map (
       --input
-      CLK          => CLK,
+      CLK          => clkcpu,
       RST          => RST,
       SCLK         => SCLK,
       CS_N         => CS_N,
@@ -143,13 +199,13 @@ MEM_WRITE: entity work.MemoryWriter
   --validator
   PAWN_VALIDATOR: entity work.pawn_validator
     port map (
-      clk           => CLK,
+      clk           => clkcpu,
       start         => START_PAWN,
       hall_input    => HALL_PAWN,
       start_pos     => S_POS_PAWN,
       end_pos       => E_POS_PAWN,
       color         => COLOR,
-      eat_move      =>EAT_MOVE,
+      eat_move      => EAT_MOVE,
 
       subs_required => SUBS_REQ,
       done          => DONE_PAWN,
@@ -158,7 +214,7 @@ MEM_WRITE: entity work.MemoryWriter
 
   BISHOP_VALIDATOR: entity work.bishop_validator
     port map (
-      clk        => CLK,
+      clk        => clkcpu,
       start      => START_BISHOP,
       hall_input => HALL_BISHOP,
       start_pos  => S_POS_BISHOP,
@@ -170,7 +226,7 @@ MEM_WRITE: entity work.MemoryWriter
 
   ROOK_VALIDATOR: entity work.rook_validator
     port map (
-      clk        => CLK,
+      clk        => clkcpu,
       start      => START_ROOK,
       hall_input => HALL_ROOK,
       start_pos  => S_POS_ROOK,
@@ -182,7 +238,7 @@ MEM_WRITE: entity work.MemoryWriter
 
   QUEEN_VALIDATOR: entity work.queen_validator
     port map (
-      clk        => CLK,
+      clk        => clkcpu,
       start      => START_QUEEN,
       hall_input => HALL_QUEEN,
       start_pos  => S_POS_QUEEN,
@@ -194,7 +250,7 @@ MEM_WRITE: entity work.MemoryWriter
 
   KING_VALIDATOR: entity work.king_validator
     port map (
-      clk       => CLK,
+      clk       => clkcpu,
       start     => START_KING,
       start_pos => S_POS_KING,
       end_pos   => E_POS_KING,
@@ -205,7 +261,7 @@ MEM_WRITE: entity work.MemoryWriter
 
   KNIGHT_VALIDATOR: entity work.knight_validator
     port map (
-      clk       => CLK,
+      clk       => clkcpu,
       start     => START_KNIGHT,
       start_pos => S_POS_KNIGHT,
       end_pos   => E_POS_KNIGHT,
@@ -217,7 +273,7 @@ MEM_WRITE: entity work.MemoryWriter
   ----Controller of validators ---------------------------------------------------------------------------
   MUX_START: entity work.six_mux
     port map (
-      clk      => CLK,
+      clk      => clkcpu,
       sign     => START,
       sel      => ENABLE,
       s_knight => START_KNIGHT,
@@ -230,7 +286,7 @@ MEM_WRITE: entity work.MemoryWriter
 
   MUX_DONE: entity work.six_demux
     port map (
-      clk      => CLK,
+      clk      => clkcpu,
       sign     => DONE,
       sel      => ENABLE,
       s_knight => DONE_KNIGHT,
@@ -243,7 +299,7 @@ MEM_WRITE: entity work.MemoryWriter
 
   MUX_VALID: entity work.six_demux
     port map (
-      clk      => CLK,
+      clk      => clkcpu,
       sign     => VALID,
       sel      => ENABLE,
       s_knight => VALID_KNIGHT,
@@ -256,7 +312,7 @@ MEM_WRITE: entity work.MemoryWriter
 
   MUX_S_POS: entity work.six_mux_vector
     port map (
-      clk      => CLK,
+      clk      => clkcpu,
       sign     => START_POS,
       sel      => ENABLE,
       s_knight => S_POS_KNIGHT,
@@ -269,7 +325,7 @@ MEM_WRITE: entity work.MemoryWriter
 
   MUX_E_POS: entity work.six_mux_vector
     port map (
-      clk      => CLK,
+      clk      => clkcpu,
       sign     => END_POS,
       sel      => ENABLE,
       s_knight => E_POS_KNIGHT,
@@ -282,7 +338,7 @@ MEM_WRITE: entity work.MemoryWriter
 
   MUX_HALL: entity work.four_mux_vector
     port map (
-      clk      => CLK,
+      clk      => clkcpu,
       sign     => DATA_BOARD,
       sel      => ENABLE,
       s_queen  => HALL_QUEEN,
@@ -292,8 +348,6 @@ MEM_WRITE: entity work.MemoryWriter
     );
 
   -- Output top-level
-  ERROR  <= ERROR_INT;
-  WINNER <= WINNER_INT;
   MISO   <= MISO_INT;
 
 end architecture;

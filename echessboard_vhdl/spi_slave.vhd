@@ -122,7 +122,7 @@ begin
     variable bit_temp : unsigned(2 downto 0) := (others => '0');
     begin
         if rising_edge(CLK) then
-            if RST = '1' or cs_n_reg = '1' then
+            if RST = '0' or cs_n_reg = '1' then
                 shift_reg               <= (others => '0');
                 bit_counter             <= (others => '0');
                 data_valid_mosi         <= '0';
@@ -148,7 +148,7 @@ begin
     process(CLK)
     begin
         if rising_edge(CLK) then
-            if RST = '1' then
+            if RST = '0' then
                 miso_shift_reg   <= WIN & WRONG & "00000";
                 miso_bit_counter <= "111";
                 miso_bit         <= '0';
@@ -181,7 +181,7 @@ begin
         variable piece_temp : std_logic_vector(2 downto 0);
     begin    
         if rising_edge(CLK) then
-            if RST = '1' then
+            if RST = '0' then
                 state          <= IDLE;
                 byte_counter   <= (others => '0');
                 command        <= (others => '0');
