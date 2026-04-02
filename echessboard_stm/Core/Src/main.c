@@ -287,15 +287,15 @@ int main(void)
       if (interrupt_pin == IRQ_START_GAME_BIT && !GET_GAMESTATE(STARTED))
       {
         ReadGamePosition(&game_pos_old);
-        int i;
-        for (i=0;i<8;i++){
-          if(game_pos_old.pos[i] != 0b11000011){
-              break;
-          }
-        }
-        if(i != 8){
-          continue;
-        }
+        //int i;
+        //for (i=0;i<8;i++){
+        //  if(game_pos_old.pos[i] != 0b11000011){
+        //      break;
+        //  }
+        //}
+        //if(i != 8){
+        //  continue;
+        //}
         SET_GAMESTATE(STARTED);
         SET_GAMESTATE(WHITE_TO_MOVE);
         SET_GAMESTATE(PROM_QUEEN);
